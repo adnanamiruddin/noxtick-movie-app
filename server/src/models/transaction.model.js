@@ -31,7 +31,7 @@ const transactionSchema = new mongoose.Schema({
     enum: ["Pending", "Paid", "Cancelled"],
     default: "Pending",
   },
-});
+}, modelOptions);
 
 const transactionModel = mongoose.model("Transaction", transactionSchema);
 

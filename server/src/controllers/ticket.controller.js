@@ -1,6 +1,7 @@
 import responseHandler from "../handlers/response.handler.js";
 import ticketModel from "../models/ticket.model.js";
 import balanceModel from "../models/balance.model.js";
+import transactionModel from "../models/transaction.model.js";
 
 const bookTicket = async (req, res) => {
   try {
@@ -72,6 +73,17 @@ const bookTicket = async (req, res) => {
 
     await ticket.save();
 
+    const transaction = new transactionModel({
+      user: user.id,
+      ticket: ticket._id,
+      quantity: seatNumbers.length,
+      totalPrice,
+      transactionDate: new Date(),
+      transactionStatus: "Paid",
+    });
+
+    await transaction.save();
+
     responseHandler.ok(res, ticket);
   } catch (error) {
     responseHandler.error(res);
@@ -90,6 +102,40 @@ const getTicketsTransaction = async (req, res) => {
   }
 };
 
+const cancelTicketTransaction = async (req, res) => {
+  try {
+    const { user } = req;
+    const { ticketId } = req.params;
 
+    const ticket = await ticketModel.findOne({ _id: ticketId, user: user.id });
 
-export default { bookTicket, getTicketsTransaction };
+    if (!ticket) {
+      return responseHandler.notFound(res, "Ticket not found");
+    }
+
+    const balance = await balanceModel.findOne({ user: user.id });
+
+    balance.balanceAmount +=
+      ticket.movieTicketPrice * ticket.seatNumbers.length;
+    await balance.save();
+
+    await ticketModel.deleteOne({ _id: ticketId, user: user.id });
+
+    const transaction = new transactionModel({
+      user: user.id,
+      ticket: ticket._id,
+      quantity: seatNumbers.length,
+      totalPrice,
+      transactionDate: new Date(),
+      transactionStatus: "Cancelled",
+    });
+
+    await transaction.save();
+
+    responseHandler.ok(res, "Successfully canceled ticket");
+  } catch (error) {
+    responseHandler.error(res);
+  }
+};
+
+export default { bookTicket, getTicketsTransaction, cancelTicketTransaction };
