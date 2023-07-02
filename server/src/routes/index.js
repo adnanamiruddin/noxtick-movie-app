@@ -6,7 +6,7 @@ import ticketRoute from "./user.ticket.route.js";
 const router = express.Router();
 
 router.use("/user", userRoute);
-router.use("/user", balanceRoute);
+router.use("/user/balance", balanceRoute);
 router.use("/user", ticketRoute);
 
 export default router;

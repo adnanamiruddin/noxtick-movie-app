@@ -9,7 +9,7 @@ const router = express.Router();
 router.get("/balance", tokenMiddleware.auth, balanceController.getBalance);
 
 router.post(
-  "/balance/topup",
+  "/topup",
   tokenMiddleware.auth,
   body("amount")
     .exists()
@@ -21,7 +21,7 @@ router.post(
 );
 
 router.post(
-  "/balance/withdraw",
+  "/withdraw",
   tokenMiddleware.auth,
   body("amount")
     .exists()
