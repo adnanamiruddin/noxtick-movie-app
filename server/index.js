@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import http from "http";
 import mongoose from "mongoose";
 import "dotenv/config";
+import routes from "./routes/index.js";
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
+app.use("/api", routes);
 
 const port = process.env.PORT || 8082;
 const server = http.createServer(app);

@@ -59,3 +59,5 @@ router.post(
 );
 
 router.get("/info", tokenMiddleware.auth, userController.getInfo);
+
+export default router;
