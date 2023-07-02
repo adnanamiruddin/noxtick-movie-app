@@ -94,7 +94,9 @@ const getTicketsTransaction = async (req, res) => {
   try {
     const { user } = req;
 
-    const transactions = await ticketModel.find({ user: user.id });
+    const transactions = await ticketModel
+      .find({ user: user.id })
+      .sort("-createdAt");
 
     responseHandler.ok(res, transactions);
   } catch (error) {
