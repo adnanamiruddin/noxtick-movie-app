@@ -37,7 +37,7 @@ const userBalanceApi = {
     } catch (error) {
       return { error };
     }
-  }
+  },
 };
 
 export default userBalanceApi;
