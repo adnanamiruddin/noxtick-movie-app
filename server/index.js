@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import http from "http";
 import mongoose from "mongoose";
 import "dotenv/config";
-import routes from "./routes/index.js";
+import routes from "./src/routes/index.js";
 
 const app = express();
 

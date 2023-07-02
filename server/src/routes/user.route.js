@@ -1,9 +1,9 @@
 import express from "express";
 import { body } from "express-validator";
-import userController from "../controllers/user.controller.js";
-import userModel from "../models/user.model.js";
 import requestHandler from "../handlers/request.handler.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
+import userController from "../controllers/user.controller.js";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 

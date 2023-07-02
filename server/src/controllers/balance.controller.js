@@ -49,6 +49,10 @@ const withdrawBalance = async (req, res) => {
       return responseHandler.notFound(res, "Balance not found");
     }
 
+    if (balance.amount < amount) {
+      return responseHandler.badRequest(res, "Balance is not enough");
+    }
+
     balance.amount = balance.amount - amount;
 
     await balance.save();
