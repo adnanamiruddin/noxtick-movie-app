@@ -1,4 +1,4 @@
-import responseHandler from "../handlers/response.handler";
+import responseHandler from "../handlers/response.handler.js";
 import axiosClient from "../axios/axios.client.js";
 
 const baseUrl = process.env.DB_MOVIES;
