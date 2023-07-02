@@ -72,7 +72,7 @@ const signIn = async (req, res) => {
 
 const getInfo = async (req, res) => {
   try {
-    const user = await userModel.findById(req.user.id);
+    const user = await userModel.findById(req.user.id).populate("balance");
 
     if (!user) return responseHandler.notFound(res);
 
