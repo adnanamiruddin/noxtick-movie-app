@@ -5,11 +5,24 @@ const baseUrl = process.env.DB_MOVIES;
 
 const getAllMovies = async (req, res) => {
   try {
-    const response = await axiosClient.get(baseUrl);
-    responseHandler.ok(res, response);
+    const movies = await axiosClient.get(baseUrl);
+
+    responseHandler.ok(res, movies);
   } catch (error) {
     responseHandler.error(res);
   }
 };
 
-export default { getAllMovies };
+const getMovieById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const movies = await axiosClient.get(baseUrl);
+
+    responseHandler.ok(res, movies[id]);
+  } catch (error) {
+    responseHandler.error(res);
+  }
+};
+
+export default { getAllMovies, getMovieById };
