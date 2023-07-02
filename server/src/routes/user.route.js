@@ -3,6 +3,7 @@ import { body } from "express-validator";
 import requestHandler from "../handlers/request.handler.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
 import userController from "../controllers/user.controller.js";
+import balanceController from "../controllers/balance.controller.js";
 import userModel from "../models/user.model.js";
 
 const router = express.Router();
@@ -64,5 +65,11 @@ router.post(
 );
 
 router.get("/info", tokenMiddleware.auth, userController.getInfo);
+
+router.get("/balance", tokenMiddleware.auth, balanceController.getBalance);
+
+router.post(
+  "/balance",
+)
 
 export default router;
