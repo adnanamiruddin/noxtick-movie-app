@@ -15,8 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 const port = process.env.PORT || 8082;
 const server = http.createServer(app);
 
-mongoose
-  .connect(process.env.MONGODB_URL)
+mongoose.connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("MongoDb Connected bang");
     server.listen(port, () => {
