@@ -23,6 +23,11 @@ router.post(
     .withMessage("Display name is required!")
     .isLength({ min: 8 })
     .withMessage("Display name must be at least 8 characters long!"),
+  body("age")
+    .exists()
+    .withMessage("Age is required!")
+    .isInt()
+    .withMessage("Age must be a valid number!"),
   body("password")
     .exists()
     .withMessage("Password is required!")
