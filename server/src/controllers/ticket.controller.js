@@ -5,7 +5,8 @@ import balanceModel from "../models/balance.model.js";
 const bookTicket = async (req, res) => {
   try {
     const { user } = req;
-    const { seatNumbers, movieAgeRating, movieTicketPrice, showtimeTime } = req.body;
+    const { seatNumbers, movieAgeRating, movieTicketPrice, showtimeTime } =
+      req.body;
 
     if (user.age < movieAgeRating) {
       return responseHandler.badRequest(
@@ -77,26 +78,18 @@ const bookTicket = async (req, res) => {
   }
 };
 
-// const bookTicket = async (req, res) => {
-//   try {
-//     const { id } = req.user;
-//     const { seat } = req.body;
+const getTicketsTransaction = async (req, res) => {
+  try {
+    const { user } = req;
 
-//     const ticket = await ticketModel.findOne({ seat });
+    const transactions = await ticketModel.find({ user: user.id });
 
-//     if (ticket) {
-//       return responseHandler.badRequest(res, "Seat is already booked");
-//     }
+    responseHandler.ok(res, transactions);
+  } catch (error) {
+    responseHandler.error(res);
+  }
+};
 
-//     const newTicket = new ticketModel({
-//       seat,
-//       userId: id,
-//     });
 
-//     await newTicket.save();
 
-//     responseHandler.ok(res, newTicket);
-//   } catch (error) {
-//     responseHandler.error(res);
-//   }
-// };
+export default { bookTicket, getTicketsTransaction };
