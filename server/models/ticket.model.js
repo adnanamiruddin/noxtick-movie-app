@@ -1,0 +1,59 @@
+import mongoose from "mongoose";
+import modelOptions from "./model.options.js";
+
+const ticketSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    bookingDate: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    bookingTime: {
+      type: String,
+      required: true,
+      default: new Date().toLocaleDateString(),
+    },
+    seatNumbers: {
+      type: [Number],
+      required: true,
+    },
+    showtimeDate: {
+      type: Date,
+      required: true,
+    },
+    showtimeTime: {
+      type: String,
+      required: true,
+    },
+    movieId: {
+      type: Number,
+      required: true,
+    },
+    movieTitle: {
+      type: String,
+      required: true,
+    },
+    moviePoster: {
+      type: String,
+      required: true,
+    },
+    movieAgeRating: {
+      type: Number,
+      required: true,
+    },
+    movieTicketPrice: {
+      type: Number,
+      required: true,
+    },
+  },
+  modelOptions
+);
+
+const ticketModel = mongoose.model("Ticket", ticketSchema);
+
+export default ticketModel;

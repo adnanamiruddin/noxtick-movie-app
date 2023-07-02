@@ -20,6 +20,6 @@ const balanceSchema = new mongoose.Schema(
   modelOptions
 );
 
-const Balance = mongoose.model("Balance", balanceSchema);
+const balanceModel = mongoose.model("Balance", balanceSchema);
 
-export default Balance;
+export default balanceModel;
