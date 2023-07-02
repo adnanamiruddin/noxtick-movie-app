@@ -3,6 +3,7 @@ import { body } from "express-validator";
 import userController from "../controllers/user.controller.js";
 import userModel from "../models/user.model.js";
 import requestHandler from "../handlers/request.handler.js";
+import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const router = express.Router();
 
@@ -57,3 +58,4 @@ router.post(
   userController.signIn
 );
 
+router.get("/info", tokenMiddleware.auth, userController.getInfo);
