@@ -5,7 +5,7 @@ import balanceModel from "../models/balance.model.js";
 const bookTicket = async (req, res) => {
   try {
     const { user } = req;
-    const { seatNumbers, movieAgeRating, movieTicketPrice } = req.body;
+    const { seatNumbers, movieAgeRating, movieTicketPrice, showtimeTime } = req.body;
 
     if (user.age < movieAgeRating) {
       return responseHandler.badRequest(
@@ -21,8 +21,25 @@ const bookTicket = async (req, res) => {
       );
     }
 
+    const isValidSeatNumbers =
+      Array.isArray(seatNumbers) &&
+      seatNumbers.length > 0 &&
+      seatNumbers.every(
+        (seatNumber) =>
+          Number.isInteger(seatNumber) && seatNumber >= 1 && seatNumber <= 64
+      ) &&
+      new Set(seatNumbers).size === seatNumbers.length;
+
+    if (!isValidSeatNumbers) {
+      return responseHandler.badRequest(
+        res,
+        "Invalid seat numbers. Please select valid seat numbers."
+      );
+    }
+
     const bookedSeats = await ticketModel.find({
       showtimeDate: { $gte: new Date() },
+      showtimeTime,
       seatNumbers: { $in: seatNumbers },
     });
 
