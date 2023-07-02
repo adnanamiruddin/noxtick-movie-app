@@ -3,7 +3,7 @@ import ticketModel from "../models/ticket.model.js";
 import balanceModel from "../models/balance.model.js";
 import transactionModel from "../models/transaction.model.js";
 
-const bookTicket = async (req, res) => {
+const bookTickets = async (req, res) => {
   try {
     const { user } = req;
     const { seatNumbers, movieAgeRating, movieTicketPrice, showtimeTime } =
@@ -102,7 +102,7 @@ const getTicketsTransaction = async (req, res) => {
   }
 };
 
-const cancelTicketTransaction = async (req, res) => {
+const cancelTicket = async (req, res) => {
   try {
     const { user } = req;
     const { ticketId } = req.params;
@@ -138,4 +138,4 @@ const cancelTicketTransaction = async (req, res) => {
   }
 };
 
-export default { bookTicket, getTicketsTransaction, cancelTicketTransaction };
+export default { bookTickets, getTicketsTransaction, cancelTicket };
