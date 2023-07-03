@@ -6,6 +6,7 @@ import userTicketApi from "../../api/modules/user.ticket.api";
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import GlobalLoading from "../common/GlobalLoading";
+import HeaderNavbar from "../common/HeaderNavbar";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -40,8 +41,16 @@ const MainLayout = () => {
       <GlobalLoading />
       {/* Global Loading END */}
 
-      <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
-        <Outlet />
+      <Box display="flex" minHeight="100vh">
+        {/* Header Section START */}
+        <HeaderNavbar />
+        {/* Header Section END */}
+
+        {/* Main Section START */}
+        <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
+          <Outlet />
+        </Box>
+        {/* Main Section END */}
       </Box>
     </div>
   );
