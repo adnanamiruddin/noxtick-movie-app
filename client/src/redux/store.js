@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import globalLoadingReducer from "./features/globalLoadingSlice";
+import appStateSlice from "./features/appStateSlice";
+import globalLoadingSlice from "./features/globalLoadingSlice";
 import authModalSlice from "./features/authModalSlice";
 
 const store = configureStore({
   reducer: {
-    globalLoading: globalLoadingReducer,
+    appState: appStateSlice,
+    globalLoading: globalLoadingSlice,
     authModal: authModalSlice,
   },
 });

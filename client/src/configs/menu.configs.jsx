@@ -1,5 +1,4 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -10,11 +9,6 @@ const main = [
     title: "Home",
     path: "/",
     icon: <HomeOutlinedIcon />,
-  },
-  {
-    title: "Search",
-    path: "/search",
-    icon: <SearchOutlinedIcon />,
   },
 ];
 

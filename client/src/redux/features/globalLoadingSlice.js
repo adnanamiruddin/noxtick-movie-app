@@ -1,7 +1,7 @@
-import { createSlide } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const globalLoadingSlice = createSlide({
-  name: "globalLoading",
+export const globalLoadingSlice = createSlice({
+  name: "GlobalLoading",
   initialState: {
     globalLoading: false,
   },

@@ -1,7 +1,7 @@
-import { createSlide } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
-export const authModalSlice = createSlide({
-  name: "authModal",
+export const authModalSlice = createSlice({
+  name: "AuthModal",
   initialState: {
     authModal: false,
   },
