@@ -3,11 +3,11 @@ import { createSlice } from "@reduxjs/toolkit/dist";
 export const authModalSlice = createSlice({
   name: "AuthModal",
   initialState: {
-    authModal: false,
+    authModalOpen: false,
   },
   reducers: {
     setAuthModalOpen: (state, action) => {
-      state.authModal = action.payload;
+      state.authModalOpen = action.payload;
     },
   },
 });

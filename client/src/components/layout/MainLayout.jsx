@@ -7,6 +7,7 @@ import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import GlobalLoading from "../common/GlobalLoading";
 import HeaderNavbar from "../common/HeaderNavbar";
+import AuthModal from "../common/AuthModal";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -40,6 +41,10 @@ const MainLayout = () => {
       {/* Global Loading START */}
       <GlobalLoading />
       {/* Global Loading END */}
+
+      {/* User Auth Modal START */}
+      <AuthModal />
+      {/* User Auth Modal END */}
 
       <Box display="flex" minHeight="100vh">
         {/* Header Section START */}
