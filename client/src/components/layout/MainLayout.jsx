@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setListTickets, setUser } from "../../redux/features/userSlice";
 import userApi from "../../api/modules/user.api";
 import userTicketApi from "../../api/modules/user.ticket.api";
+import { Box } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,11 @@ const MainLayout = () => {
     if (!user) dispatch(setListTickets([]));
   }, [user, dispatch]);
 
-  return <div>MainLayout</div>;
+  return (
+    <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
+      <Outlet />
+    </Box>
+  );
 };
 
 export default MainLayout;
