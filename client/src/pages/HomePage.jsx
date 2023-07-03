@@ -1,6 +1,8 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
-import MoviePostersSlide from "../components/common/MoviePostersSlide";
+import Container from "../components/common/Container"
+import MovieSlide from "../components/common/MovieSlide";
+// import MoviePostersSlide from "../components/common/MoviePostersSlide";
 
 const HomePage = () => {
   return (
@@ -21,7 +23,12 @@ const HomePage = () => {
           </Typography>
         </Stack>
       </Box>
-      <MoviePostersSlide />
+      <Box sx={{...uiConfigs.style.mainContent}}>
+        <Container>
+          <MovieSlide />
+        </Container>
+      </Box>
+      {/* <MoviePostersSlide /> */}
     </div>
   );
 };
