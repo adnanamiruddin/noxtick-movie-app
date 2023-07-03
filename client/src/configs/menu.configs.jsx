@@ -9,6 +9,7 @@ const main = [
     title: "Home",
     path: "/",
     icon: <HomeOutlinedIcon />,
+    state: "home",
   },
 ];
 
@@ -17,21 +18,25 @@ const user = [
     title: "My Info",
     path: "/my-info",
     icon: <InfoOutlinedIcon />,
+    state: "info",
   },
   {
     title: "Transactions",
     path: "/transactions",
     icon: <PointOfSaleOutlinedIcon />,
+    state: "transactions",
   },
   {
     title: "Top Up",
     path: "/topup",
     icon: <PaidOutlinedIcon />,
+    state: "topup",
   },
   {
     title: "Withdraw",
     path: "/withdraw",
     icon: <AccountBalanceWalletOutlinedIcon />,
+    state: "withdraw",
   },
 ];
 
