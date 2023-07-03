@@ -31,7 +31,6 @@ const routes = [
   {
     path: "/movie/:movieId",
     element: <MovieDetail />,
-    state: "movie.detail",
   },
   {
     path: "/my-info",
