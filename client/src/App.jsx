@@ -19,7 +19,7 @@ const App = () => {
         autoClose={3500}
         hideProgressBar={false}
         newestOnTop={false}
-        theme="dark"
+        theme={themeMode}
         closeOnClick
         pauseOnFocusLoss
         pauseOnHover
