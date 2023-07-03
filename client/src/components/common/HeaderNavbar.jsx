@@ -7,7 +7,7 @@ import {
   Toolbar,
   useScrollTrigger,
 } from "@mui/material";
-import { cloneElement } from "react";
+import { cloneElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { themeModes } from "../../configs/theme.configs";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
 import { setThemeMode } from "../../redux/features/themeModeSlice";
+import SideNavbar from "./SideNavbar";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
@@ -56,8 +57,17 @@ const HeaderNavbar = () => {
     dispatch(setThemeMode(theme));
   };
 
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSideNavbar = () => setSidebarOpen(!sidebarOpen);
+
   return (
     <div>
+      {/* Navbar For Mobile View (Active Hamburger Icon) START */}
+      <SideNavbar open={sidebarOpen} toggleSideNavbar={toggleSideNavbar} />
+      {/* Navbar For Mobile View (Active Hamburger Icon) END */}
+
+      {/* Navbar For Tab/Desktop/etc */}
       <ScrollAppBar>
         <AppBar>
           <Toolbar
@@ -72,6 +82,7 @@ const HeaderNavbar = () => {
               <IconButton
                 color="inherit"
                 sx={{ mr: 2, display: { md: "none" } }}
+                onClick={toggleSideNavbar}
               >
                 <MenuIcon />
               </IconButton>
