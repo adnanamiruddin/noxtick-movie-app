@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit/dist";
 import appStateSlice from "./features/appStateSlice";
 import userSlice from "./features/userSlice";
 import globalLoadingSlice from "./features/globalLoadingSlice";

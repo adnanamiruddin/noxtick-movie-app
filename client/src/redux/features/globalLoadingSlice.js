@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit/dist";
 
 export const globalLoadingSlice = createSlice({
   name: "GlobalLoading",

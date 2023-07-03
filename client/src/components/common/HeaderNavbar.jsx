@@ -14,11 +14,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "./Logo";
 import menuConfigs from "../../configs/menu.configs";
 import { Link } from "react-router-dom";
-import  DarkModeOutlinedIcon  from "@mui/icons-material/DarkModeOutlined";
-import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
+import { setThemeMode } from "../../redux/features/themeModeSlice";
 
 const ScrollAppBar = ({ children, window }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
+
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     treshold: 50,
@@ -48,13 +50,19 @@ const HeaderNavbar = () => {
 
   const dispatch = useDispatch();
 
+  const onSwitchTheme = () => {
+    const theme =
+      themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
+    dispatch(setThemeMode(theme));
+  };
+
   return (
     <div>
       <ScrollAppBar>
         <AppBar>
           <Toolbar
             sx={{
-              marginTop: 5,
+              marginTop: "5px",
               justifyContent: "space-between",
               alignItems: "center",
             }}
@@ -100,7 +108,7 @@ const HeaderNavbar = () => {
                     {menu.title}
                   </Button>
                 ))}
-                <IconButton sx={{ color: "inherit" }}>
+                <IconButton sx={{ color: "inherit" }} onClick={onSwitchTheme}>
                   {themeMode === themeModes.dark ? (
                     <DarkModeOutlinedIcon />
                   ) : (
