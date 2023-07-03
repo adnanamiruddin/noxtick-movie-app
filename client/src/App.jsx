@@ -34,10 +34,10 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            {routes.map((route, index) =>
+            {routes.map((route, i) =>
               route.index ? (
                 <Route
-                  key={index}
+                  key={i}
                   index
                   element={
                     route.state ? (
@@ -51,7 +51,7 @@ const App = () => {
                 />
               ) : (
                 <Route
-                  key={index}
+                  key={i}
                   path={route.path}
                   element={
                     route.state ? (
