@@ -5,6 +5,7 @@ import userApi from "../../api/modules/user.api";
 import userTicketApi from "../../api/modules/user.ticket.api";
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import GlobalLoading from "../common/GlobalLoading";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -34,9 +35,15 @@ const MainLayout = () => {
   }, [user, dispatch]);
 
   return (
-    <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
-      <Outlet />
-    </Box>
+    <div>
+      {/* Global Loading START */}
+      <GlobalLoading />
+      {/* Global Loading END */}
+
+      <Box component="main" flexGrow={1} overflow="hidden" minHeight="100vh">
+        <Outlet />
+      </Box>
+    </div>
   );
 };
 
