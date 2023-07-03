@@ -18,10 +18,11 @@ const AutoSwiper = ({ children }) => {
       }}
     >
       <Swiper
-        slidesPerView="auto"
+        slidesPerView={3}
         grabCursor={true}
         loop={true}
         style={{ width: "100%", height: "max-content" }}
+        initialSlide={Math.floor(Math.random() * 30)}
         effect="coverflow"
         coverflowEffect={{
           rotate: 0,
@@ -29,8 +30,12 @@ const AutoSwiper = ({ children }) => {
           depth: 120,
           modifier: 2.5,
         }}
-        initialSlide={Math.floor(Math.random() * 30)}
         modules={[EffectCoverflow]}
+        breakpoints={{
+          960: {
+            slidesPerView: "auto",
+          },
+        }}
       >
         {children}
       </Swiper>

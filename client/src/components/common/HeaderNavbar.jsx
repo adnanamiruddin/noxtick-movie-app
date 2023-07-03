@@ -83,7 +83,7 @@ const HeaderNavbar = () => {
               {/* Mobile View (Hamburger Icon) START */}
               <IconButton
                 color="inherit"
-                sx={{ mr: 2, display: { md: "none" } }}
+                sx={{ marginRight: 1, display: { md: "none" } }}
                 onClick={toggleSideNavbar}
               >
                 <MenuIcon />

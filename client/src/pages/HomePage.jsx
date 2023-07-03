@@ -17,7 +17,7 @@ const HomePage = () => {
           </Typography>
           <Typography variant="body1" sx={{ textAlign: "center" }}>
             Mau nonton apa hari ini? Skuy pesan tiketmu dan nikmati pengalaman
-            menonton yang seru bersama Noxtick.
+            menonton yang seru bersama NoxTick.
           </Typography>
         </Stack>
       </Box>
