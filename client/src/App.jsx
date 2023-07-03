@@ -7,6 +7,9 @@ import MainLayout from "./components/layout/MainLayout";
 import routes from "./routes/routes";
 import PageWrapper from "./components/common/PageWrapper";
 import { useSelector } from "react-redux";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import themeConfigs from "./configs/theme.configs";
 
 const App = () => {
