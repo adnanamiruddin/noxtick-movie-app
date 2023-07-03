@@ -17,9 +17,9 @@ const App = () => {
       <ToastContainer
         position="bottom-left"
         autoClose={3500}
+        theme={themeMode}
         hideProgressBar={false}
         newestOnTop={false}
-        theme={themeMode}
         closeOnClick
         pauseOnFocusLoss
         pauseOnHover
