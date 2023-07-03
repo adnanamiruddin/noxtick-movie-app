@@ -8,6 +8,7 @@ import { Outlet } from "react-router-dom";
 import GlobalLoading from "../common/GlobalLoading";
 import HeaderNavbar from "../common/HeaderNavbar";
 import AuthModal from "../common/AuthModal";
+import Footer from "../common/Footer";
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -57,6 +58,10 @@ const MainLayout = () => {
         </Box>
         {/* Main Section END */}
       </Box>
+
+      {/* Footer Section START */}
+      <Footer />
+      {/* Footer Section END */}
     </div>
   );
 };
