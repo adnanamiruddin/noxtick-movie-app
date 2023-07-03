@@ -1,4 +1,5 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -10,6 +11,12 @@ const main = [
     path: "/",
     icon: <HomeOutlinedIcon />,
     state: "home",
+  },
+  {
+    title: "About",
+    path: "/about",
+    icon: <HelpCenterOutlinedIcon />,
+    state: "about",
   },
 ];
 
