@@ -13,7 +13,7 @@ const Logo = () => {
           fontSize: "103%",
         }}
       >
-        tick
+        Tick
       </span>
     </Typography>
   );

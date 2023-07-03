@@ -7,34 +7,38 @@ import movieApi from "../../api/modules/movie.api";
 import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
 
 const MoviePostersSlide = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
-      dispatch(setGlobalLoading(true))
+      dispatch(setGlobalLoading(true));
       const { response, error } = await movieApi.getAllMovies();
-      dispatch(setGlobalLoading(false))
+      dispatch(setGlobalLoading(false));
 
       if (response) setMovies(response);
       if (error) console.log(error.message);
     };
 
     getMovies();
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <AutoSwiper>
-      {movies.map((movie, i) => (
+      {[...movies].map((movie, i) => (
         <SwiperSlide key={i}>
-          <Box sx={{
-            paddingTop: "160%",
-            backgroundImage: `url(${movie.poster_url})`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            marginRight: 0.5,
-          }} />
+          <Box
+            sx={{
+              paddingTop: "160%",
+              backgroundImage: `url(${movie.poster_url})`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              marginRight: 0.5,
+              border: "4px solid",
+              borderImage: "linear-gradient(to right, gold, silver) 1",
+            }}
+          />
         </SwiperSlide>
       ))}
     </AutoSwiper>

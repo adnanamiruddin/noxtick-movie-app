@@ -11,17 +11,17 @@ const HomePage = () => {
           <Typography
             variant="h4"
             component="h1"
-            sx={{ fontWeight: "600", alignSelf: "center" }}
+            sx={{ fontWeight: "600", alignSelf: "center", textAlign: "center" }}
           >
-            Selamat datang di Noxtick!
+            Selamat datang di NoxTick!
           </Typography>
           <Typography variant="body1" sx={{ textAlign: "center" }}>
             Mau nonton apa hari ini? Skuy pesan tiketmu dan nikmati pengalaman
             menonton yang seru bersama Noxtick.
           </Typography>
         </Stack>
-        <MoviePostersSlide />
       </Box>
+      <MoviePostersSlide />
     </div>
   );
 };
