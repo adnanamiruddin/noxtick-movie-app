@@ -31,6 +31,7 @@ const themeConfigs = {
             },
             secondary: {
               main: "#ffca28",
+              contrastText: "#000000",
             },
             background: {
               default: colors.grey["100"],

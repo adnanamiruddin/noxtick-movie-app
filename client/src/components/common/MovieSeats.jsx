@@ -1,5 +1,4 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const leftSideSeats = [
@@ -24,7 +23,7 @@ const rightSideSeats = [
   [61, 62, 63, 64],
 ];
 
-const MovieSeats = ({ selectedSeats, setSelectedSeats, handleSeatClick }) => {
+const MovieSeats = ({ selectedSeats, handleSeatClick }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
 
   return (
@@ -33,7 +32,8 @@ const MovieSeats = ({ selectedSeats, setSelectedSeats, handleSeatClick }) => {
         sx={{
           display: "flex",
           justifyContent: { xs: "end", md: "center" },
-          marginBottom: { xs: "1rem", md: "3.5rem" },
+          marginBottom: { xs: "1rem", md: "3rem" },
+          paddingTop: "1rem"
         }}
       >
         <Box

@@ -8,6 +8,8 @@ import HeaderImage from "../components/common/HeaderImage";
 import { Box, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import MovieSeats from "../components/common/MovieSeats";
+import MovieSchedule from "../components/common/MovieSchedule";
+import Container from "../components/common/Container";
 
 const MovieDetail = () => {
   const { user, listTickets } = useSelector((state) => state.user);
@@ -167,11 +169,15 @@ const MovieDetail = () => {
         </Box>
 
         <Box sx={{ marginTop: "4rem" }}>
-          <MovieSeats
-            selectedSeats={selectedSeats}
-            setSelectedSeats={setSelectedSeats}
-            handleSeatClick={handleSeatClick}
-          />
+          <Container header="Movie Schedule">
+            <MovieSchedule />
+          </Container>
+          <Container header="Movie Seats">
+            <MovieSeats
+              selectedSeats={selectedSeats}
+              handleSeatClick={handleSeatClick}
+            />
+          </Container>
         </Box>
       </Box>
     </div>
