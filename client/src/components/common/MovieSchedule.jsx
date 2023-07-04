@@ -1,10 +1,7 @@
-import { useState } from "react";
 import { Button, Typography, Box, Stack } from "@mui/material";
 import dayjs from "dayjs";
 
-const MovieSchedule = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+const MovieSchedule = ({selectedDate, setSelectedDate, selectedTime, setSelectedTime}) => {
 
   const handleDateClick = (date) => {
     setSelectedDate(date);

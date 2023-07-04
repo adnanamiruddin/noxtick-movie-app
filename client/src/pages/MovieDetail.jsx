@@ -18,8 +18,9 @@ const MovieDetail = () => {
   const dispatch = useDispatch();
 
   const [movie, setMovie] = useState(null);
-
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -170,7 +171,12 @@ const MovieDetail = () => {
 
         <Box sx={{ marginTop: "4rem" }}>
           <Container header="Movie Schedule">
-            <MovieSchedule />
+            <MovieSchedule
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+              selectedTime={selectedTime}
+              setSelectedTime={setSelectedTime}
+            />
           </Container>
           <Container header="Movie Seats">
             <MovieSeats
