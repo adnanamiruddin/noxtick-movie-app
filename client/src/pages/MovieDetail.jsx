@@ -8,7 +8,7 @@ const MovieDetail = () => {
   useEffect(() => {
     const fetchMovieDetail = async () => {
       const movieDetail = await movieApi.getMovieByTitle({title: movieTitle})
-      console.log(movieDetail)
+      // console.log(movieDetail)
     }
     fetchMovieDetail()
   }, [movieTitle])
