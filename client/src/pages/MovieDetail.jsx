@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import HeaderImage from "../components/common/HeaderImage";
 import { Box, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
+import MovieSeats from "../components/common/MovieSeats";
 
 const MovieDetail = () => {
   const { user, listTickets } = useSelector((state) => state.user);
@@ -15,6 +16,8 @@ const MovieDetail = () => {
   const dispatch = useDispatch();
 
   const [movie, setMovie] = useState(null);
+
+  const [selectedSeats, setSelectedSeats] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -32,6 +35,18 @@ const MovieDetail = () => {
 
     getMovieDetails();
   }, [movieTitle, dispatch]);
+
+  const handleSeatClick = (seatNumber) => {
+    if (selectedSeats.includes(seatNumber)) {
+      // Menghapus kursi yang sudah dipilih dari selectedSeats
+      setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
+    } else {
+      //  Menambahkan kursi yang belum dipilih ke selectedSeats
+      if (selectedSeats.length < 6) {
+        setSelectedSeats([...selectedSeats, seatNumber]);
+      }
+    }
+  };
 
   return movie ? (
     <div>
@@ -149,6 +164,14 @@ const MovieDetail = () => {
             </Box>
             {/* Movie's Information END */}
           </Box>
+        </Box>
+
+        <Box sx={{ marginTop: "4rem" }}>
+          <MovieSeats
+            selectedSeats={selectedSeats}
+            setSelectedSeats={setSelectedSeats}
+            handleSeatClick={handleSeatClick}
+          />
         </Box>
       </Box>
     </div>

@@ -20,13 +20,14 @@ const themeConfigs = {
               contrastText: "#ffffff",
             },
             background: {
-              default: "#000000",
               paper: "#131313",
+              default: "#000000",
             },
           }
         : {
             primary: {
               main: "#ffc107",
+              contrastText: "#000000",
             },
             secondary: {
               main: "#ffca28",
