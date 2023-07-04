@@ -13,16 +13,23 @@ const getAllMovies = async (req, res) => {
   }
 };
 
-const getMovieById = async (req, res) => {
+const getMovieByTitle = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { title } = req.params;
+    const decodedTitle = decodeURIComponent(title);
 
     const movies = await axiosClient.get(baseUrl);
+    const movie = movies.find((m) => m.title === decodedTitle);
 
-    responseHandler.ok(res, movies[id]);
+    if (movie) {
+      responseHandler.ok(res, movie);
+    } else {
+      responseHandler.error(res, "Movie not found");
+    }
   } catch (error) {
     responseHandler.error(res);
   }
 };
 
-export default { getAllMovies, getMovieById };
+
+export default { getAllMovies, getMovieByTitle };

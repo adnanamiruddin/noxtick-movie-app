@@ -10,7 +10,7 @@ import WithdrawBalance from "../pages/WithdrawBalance";
 export const routesGen = {
   home: "/",
   about: "/about",
-  movieDetail: (movieId) => `/movie/${movieId}`,
+  movieDetail: (movieTitle) => `/movie/${movieTitle}`,
   myInfo: "/my-info",
   transactions: "/transactions",
   topup: "/topup",
@@ -29,7 +29,7 @@ const routes = [
     state: "about",
   },
   {
-    path: "/movie/:movieId",
+    path: "/movie/:movieTitle",
     element: <MovieDetail />,
   },
   {

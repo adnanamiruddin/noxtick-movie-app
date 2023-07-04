@@ -14,7 +14,7 @@ const MovieItem = ({ movie }) => {
 
   useEffect(() => {
     setTitle(movie.title);
-    setReleaseDate(movie.release_date);
+    setReleaseDate(movie.release_date.split("-")[0]);
     setPosterUrl(movie.poster_url);
     setAgeRating(movie.age_rating);
   }, [movie]);

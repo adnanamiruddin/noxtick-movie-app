@@ -5,7 +5,7 @@ const getBalance = async (req, res) => {
   try {
     const { id } = req.user;
 
-    const balance = await balanceModel.findOne({ userId: id });
+    const balance = await balanceModel.findOne({ user: id });
 
     if (!balance) {
       return responseHandler.notFound(res, "Balance not found");
@@ -22,7 +22,7 @@ const updateBalance = async (req, res) => {
     const { id } = req.user;
     const { amount } = req.body;
 
-    const balance = await balanceModel.findOne({ userId: id });
+    const balance = await balanceModel.findOne({ user: id });
 
     if (!balance) {
       return responseHandler.notFound(res, "Balance not found");
@@ -43,7 +43,7 @@ const withdrawBalance = async (req, res) => {
     const { id } = req.user;
     const { amount, password } = req.body;
 
-    const balance = await balanceModel.findOne({ userId: id });
+    const balance = await balanceModel.findOne({ user: id });
 
     if (!balance) {
       return responseHandler.notFound(res, "Balance not found");

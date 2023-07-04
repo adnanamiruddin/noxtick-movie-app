@@ -2,7 +2,7 @@ import publicClient from "../client/public.client";
 
 const movieEndPoints = {
   movie: "movie",
-  movieById: ({ id }) => `movie/${id}`,
+  movieByTitle: ({ title }) => `movie/${title}`,
 };
 
 const movieApi = {
@@ -15,9 +15,9 @@ const movieApi = {
     }
   },
 
-  getMovieById: async ({ id }) => {
+  getMovieByTitle: async ({ title }) => {
     try {
-      const response = await publicClient.get(movieEndPoints.movieById({ id }));
+      const response = await publicClient.get(movieEndPoints.movieByTitle({ title }));
       return { response };
     } catch (error) {
       return { error };
