@@ -28,7 +28,7 @@ const updateBalance = async (req, res) => {
       return responseHandler.notFound(res, "Balance not found");
     }
 
-    balance.amount = amount;
+    balance.balanceAmount += amount;
 
     await balance.save();
 
@@ -49,7 +49,7 @@ const withdrawBalance = async (req, res) => {
       return responseHandler.notFound(res, "Balance not found");
     }
 
-    if (balance.amount < amount) {
+    if (balance.balanceAmount < amount) {
       return responseHandler.badRequest(res, "Balance is not enough");
     }
 
@@ -58,7 +58,7 @@ const withdrawBalance = async (req, res) => {
       return responseHandler.badRequest(res, "Wrong password!");
     }
 
-    balance.amount = balance.amount - amount;
+    balance.balanceAmount -= amount;
 
     await balance.save();
 
