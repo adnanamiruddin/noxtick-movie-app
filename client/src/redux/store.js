@@ -13,7 +13,7 @@ const store = configureStore({
     globalLoading: globalLoadingSlice,
     authModal: authModalSlice,
     themeMode: themeModeSlice,
-    userBalance: userBalanceSlice,
+    balance: userBalanceSlice,
   },
 });
 
