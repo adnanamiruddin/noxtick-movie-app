@@ -18,18 +18,6 @@ const SigninForm = ({ switchAuthState }) => {
   const [errorMessage, setErrorMessage] = useState();
   const [userBalance, setUserBalance] = useState(0);
 
-  useEffect(() => {
-    const getUserBalance = async () => {
-      const { response, error } = await userBalanceApi.getBalance();
-      if (response) {
-        setUserBalance(response.balanceAmount);
-      }
-      if (error) toast.error(error.message);
-    };
-
-    getUserBalance();
-  }, []);
-
   const signinForm = useFormik({
     initialValues: {
       username: "",
@@ -52,7 +40,15 @@ const SigninForm = ({ switchAuthState }) => {
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
-        dispatch(setBalance(userBalance))
+
+        const { response: balanceResponse, error: balanceError } =
+          await userBalanceApi.getBalance();
+        if (balanceResponse) {
+          setUserBalance(balanceResponse.balanceAmount);
+        }
+        if (balanceError) toast.error(balanceError.message);
+
+        dispatch(setBalance(userBalance));
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }
