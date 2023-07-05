@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { toast } from "react-toastify";
 import HeaderImage from "../components/common/HeaderImage";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import MovieSeats from "../components/common/MovieSeats";
 import MovieSchedule from "../components/common/MovieSchedule";
 import Container from "../components/common/Container";
 import bookedSeatsApi from "../api/modules/booked.seats.api";
 import dayjs from "dayjs";
+import ConfirmationModal from "../components/common/ConfirmationModal";
 
 const MovieDetail = () => {
   const { user, listTickets } = useSelector((state) => state.user);
@@ -25,6 +26,7 @@ const MovieDetail = () => {
   const [selectedDate, setSelectedDate] = useState(dayjs().format("DD MMM"));
   const [selectedTime, setSelectedTime] = useState("12.30");
   const [bookedSeats, setBookedSeats] = useState([]);
+  const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,7 +61,7 @@ const MovieDetail = () => {
         showtimeDate: selectedDate || dateParam,
         showtimeTime: selectedTime || timeParam,
       });
-      if (response) setBookedSeats(response.seatNumbers)
+      if (response) setBookedSeats(response.seatNumbers);
       if (error) toast.error(error.message);
     };
 
@@ -77,6 +79,8 @@ const MovieDetail = () => {
       }
     }
   };
+
+  const handleClose = () => setIsModalConfirmOpen(false);
 
   return movie ? (
     <div>
@@ -212,6 +216,25 @@ const MovieDetail = () => {
               bookedSeats={[bookedSeats]}
             />
           </Container>
+          <Box
+            sx={{ marginTop: "2rem", display: user ? "flex" : "none", justifyContent: "end" }}
+          >
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => setIsModalConfirmOpen(true)}
+            >
+              Buy Tickets
+            </Button>
+          </Box>
+            <ConfirmationModal
+              open={isModalConfirmOpen}
+              handleClose={handleClose}
+              movie={movie}
+              selectedDate={selectedDate}
+              selectedTime={selectedTime}
+              selectedSeats={selectedSeats}
+            />
         </Box>
       </Box>
     </div>

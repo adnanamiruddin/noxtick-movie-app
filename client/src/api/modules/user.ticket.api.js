@@ -17,19 +17,21 @@ const userTicketApi = {
   },
 
   bookTickets: async ({
+    showtimeDate,
+    showtimeTime,
     seatNumbers,
     movieAgeRating,
     movieTicketPrice,
-    showtimeTime,
   }) => {
     try {
       const response = await privateClient.post(
         userTicketEndPoints.bookTickets,
         {
+          showtimeDate,
+          showtimeTime,
           seatNumbers,
           movieAgeRating,
           movieTicketPrice,
-          showtimeTime,
         }
       );
       return { response };
