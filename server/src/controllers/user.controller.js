@@ -1,6 +1,7 @@
 import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
 import userModel from "../models/user.model.js";
+import balanceModel from "../models/balance.model.js";
 
 const signUp = async (req, res) => {
   try {
@@ -20,6 +21,11 @@ const signUp = async (req, res) => {
     user.setPassword(password);
 
     await user.save();
+
+    await balanceModel.create({
+      user: user.id,
+      balanceAmount: 0,
+    });
 
     const token = jsonwebtoken.sign(
       { data: user.id },
