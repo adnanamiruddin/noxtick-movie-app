@@ -23,7 +23,7 @@ const rightSideSeats = [
   [61, 62, 63, 64],
 ];
 
-const MovieSeats = ({ selectedSeats, handleSeatClick }) => {
+const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
   const { themeMode } = useSelector((state) => state.themeMode);
 
   return (
@@ -70,12 +70,14 @@ const MovieSeats = ({ selectedSeats, handleSeatClick }) => {
               {row.map((seatNumber) => {
                 const isSelected = selectedSeats.includes(seatNumber);
                 const isMaxSelection = selectedSeats.length >= 6;
+                const isBooked = bookedSeats.includes(seatNumber);
 
                 return (
                   <Grid item key={seatNumber} xs={3}>
                     <Button
                       variant="contained"
                       color={isSelected ? "success" : "info"}
+                      disabled={isBooked}
                       onClick={() => handleSeatClick(seatNumber)}
                       sx={{
                         width: "100%",
@@ -87,7 +89,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick }) => {
                       <Typography
                         variant="body1"
                         sx={{
-                          color: isSelected ? "#fff" : "#000",
+                          color: isBooked ? "red" : isSelected ? "#fff" : "#000",
                           fontWeight: "bold",
                         }}
                       >
@@ -141,12 +143,14 @@ const MovieSeats = ({ selectedSeats, handleSeatClick }) => {
               {row.map((seatNumber) => {
                 const isSelected = selectedSeats.includes(seatNumber);
                 const isMaxSelection = selectedSeats.length >= 6;
+                const isBooked = bookedSeats.includes(seatNumber);
 
                 return (
                   <Grid item key={seatNumber} xs={3} marginBottom={1}>
                     <Button
                       variant="contained"
                       color={isSelected ? "success" : "info"}
+                      disabled={isBooked}
                       onClick={() => handleSeatClick(seatNumber)}
                       sx={{
                         width: "100%",
@@ -158,7 +162,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick }) => {
                       <Typography
                         variant="body1"
                         sx={{
-                          color: isSelected ? "#fff" : "#000",
+                          color: isBooked ? "red" : isSelected ? "#fff" : "#000",
                           fontWeight: "bold",
                         }}
                       >

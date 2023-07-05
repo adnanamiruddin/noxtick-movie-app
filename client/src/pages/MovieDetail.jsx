@@ -53,14 +53,18 @@ const MovieDetail = () => {
     setSelectedDate(dateParam);
     setSelectedTime(timeParam);
 
-    const { response, error } = bookedSeatsApi.getBookedSeatsByTitle({
-      title: movieTitle,
-      showtimeDate: selectedDate,
-      showtimeTime: selectedTime,
-    });
-    if (response) console.log({ response });
-    if (error) toast.error(error.message);
-  }, [location.search, movieTitle, selectedDate, selectedTime]);
+    const getBookedSeats = async () => {
+      const { response, error } = await bookedSeatsApi.getBookedSeatsByTitle({
+        title: movieTitle,
+        showtimeDate: selectedDate || dateParam,
+        showtimeTime: selectedTime || timeParam,
+      });
+      if (response) setBookedSeats(response)
+      if (error) toast.error(error.message);
+    };
+
+    getBookedSeats();
+  }, [location.search, movieTitle]);
 
   const handleSeatClick = (seatNumber) => {
     if (selectedSeats.includes(seatNumber)) {
@@ -205,6 +209,7 @@ const MovieDetail = () => {
             <MovieSeats
               selectedSeats={selectedSeats}
               handleSeatClick={handleSeatClick}
+              bookedSeats={[10, 12, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20]}
             />
           </Container>
         </Box>

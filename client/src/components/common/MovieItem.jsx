@@ -5,8 +5,11 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import uiConfigs from "../../configs/ui.configs";
 import { routesGen } from "../../routes/routes";
 import { Button, Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const MovieItem = ({ movie }) => {
+  const {themeMode} = useSelector(state => state.themeMode)
+
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState(null);
   const [posterUrl, setPosterUrl] = useState("");
@@ -25,7 +28,7 @@ const MovieItem = ({ movie }) => {
         sx={{
           marginRight: 0.5,
           paddingTop: "160%",
-          color: "primary.contrastText",
+          color: themeMode === "dark" ? "primary.contrastText" : "#fff",
           ...uiConfigs.style.backgroundImage(posterUrl),
           "&:hover .media-info": { bottom: 0, opacity: 1 },
           "&:hover .media-back-drop, &:hover .media-play-btn": { opacity: 1 },
@@ -42,7 +45,7 @@ const MovieItem = ({ movie }) => {
               top: 0,
               left: 0,
               backgroundImage:
-                "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))",
+                themeMode === "dark" ? "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))" : "linear-gradient(to top, rgba(60, 60, 60, 1), rgba(60, 60, 60, 0))",
               opacity: { xs: 1, md: 0 },
               transition: "all 0.3s ease",
             }}
