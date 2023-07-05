@@ -22,6 +22,7 @@ const userTicketApi = {
     seatNumbers,
     movieAgeRating,
     movieTicketPrice,
+    movieTitle,
   }) => {
     try {
       const response = await privateClient.post(
@@ -32,6 +33,7 @@ const userTicketApi = {
           seatNumbers,
           movieAgeRating,
           movieTicketPrice,
+          movieTitle,
         }
       );
       return { response };

@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import userTicketApi from "../../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import bookedSeatsApi from "../../api/modules/booked.seats.api";
 
 const ConfirmationModal = ({
   open,
@@ -15,28 +16,39 @@ const ConfirmationModal = ({
   selectedSeats,
 }) => {
   const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const total = selectedSeats.length * movie.ticket_price;
 
   const handleConfirmBuy = async () => {
-
     const body = {
       showtimeDate: selectedDate,
       showtimeTime: selectedTime,
-      seatNumbers : selectedSeats,
+      seatNumbers: selectedSeats,
       movieAgeRating: movie.age_rating,
       movieTicketPrice: total,
+      movieTitle: movie.title,
     };
     const { response, error } = await userTicketApi.bookTickets(body);
-    const 
 
+    console.log({ response1: response });
     if (response) {
-      console.log({response});
-      toast.success("Berhasil membeli tiket");
-      setTimeout(() => {
-        navigate("/")
-      }, 1000);
+      const body = {
+        showtimeDate: selectedDate,
+        showtimeTime: selectedTime,
+        seatNumbers: selectedSeats,
+        movieId: movie.id,
+        movieTitle: movie.title,
+      };
+      const { response, error } = await bookedSeatsApi.addBookedSeats(body);
+      console.log({ response2: response });
+      if (response) {
+        toast.success("Berhasil membeli tiket");
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+      }
+      if (error) toast.error(error.message);
     }
     if (error) toast.error(error.message);
   };
@@ -88,7 +100,13 @@ const ConfirmationModal = ({
               {`Total: Rp ${total}`}
             </Typography>
 
-            <Button variant="contained" disabled={total !== 0 ? false : true} onClick={handleConfirmBuy}>Konfirmasi</Button>
+            <Button
+              variant="contained"
+              disabled={total !== 0 ? false : true}
+              onClick={handleConfirmBuy}
+            >
+              Konfirmasi
+            </Button>
           </Box>
         ) : (
           <Typography>UMUR LU BELUM CUKUP DEK</Typography>

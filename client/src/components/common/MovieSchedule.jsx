@@ -6,7 +6,7 @@ const MovieSchedule = ({selectedDate, setSelectedDate, selectedTime, setSelected
   const navigate = useNavigate()
 
   const handleDateClick = (date) => {
-    setSelectedDate(date.format("DD MMM"));
+    setSelectedDate(date);
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("date", date);
     navigate({ search: searchParams.toString() });
