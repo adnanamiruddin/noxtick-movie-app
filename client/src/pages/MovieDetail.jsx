@@ -61,8 +61,12 @@ const MovieDetail = () => {
         showtimeDate: selectedDate || dateParam,
         showtimeTime: selectedTime || timeParam,
       });
-      if (response) setBookedSeats(response.seatNumbers);
-      if (error) toast.error(error.message);
+      if (response && response.length > 0) {
+        setBookedSeats(response[0].seatNumbers.length > 0 ? response[0].seatNumbers : []);
+      } else {
+        setBookedSeats([]);
+        if (error) toast.error(error.message);
+      }
     };
 
     getBookedSeats();
@@ -213,7 +217,7 @@ const MovieDetail = () => {
             <MovieSeats
               selectedSeats={selectedSeats}
               handleSeatClick={handleSeatClick}
-              bookedSeats={[bookedSeats]}
+              bookedSeats={bookedSeats}
             />
           </Container>
           <Box

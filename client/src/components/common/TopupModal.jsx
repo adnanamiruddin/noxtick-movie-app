@@ -8,9 +8,9 @@ import { increaseBalance } from "../../redux/features/userBalanceSlice";
 
 const TopupModal = ({ open, onClose, selectedAmount }) => {
   const { user } = useSelector((state) => state.user);
-  const {balance} = useSelector((state) => state.balance);
+  const { balance } = useSelector((state) => state.balance);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleTopup = async () => {
@@ -20,7 +20,7 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
       });
 
       if (response) {
-        dispatch(increaseBalance(response.balanceAmount))
+        dispatch(increaseBalance(response.balanceAmount));
         toast.success("Berhasil top up saldo");
         setTimeout(() => {
           navigate("/");
