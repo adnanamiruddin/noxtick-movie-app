@@ -15,6 +15,16 @@ router.get(
 router.post(
   "/book-tickets",
   tokenMiddleware.auth,
+  body("showtimeDate")
+    .exists()
+    .withMessage("Showtime date is required!")
+    .isString()
+    .withMessage("Showtime date must be a valid string!"),
+  body("showtimeTime")
+    .exists()
+    .withMessage("Showtime time is required!")
+    .isString()
+    .withMessage("Showtime time must be a valid date!"),
   body("seatNumbers")
     .exists()
     .withMessage("Seat numbers are required!")
@@ -30,11 +40,11 @@ router.post(
     .withMessage("Movie ticket price is required!")
     .isInt({ min: 0 })
     .withMessage("Movie ticket price must be a valid number!"),
-  body("showtimeTime")
+  body("movieTitle")
     .exists()
-    .withMessage("Showtime time is required!")
-    .isDate()
-    .withMessage("Showtime time must be a valid date!"),
+    .withMessage("Movie title is required!")
+    .isString()
+    .withMessage("Movie title must be a valid string!"),
   requestHandler.validate,
   ticketController.bookTickets
 );
@@ -45,4 +55,4 @@ router.post(
   ticketController.cancelTicket
 );
 
-export default router
+export default router;

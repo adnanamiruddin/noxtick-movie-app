@@ -6,7 +6,10 @@ import bookedSeatsController from "../controllers/booked.seats.controller.js";
 
 const router = express.Router();
 
-router.get("/", bookedSeatsController.getAllBookedSeats);
+router.get(
+  "/:title",
+  bookedSeatsController.getBookedTickets
+);
 
 router.post(
   "/",

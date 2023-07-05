@@ -2,12 +2,19 @@ import responseHandler from "../handlers/response.handler.js";
 import ticketModel from "../models/ticket.model.js";
 import balanceModel from "../models/balance.model.js";
 import transactionModel from "../models/transaction.model.js";
+import bookedSeatsModel from "../models/booked.seats.model.js";
 
 const bookTickets = async (req, res) => {
   try {
     const { user } = req;
-    const { seatNumbers, movieAgeRating, movieTicketPrice, showtimeTime } =
-      req.body;
+    const {
+      showtimeDate,
+      showtimeTime,
+      seatNumbers,
+      movieAgeRating,
+      movieTicketPrice,
+      movieTitle,
+    } = req.body;
 
     if (user.age < movieAgeRating) {
       return responseHandler.badRequest(
@@ -39,10 +46,11 @@ const bookTickets = async (req, res) => {
       );
     }
 
-    const bookedSeats = await ticketModel.find({
-      showtimeDate: { $gte: new Date() },
+    const bookedSeats = await bookedSeatsModel.find({
+      showtimeDate,
       showtimeTime,
       seatNumbers: { $in: seatNumbers },
+      movieTitle,
     });
 
     if (bookedSeats.length > 0) {

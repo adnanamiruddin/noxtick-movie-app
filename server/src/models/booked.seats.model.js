@@ -4,7 +4,7 @@ import modelOptions from "./model.options.js";
 const bookedSeatsSchema = new mongoose.Schema(
   {
     showtimeDate: {
-      type: Date,
+      type: String,
       required: true,
     },
     showtimeTime: {

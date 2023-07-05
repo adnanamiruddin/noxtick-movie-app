@@ -1,10 +1,24 @@
 import responseHandler from "../handlers/response.handler.js";
 import bookedSeatsModel from "../models/booked.seats.model.js";
 
-const getAllBookedSeats = async (req, res) => {
+const getBookedTickets = async (req, res) => {
   try {
-    const bookedSeats = await bookedSeatsModel.find();
-    responseHandler.ok(res, bookedSeats);
+    const { title } = req.params;
+    const { showtimeDate, showtimeTime } = req.query;
+
+    const decodedTitle = decodeURIComponent(title);
+
+    const bookedSeats = await bookedSeatsModel.find({
+      movieTitle: decodedTitle,
+      showtimeDate,
+      showtimeTime,
+    });
+
+    if (bookedSeats) {
+      responseHandler.ok(res, bookedSeats);
+    } else {
+      responseHandler.notFound(res);
+    }
   } catch (error) {
     responseHandler.error(res);
   }
@@ -44,7 +58,7 @@ const removeBookedSeats = async (req, res) => {
 };
 
 export default {
-  getAllBookedSeats,
+  getBookedTickets,
   addBookedSeats,
   removeBookedSeats,
 };

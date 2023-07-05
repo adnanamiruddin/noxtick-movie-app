@@ -23,7 +23,7 @@ const ticketSchema = new mongoose.Schema(
       required: true,
     },
     showtimeDate: {
-      type: Date,
+      type: String,
       required: true,
     },
     showtimeTime: {
