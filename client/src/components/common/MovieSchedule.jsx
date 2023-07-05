@@ -1,14 +1,22 @@
 import { Button, Typography, Box, Stack } from "@mui/material";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const MovieSchedule = ({selectedDate, setSelectedDate, selectedTime, setSelectedTime}) => {
+  const navigate = useNavigate()
 
   const handleDateClick = (date) => {
     setSelectedDate(date);
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("date", date);
+    navigate({ search: searchParams.toString() });
   };
 
   const handleTimeClick = (time) => {
     setSelectedTime(time);
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("time", time);
+    navigate({ search: searchParams.toString() });
   };
 
   const renderDates = () => {

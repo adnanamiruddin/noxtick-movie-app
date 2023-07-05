@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import movieApi from "../api/modules/movie.api";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,17 +10,21 @@ import uiConfigs from "../configs/ui.configs";
 import MovieSeats from "../components/common/MovieSeats";
 import MovieSchedule from "../components/common/MovieSchedule";
 import Container from "../components/common/Container";
+import bookedSeatsApi from "../api/modules/booked.seats.api";
+import dayjs from "dayjs";
 
 const MovieDetail = () => {
   const { user, listTickets } = useSelector((state) => state.user);
   const { movieTitle } = useParams();
+  const location = useLocation();
 
   const dispatch = useDispatch();
 
   const [movie, setMovie] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(dayjs().format("DD MMM"));
+  const [selectedTime, setSelectedTime] = useState("12.30");
+  const [bookedSeats, setBookedSeats] = useState([]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,6 +42,25 @@ const MovieDetail = () => {
 
     getMovieDetails();
   }, [movieTitle, dispatch]);
+
+  useEffect(() => {
+    // Mendapatkan parameter dari URL menggunakan useSearchParams
+    const searchParams = new URLSearchParams(location.search);
+    const dateParam = searchParams.get("date");
+    const timeParam = searchParams.get("time");
+
+    // Memperbarui state berdasarkan parameter URL
+    setSelectedDate(dateParam);
+    setSelectedTime(timeParam);
+
+    const { response, error } = bookedSeatsApi.getBookedSeatsByTitle({
+      title: movieTitle,
+      showtimeDate: selectedDate,
+      showtimeTime: selectedTime,
+    });
+    if (response) console.log({ response });
+    if (error) toast.error(error.message);
+  }, [location.search, movieTitle, selectedDate, selectedTime]);
 
   const handleSeatClick = (seatNumber) => {
     if (selectedSeats.includes(seatNumber)) {
