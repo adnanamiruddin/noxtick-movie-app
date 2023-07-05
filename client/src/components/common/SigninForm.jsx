@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
@@ -8,12 +8,27 @@ import { LoadingButton } from "@mui/lab";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import userApi from "../../api/modules/user.api";
 import { setUser } from "../../redux/features/userSlice";
+import { setBalance } from "../../redux/features/userBalanceSlice";
+import userBalanceApi from "../../api/modules/user.balance.api";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();
 
   const [isLoginRequest, setIsLoginRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState();
+  const [userBalance, setUserBalance] = useState(0);
+
+  useEffect(() => {
+    const getUserBalance = async () => {
+      const { response, error } = await userBalanceApi.getBalance();
+      if (response) {
+        setUserBalance(response.balanceAmount);
+      }
+      if (error) toast.error(error.message);
+    };
+
+    getUserBalance();
+  }, []);
 
   const signinForm = useFormik({
     initialValues: {
@@ -37,6 +52,7 @@ const SigninForm = ({ switchAuthState }) => {
       if (response) {
         signinForm.resetForm();
         dispatch(setUser(response));
+        dispatch(setBalance(userBalance))
         dispatch(setAuthModalOpen(false));
         toast.success("Sign in success");
       }

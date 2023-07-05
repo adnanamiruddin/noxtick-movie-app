@@ -8,21 +8,8 @@ import { useEffect, useState } from "react";
 
 const TopupModal = ({ open, onClose, selectedAmount }) => {
   const { user } = useSelector((state) => state.user);
+  const {userBalance} = useSelector((state) => state.userBalance);
   const navigate = useNavigate();
-
-  const [userBalance, setUserBalance] = useState(0);
-
-  useEffect(() => {
-    const getUserBalance = async () => {
-      const { response, error } = await userBalanceApi.getBalance();
-      if (response) {
-        setUserBalance(response.balanceAmount);
-      }
-      if (error) toast.error(error.message);
-    };
-
-    getUserBalance();
-  }, [user]);
 
   const handleTopup = async () => {
     if (selectedAmount) {
