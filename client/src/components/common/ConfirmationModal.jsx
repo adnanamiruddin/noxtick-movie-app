@@ -9,13 +9,13 @@ import bookedSeatsApi from "../../api/modules/booked.seats.api";
 
 const ConfirmationModal = ({
   open,
-  handleClose,
+  onClose,
   movie,
   selectedDate,
   selectedTime,
   selectedSeats,
 }) => {
-  const { user } = useSelector((state) => state.user);
+  const { user, listTickets } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   const total = selectedSeats.length * movie.ticket_price;
@@ -31,7 +31,6 @@ const ConfirmationModal = ({
     };
     const { response, error } = await userTicketApi.bookTickets(body);
 
-    console.log({ response1: response });
     if (response) {
       const body = {
         showtimeDate: selectedDate,
@@ -41,12 +40,12 @@ const ConfirmationModal = ({
         movieTitle: movie.title,
       };
       const { response, error } = await bookedSeatsApi.addBookedSeats(body);
-      console.log({ response2: response });
+
       if (response) {
         toast.success("Berhasil membeli tiket");
         setTimeout(() => {
           navigate("/");
-        }, 1000);
+        }, 1500);
       }
       if (error) toast.error(error.message);
     }
@@ -54,7 +53,7 @@ const ConfirmationModal = ({
   };
 
   return user ? (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={onClose}>
       <Box
         sx={{
           position: "absolute",

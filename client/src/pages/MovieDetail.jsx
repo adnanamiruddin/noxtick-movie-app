@@ -229,7 +229,7 @@ const MovieDetail = () => {
           </Box>
             <ConfirmationModal
               open={isModalConfirmOpen}
-              handleClose={handleClose}
+              onClose={handleClose}
               movie={movie}
               selectedDate={selectedDate}
               selectedTime={selectedTime}
