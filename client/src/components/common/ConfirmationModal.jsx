@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import Logo from "./Logo";
@@ -17,6 +17,20 @@ const ConfirmationModal = ({
 }) => {
   const { user, listTickets } = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  const [userBalance, setUserBalance] = useState(0);
+
+  useEffect(() => {
+    const getUserBalance = async () => {
+      const { response, error } = await userBalanceApi.getBalance();
+      if (response) {
+        setUserBalance(response.balanceAmount);
+      }
+      if (error) toast.error(error.message);
+    };
+
+    getUserBalance();
+  }, [user]);
 
   const total = selectedSeats.length * movie.ticket_price;
 
