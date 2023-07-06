@@ -38,6 +38,10 @@ const ticketSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    movieTicketPrice: {
+      type: Number,
+      required: true,
+    },
   },
   modelOptions
 );

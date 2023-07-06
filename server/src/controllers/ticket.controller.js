@@ -116,16 +116,27 @@ const getTicketsTransaction = async (req, res) => {
 const cancelTicket = async (req, res) => {
   try {
     const { id } = req.user;
-    const { ticketId } = req.params;
+    const { ticketId, password } = req.body;
 
-    const user = await userModel.findById(id);
+    const user = await userModel
+      .findById(id)
+      .select("id password salt balance");
     const ticket = await ticketModel.findOne({ _id: ticketId, user: user.id });
+
+    if (!user) {
+      return responseHandler.notFound(res, "User not found");
+    }
+
+    if (!user.validatePassword(password)) {
+      return responseHandler.badRequest(res, "Wrong password!");
+    }
 
     if (!ticket) {
       return responseHandler.notFound(res, "Ticket not found");
     }
 
     user.balance += ticket.movieTicketPrice * ticket.seatNumbers.length;
+
     await user.save();
 
     await ticketModel.deleteOne({ _id: ticketId, user: user.id });
@@ -133,7 +144,7 @@ const cancelTicket = async (req, res) => {
     const transaction = await transactionModel.updateOne(
       { user: user.id, ticket: ticketId },
       {
-        transactionStatus: "Canceled",
+        transactionStatus: "Cancelled",
       }
     );
 

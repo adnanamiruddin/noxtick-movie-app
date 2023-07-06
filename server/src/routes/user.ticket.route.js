@@ -7,13 +7,13 @@ import ticketController from "../controllers/ticket.controller.js";
 const router = express.Router();
 
 router.get(
-  "/my-tickets",
+  "/tickets",
   tokenMiddleware.auth,
   ticketController.getTicketsTransaction
 );
 
 router.post(
-  "/book-tickets",
+  "/tickets",
   tokenMiddleware.auth,
   body("showtimeDate")
     .exists()
@@ -45,13 +45,34 @@ router.post(
     .withMessage("Movie title is required!")
     .isString()
     .withMessage("Movie title must be a valid string!"),
+  body("moviePoster")
+    .exists()
+    .withMessage("Movie poster is required!")
+    .isString()
+    .withMessage("Movie poster must be a valid string!"),
+  body("movieTicketPrice")
+    .exists()
+    .withMessage("Movie ticket price is required!")
+    .isInt({ min: 0 })
+    .withMessage("Movie ticket price must be a valid number!"),
   requestHandler.validate,
   ticketController.bookTickets
 );
 
 router.post(
-  "/cancel-tickets/:ticketId",
+  "/tickets",
   tokenMiddleware.auth,
+  body("ticketId")
+    .exists()
+    .withMessage("Ticket ID is required!")
+    .isMongoId()
+    .withMessage("Ticket ID must be a valid MongoDB ID!"),
+  body("password")
+    .exists()
+    .withMessage("Password is required!")
+    .isString()
+    .withMessage("Password must be a valid string!"),
+  requestHandler.validate,
   ticketController.cancelTicket
 );
 
