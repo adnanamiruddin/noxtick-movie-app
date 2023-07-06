@@ -8,7 +8,7 @@ const TicketItem = ({ ticket }) => {
     movieTitle,
     showtimeDate,
     showtimeTime,
-    bookingData,
+    moviePoster,
   } = ticket;
 
   // const bookingDateTime = new Date(bookingTime);
@@ -28,25 +28,23 @@ const TicketItem = ({ ticket }) => {
         borderRadius: "8px",
       }}
     >
-      <Box sx={{ marginRight: 4 }}>
-        {/* <img
-          src={posterUrl}
-          alt={movieTitle}
-          style={{ width: "100px", height: "150px" }}
-        /> */}
-      </Box>
       <Box>
         <Typography variant="h6">{movieTitle}</Typography>
         <Typography variant="body1">
           Showtime: {showtimeDate} {showtimeTime}
         </Typography>
-        <Typography variant="body1">
-          Booking Time: {bookingTime}
-        </Typography>
+        <Typography variant="body1">Booking Time: {bookingTime}</Typography>
         <Typography variant="body1">
           Seat Numbers: {seatNumbers.join(", ")}
         </Typography>
         {/* <Typography variant="body1">Booking Data: {bookingData}</Typography> */}
+      </Box>
+      <Box sx={{ marginLeft: 4 }}>
+        <img
+          src={moviePoster}
+          alt={movieTitle}
+          style={{ width: "100px", height: "150px" }}
+        />
       </Box>
     </Box>
   );

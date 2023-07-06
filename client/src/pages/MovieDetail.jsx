@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 import HeaderImage from "../components/common/HeaderImage";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
+import BuyTicketModal from "../components/common/BuyTicketModal";
 import MovieSeats from "../components/common/MovieSeats";
 import MovieSchedule from "../components/common/MovieSchedule";
 import Container from "../components/common/Container";
 import bookedSeatsApi from "../api/modules/booked.seats.api";
 import dayjs from "dayjs";
-import ConfirmationModal from "../components/common/ConfirmationModal";
 
 const MovieDetail = () => {
   const { user } = useSelector((state) => state.user);
@@ -62,7 +62,9 @@ const MovieDetail = () => {
         showtimeTime: selectedTime || timeParam,
       });
       if (response && response.length > 0) {
-        setBookedSeats(response[0].seatNumbers.length > 0 ? response[0].seatNumbers : []);
+        setBookedSeats(
+          response[0].seatNumbers.length > 0 ? response[0].seatNumbers : []
+        );
       } else {
         setBookedSeats([]);
         if (error) toast.error(error.message);
@@ -221,7 +223,11 @@ const MovieDetail = () => {
             />
           </Container>
           <Box
-            sx={{ marginTop: "2rem", display: user ? "flex" : "none", justifyContent: "end" }}
+            sx={{
+              marginTop: "2rem",
+              display: user ? "flex" : "none",
+              justifyContent: "end",
+            }}
           >
             <Button
               variant="contained"
@@ -231,14 +237,14 @@ const MovieDetail = () => {
               Buy Tickets
             </Button>
           </Box>
-            <ConfirmationModal
-              open={isModalConfirmOpen}
-              onClose={handleClose}
-              movie={movie}
-              selectedDate={selectedDate}
-              selectedTime={selectedTime}
-              selectedSeats={selectedSeats}
-            />
+          <BuyTicketModal
+            open={isModalConfirmOpen}
+            onClose={handleClose}
+            movie={movie}
+            selectedDate={selectedDate}
+            selectedTime={selectedTime}
+            selectedSeats={selectedSeats}
+          />
         </Box>
       </Box>
     </div>

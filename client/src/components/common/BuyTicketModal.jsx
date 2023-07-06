@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import bookedSeatsApi from "../../api/modules/booked.seats.api";
 import { bookTickets } from "../../redux/features/userSlice";
 
-const ConfirmationModal = ({
+const BuyTicketModal = ({
   open,
   onClose,
   movie,
@@ -30,6 +30,7 @@ const ConfirmationModal = ({
       movieAgeRating: movie.age_rating,
       movieTicketPrice: total,
       movieTitle: movie.title,
+      moviePoster: movie.poster_url,
     };
     const { response, error } = await userTicketApi.bookTickets(body);
 
@@ -83,6 +84,10 @@ const ConfirmationModal = ({
             </Typography>
 
             <Typography variant="body1" mb={2}>
+              Saldo: Rp.{user.balance}
+            </Typography>
+
+            <Typography variant="body1" mb={2}>
               Film: {movie.title}
             </Typography>
 
@@ -99,7 +104,7 @@ const ConfirmationModal = ({
             </Typography>
 
             <Typography variant="body1" mb={2}>
-              {`Total: Rp ${total}`}
+              {`Total: Rp.${total}`}
             </Typography>
 
             <Button
@@ -120,4 +125,4 @@ const ConfirmationModal = ({
   );
 };
 
-export default ConfirmationModal;
+export default BuyTicketModal;

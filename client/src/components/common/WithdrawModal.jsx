@@ -65,7 +65,7 @@ const WithdrawModal = ({ open, onClose, amount }) => {
         </Typography>
 
         <Typography variant="body1" mb={2}>
-          Saldo Anda: Rp {user.balance}
+          Saldo Anda: Rp.{user.balance}
         </Typography>
 
         <Typography variant="body1" mb={2}>

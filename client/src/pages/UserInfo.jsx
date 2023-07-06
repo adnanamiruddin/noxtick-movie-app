@@ -12,14 +12,14 @@ const UserInfo = () => {
 
   useEffect(() => {
     const getTickets = async () => {
-      const {response, error} = await userTicketApi.getTickets();
+      const { response, error } = await userTicketApi.getTickets();
 
       if (response) setTickets(response);
       if (error) toast.error(error.message);
-    }
+    };
 
     getTickets();
-  }, [user])
+  }, [user]);
 
   return (
     <Box sx={{ textAlign: "center" }}>
@@ -48,11 +48,19 @@ const UserInfo = () => {
             Age: {user.age}
           </Typography>
           <Typography variant="body1" gutterBottom>
-            Balance: {user.balance}
+            Balance: Rp.{user.balance}
           </Typography>
         </Box>
       </Box>
-      <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
         {tickets.map((ticket, i) => (
           <TicketItem key={i} ticket={ticket} />
         ))}

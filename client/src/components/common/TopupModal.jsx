@@ -61,7 +61,7 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
         </Typography>
 
         <Typography variant="body1" mb={2}>
-          Saldo Awal: {user.balance}
+          Saldo Awal: Rp.{user.balance}
         </Typography>
 
         <Typography variant="body1" mb={2}>
