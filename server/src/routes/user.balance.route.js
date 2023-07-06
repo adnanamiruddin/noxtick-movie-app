@@ -34,7 +34,7 @@ router.post(
     .isLength({ min: 8 })
     .withMessage("Minimum 8 characters for password"),
   requestHandler.validate,
-  balanceController.updateBalance
+  balanceController.withdrawBalance
 );
 
 export default router;

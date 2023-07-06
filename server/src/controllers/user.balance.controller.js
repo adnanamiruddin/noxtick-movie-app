@@ -11,7 +11,7 @@ const getBalance = async (req, res) => {
       return responseHandler.notFound(res, "Balance not found");
     }
 
-    responseHandler.ok(res, balance);
+    responseHandler.ok(res, user);
   } catch (error) {
     responseHandler.error(res);
   }
@@ -30,9 +30,9 @@ const updateBalance = async (req, res) => {
 
     user.balance += amount;
 
-    await balance.save();
+    await user.save();
 
-    responseHandler.ok(res, balance);
+    responseHandler.ok(res, user);
   } catch (error) {
     responseHandler.error(res);
   }
@@ -43,7 +43,9 @@ const withdrawBalance = async (req, res) => {
     const { id } = req.user;
     const { amount, password } = req.body;
 
-    const user = await userModel.findById(id).select("balance");
+    const user = await userModel
+      .findById(id)
+      .select("id password salt balance");
 
     if (!user) {
       return responseHandler.notFound(res, "Balance not found");
@@ -59,10 +61,14 @@ const withdrawBalance = async (req, res) => {
 
     user.balance -= amount;
 
-    await balance.save();
+    await user.save();
 
-    responseHandler.ok(res, balance);
+    user.password = undefined;
+    user.salt = undefined;
+
+    responseHandler.ok(res, user);
   } catch (error) {
+    console.log({ error });
     responseHandler.error(res);
   }
 };

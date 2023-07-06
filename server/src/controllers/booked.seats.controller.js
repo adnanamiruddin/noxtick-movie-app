@@ -62,7 +62,7 @@ const removeBookedSeats = async (req, res) => {
 
     await bookedSeatsModel.findByIdAndDelete(id);
 
-    responseHandler.ok(res);
+    responseHandler.ok(res, "Successfully canceled seats");
   } catch (error) {
     responseHandler.error(res);
   }
