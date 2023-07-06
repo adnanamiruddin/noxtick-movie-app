@@ -2,22 +2,28 @@ import { Button, Typography, Box, Stack } from "@mui/material";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 
-const MovieSchedule = ({selectedDate, setSelectedDate, selectedTime, setSelectedTime}) => {
-  const navigate = useNavigate()
+const monthNames = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
-  const handleDateClick = (date) => {
-    setSelectedDate(date);
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set("date", date);
-    navigate({ search: searchParams.toString() });
-  };
-
-  const handleTimeClick = (time) => {
-    setSelectedTime(time);
-    const searchParams = new URLSearchParams(location.search);
-    searchParams.set("time", time);
-    navigate({ search: searchParams.toString() });
-  };
+const MovieSchedule = ({
+  selectedDate,
+  setSelectedDate,
+  selectedTime,
+  setSelectedTime,
+}) => {
+  const navigate = useNavigate();
 
   const renderDates = () => {
     const dates = [];
@@ -44,19 +50,49 @@ const MovieSchedule = ({selectedDate, setSelectedDate, selectedTime, setSelected
   };
 
   const renderTimes = () => {
-    const times = ["12.30", "15.10", "18.15", "21.00"];
+    const times = ["11.40", "14.30", "17.15", "20.35"];
+    const currentTime = new Date();
+    const [selectedDay, selectedMonth] = selectedDate.split(" ");
+  
+    return times.map((time) => {
+      const [selectedHour, selectedMinute] = time.split(".");
+      const showtime = new Date();
+      showtime.setHours(selectedHour);
+      showtime.setMinutes(selectedMinute);
+      showtime.setDate(selectedDay);
+      showtime.setMonth(monthNames.indexOf(selectedMonth));
+  
+      const timeDifference = (showtime.getTime() - currentTime.getTime()) / (1000 * 60);
+      const isTimePassed = timeDifference <= 10;
+  
+      return (
+        <Button
+          key={time}
+          variant="contained"
+          color={selectedTime === time ? "success" : "info"}
+          onClick={() => handleTimeClick(time)}
+          sx={{ margin: 1 }}
+          disabled={isTimePassed}
+        >
+          {time}
+        </Button>
+      );
+    });
+  };
+  
 
-    return times.map((time) => (
-      <Button
-        key={time}
-        variant="contained"
-        color={selectedTime === time ? "success" : "info"}
-        onClick={() => handleTimeClick(time)}
-        sx={{ margin: 1 }}
-      >
-        {time}
-      </Button>
-    ));
+  const handleDateClick = (date) => {
+    setSelectedDate(date);
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("date", date);
+    navigate({ search: searchParams.toString() });
+  };
+
+  const handleTimeClick = (time) => {
+    setSelectedTime(time);
+    const searchParams = new URLSearchParams(location.search);
+    searchParams.set("time", time);
+    navigate({ search: searchParams.toString() });
   };
 
   return (

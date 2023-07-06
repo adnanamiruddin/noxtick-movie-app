@@ -24,7 +24,7 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs().format("DD MMM"));
-  const [selectedTime, setSelectedTime] = useState("12.30");
+  const [selectedTime, setSelectedTime] = useState("11.40");
   const [bookedSeats, setBookedSeats] = useState([]);
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
 
@@ -52,8 +52,8 @@ const MovieDetail = () => {
     const timeParam = searchParams.get("time");
 
     // Memperbarui state berdasarkan parameter URL
-    setSelectedDate(dateParam);
-    setSelectedTime(timeParam);
+    setSelectedDate(dateParam || dayjs().format("DD MMM"));
+    setSelectedTime(timeParam || "11.40");
 
     const getBookedSeats = async () => {
       const { response, error } = await bookedSeatsApi.getBookedSeatsByTitle({
@@ -70,7 +70,7 @@ const MovieDetail = () => {
     };
 
     getBookedSeats();
-  }, [location.search, movieTitle]);
+  }, [location.search, movieTitle, bookedSeats]);
 
   const handleSeatClick = (seatNumber) => {
     if (selectedSeats.includes(seatNumber)) {
