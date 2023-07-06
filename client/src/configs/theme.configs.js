@@ -16,7 +16,7 @@ const themeConfigs = {
               contrastText: "#ffffff",
             },
             secondary: {
-              main: "#ffca28",
+              main: "#ff8f00",
               contrastText: "#ffffff",
             },
             background: {
@@ -30,7 +30,7 @@ const themeConfigs = {
               contrastText: "#000000",
             },
             secondary: {
-              main: "#ffca28",
+              main: "#ffb300",
               contrastText: "#000000",
             },
             background: {

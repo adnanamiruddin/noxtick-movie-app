@@ -24,12 +24,13 @@ const TicketItem = ({ ticket }) => {
         alignItems: "center",
         padding: 2,
         margin: 2,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "secondary.main",
         borderRadius: "8px",
+        color: "primary.contrastText",
       }}
     >
       <Box>
-        <Typography variant="h6">{movieTitle}</Typography>
+        <Typography variant="h5">{movieTitle}</Typography>
         <Typography variant="body1">
           Showtime: {showtimeDate} {showtimeTime}
         </Typography>
