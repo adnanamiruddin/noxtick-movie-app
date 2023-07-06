@@ -1,6 +1,6 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
-import Container from "../components/common/Container"
+import Container from "../components/common/Container";
 import MovieSlide from "../components/common/MovieSlide";
 // import MoviePostersSlide from "../components/common/MoviePostersSlide";
 
@@ -15,15 +15,15 @@ const HomePage = () => {
             component="h1"
             sx={{ fontWeight: "600", alignSelf: "center", textAlign: "center" }}
           >
-            Selamat datang di NoxTick!
+            Welcome to NoxTick!
           </Typography>
           <Typography variant="body1" sx={{ textAlign: "center" }}>
-            Mau nonton apa hari ini? Skuy pesan tiketmu dan nikmati pengalaman
-            menonton yang seru bersama NoxTick.
+            What do you want to watch today? Come on order your ticket and enjoy an
+            exciting viewing experience with NoxTick.
           </Typography>
         </Stack>
       </Box>
-      <Box sx={{...uiConfigs.style.mainContent}}>
+      <Box sx={{ ...uiConfigs.style.mainContent }}>
         <Container>
           <MovieSlide />
         </Container>

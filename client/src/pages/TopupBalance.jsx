@@ -37,7 +37,7 @@ const TopupBalance = () => {
             key={amount.value}
             variant="contained"
             onClick={() => handleAmountSelection(amount.value)}
-            sx={{ mr: 2, mb: 2 }}
+            sx={{ marginRight: 2, marginBottom: 2 }}
           >
             {amount.label}
           </Button>

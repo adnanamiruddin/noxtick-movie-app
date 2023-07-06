@@ -1,18 +1,23 @@
 import { Box, Toolbar, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import TicketItem from "../components/common/TicketItem";
 import { useEffect, useState } from "react";
 import userTicketApi from "../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
+import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 
 const UserInfo = () => {
   const { user } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     const getTickets = async () => {
+      dispatch(setGlobalLoading(true));
       const { response, error } = await userTicketApi.getTickets();
+      dispatch(setGlobalLoading(false));
 
       if (response) setTickets(response);
       if (error) toast.error(error.message);
