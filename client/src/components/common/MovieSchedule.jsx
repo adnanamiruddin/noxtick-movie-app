@@ -53,7 +53,7 @@ const MovieSchedule = ({
     const times = ["11.40", "14.30", "17.15", "20.35"];
     const currentTime = new Date();
     const [selectedDay, selectedMonth] = selectedDate.split(" ");
-  
+
     return times.map((time) => {
       const [selectedHour, selectedMinute] = time.split(".");
       const showtime = new Date();
@@ -61,10 +61,11 @@ const MovieSchedule = ({
       showtime.setMinutes(selectedMinute);
       showtime.setDate(selectedDay);
       showtime.setMonth(monthNames.indexOf(selectedMonth));
-  
-      const timeDifference = (showtime.getTime() - currentTime.getTime()) / (1000 * 60);
+
+      const timeDifference =
+        (showtime.getTime() - currentTime.getTime()) / (1000 * 60);
       const isTimePassed = timeDifference <= 10;
-  
+
       return (
         <Button
           key={time}
@@ -79,7 +80,6 @@ const MovieSchedule = ({
       );
     });
   };
-  
 
   const handleDateClick = (date) => {
     setSelectedDate(date);

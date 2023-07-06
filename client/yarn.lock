@@ -782,6 +782,13 @@ ajv@^6.10.0, ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
+angka-menjadi-terbilang@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/angka-menjadi-terbilang/-/angka-menjadi-terbilang-0.5.0.tgz#a92293b2bb6a289c93b656e0d19c7f3c6fe2950f"
+  integrity sha512-H6FteJ1iyRWu1Vz8Yz7DT403B9WxglJWimHxTryUxhc60rAtCunf/7IlIZBDa87jK9HLY8czId/GJUkrfGANBw==
+  dependencies:
+    ramda "^0.23.0"
+
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
@@ -2067,6 +2074,11 @@ queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/queue-microtask/-/queue-microtask-1.2.3.tgz#4929228bbc724dfac43e0efb058caf7b6cfb6243"
   integrity sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
+
+ramda@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.23.0.tgz#ccd13fff73497a93974e3e86327bfd87bd6e8e2b"
+  integrity sha512-ZEg7VlLXEeDfdkmqGi/12/2n8vNlxdx3iU74GbEP6VN2Udx4jLTn6Fw0jU4sjmvaPKjrIZIYk8HBj7quaie97Q==
 
 react-dom@^18.2.0:
   version "18.2.0"

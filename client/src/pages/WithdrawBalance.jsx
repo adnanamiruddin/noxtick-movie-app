@@ -1,31 +1,15 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import userBalanceApi from "../api/modules/user.balance.api";
+import { useSelector } from "react-redux";
 import { Box, Button, TextField, Toolbar, Typography } from "@mui/material";
+import WithdrawModal from "../components/common/WithdrawModal";
 
 const WithdrawBalance = () => {
-  const { balance } = useSelector((state) => state.balance);
+  const { user } = useSelector((state) => state.user);
 
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleWithdraw = async () => {
-    if (amount <= 0) {
-      toast.error("Withdraw amount must be greater than 0");
-      return;
-    }
-    if (amount > 500000) {
-      toast.error("Maximum withdraw amount is 500,000");
-      return;
-    }
-    const { response, error } = await userBalanceApi.withdraw({ amount });
-    if (response) {
-      toast.success("Withdraw successful");
-    }
-    if (error) {
-      toast.error(error.message);
-    }
-  };
+  const handleClose = () => setIsModalOpen(false);
 
   return (
     <Box sx={{ maxWidth: 400, mx: "auto", mt: 4, p: 2 }}>
@@ -34,7 +18,7 @@ const WithdrawBalance = () => {
         Withdraw Balance
       </Typography>
       <Typography variant="body1" mb={2}>
-        {`Your current balance is Rp ${balance}`}
+        {`Your current balance is Rp ${user.balance}`}
       </Typography>
       <TextField
         type="number"
@@ -46,9 +30,10 @@ const WithdrawBalance = () => {
         inputProps={{ inputProps: { min: 0, max: 500000 } }}
         sx={{ mb: 2 }}
       />
-      <Button variant="contained" onClick={handleWithdraw}>
+      <Button variant="contained" onClick={() => setIsModalOpen(true)}>
         Withdraw
       </Button>
+      <WithdrawModal open={isModalOpen} onClose={handleClose} amount={amount} />
     </Box>
   );
 };

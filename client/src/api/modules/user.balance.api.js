@@ -16,10 +16,11 @@ const userBalanceApi = {
     }
   },
 
-  topup: async ({ amount }) => {
+  topup: async ({ amount, password }) => {
     try {
       const response = await privateClient.post(userBalanceEndPoints.topup, {
         amount,
+        password
       });
       return { response };
     } catch (error) {

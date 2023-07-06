@@ -15,7 +15,7 @@ import dayjs from "dayjs";
 import ConfirmationModal from "../components/common/ConfirmationModal";
 
 const MovieDetail = () => {
-  const { user, listTickets } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const { movieTitle } = useParams();
   const location = useLocation();
 
