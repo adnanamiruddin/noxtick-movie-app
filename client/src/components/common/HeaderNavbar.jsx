@@ -80,7 +80,7 @@ const HeaderNavbar = () => {
             }}
           >
             <Stack direction="row" spacing={1} alignItems="center">
-              {/* Mobile View (Hamburger Icon) START */}
+              {/* Mobile (View) Hamburger Icon START */}
               <IconButton
                 color="inherit"
                 sx={{ marginRight: 1, display: { md: "none" } }}
@@ -88,13 +88,13 @@ const HeaderNavbar = () => {
               >
                 <MenuIcon />
               </IconButton>
-              {/* Mobile View (Hamburger Icon) END */}
+              {/* Mobile (View) Hamburger Icon END */}
 
-              {/* Mobile View Icon START */}
+              {/* Mobile (View) Icon START */}
               <Box sx={{ display: { xs: "inline-block", md: "none" } }}>
                 <Logo />
               </Box>
-              {/* Mobile View Icon END */}
+              {/* Mobile (View) Icon END */}
             </Stack>
 
             {/* Main Menu Section START */}

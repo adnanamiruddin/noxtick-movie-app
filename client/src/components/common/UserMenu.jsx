@@ -11,6 +11,7 @@ import {
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import menuConfigs from "../../configs/menu.configs";
 import { setUser } from "../../redux/features/userSlice";
+import uiConfigs from "../../configs/ui.configs";
 
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
@@ -22,18 +23,18 @@ const UserMenu = () => {
   const toggleMenu = (e) => setAnchorElement(e.currentTarget);
 
   return (
-    <div>
+    <>
       {user ? (
-        <div>
+        <>
           <Typography
             variant="h6"
             sx={{
               cursor: "pointer",
               userSelect: "none",
               marginTop: { xs: 0.5, md: 0 },
-              marginLeft: { xs: 2.5, sm: 28, md: 0 },
-              textAlign: "center",
-              fontSize: { xs: "1rem", sm: "1.5rem" },
+              fontSize: { xs: "1rem", md: "1.5rem" },
+              width: "100%",
+              ...uiConfigs.style.typoLines(1, "end"),
             }}
             onClick={toggleMenu}
           >
@@ -76,9 +77,9 @@ const UserMenu = () => {
               />
             </ListItemButton>
           </Menu>
-        </div>
+        </>
       ) : ""}
-    </div>
+    </>
   );
 };
 
