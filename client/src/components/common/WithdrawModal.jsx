@@ -6,14 +6,10 @@ import { toast } from "react-toastify";
 import userBalanceApi from "../../api/modules/user.balance.api";
 import { useNavigate } from "react-router-dom";
 
-const WithdrawModal = ({
-  open,
-  onClose,
-  amount,
-}) => {
-  const {user} = useSelector(state => state.user)
+const WithdrawModal = ({ open, onClose, amount }) => {
+  const { user } = useSelector((state) => state.user);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
 
@@ -21,7 +17,7 @@ const WithdrawModal = ({
     setPassword(e.target.value);
   };
 
-  const handleConfirmWithdraw = async () => {
+  const handleConfirmWithdrawal = async () => {
     if (amount <= 0) {
       toast.error("Withdraw amount must be greater than 0");
       return;
@@ -30,7 +26,10 @@ const WithdrawModal = ({
       toast.error("Maximum withdraw amount is Rp.500.000");
       return;
     }
-    const { response, error } = await userBalanceApi.withdraw({ amount, password });
+    const { response, error } = await userBalanceApi.withdraw({
+      amount,
+      password,
+    });
     if (response) {
       toast.success("Withdraw successful");
       setTimeout(() => {
@@ -82,7 +81,7 @@ const WithdrawModal = ({
           sx={{ marginBottom: 2 }}
         />
 
-        <Button variant="contained" onClick={handleConfirmWithdraw}>
+        <Button variant="contained" onClick={handleConfirmWithdrawal}>
           Konfirmasi Penarikan
         </Button>
       </Box>

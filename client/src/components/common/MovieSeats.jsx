@@ -47,6 +47,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
             alignItems: "center",
             fontSize: "24px",
             fontWeight: 500,
+            borderRadius: {xs: 0, md: "5px"},
           }}
         >
           Studio Screen

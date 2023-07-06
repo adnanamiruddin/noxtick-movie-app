@@ -15,7 +15,7 @@ const ConfirmationModal = ({
   selectedTime,
   selectedSeats,
 }) => {
-  const { user, listTickets } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
