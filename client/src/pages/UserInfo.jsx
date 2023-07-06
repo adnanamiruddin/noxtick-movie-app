@@ -1,8 +1,25 @@
 import { Box, Toolbar, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
+import TicketItem from "../components/common/TicketItem";
+import { useEffect, useState } from "react";
+import userTicketApi from "../api/modules/user.ticket.api";
+import { toast } from "react-toastify";
 
 const UserInfo = () => {
   const { user } = useSelector((state) => state.user);
+
+  const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+    const getTickets = async () => {
+      const {response, error} = await userTicketApi.getTickets();
+
+      if (response) setTickets(response);
+      if (error) toast.error(error.message);
+    }
+
+    getTickets();
+  }, [user])
 
   return (
     <Box sx={{ textAlign: "center" }}>
@@ -34,6 +51,11 @@ const UserInfo = () => {
             Balance: {user.balance}
           </Typography>
         </Box>
+      </Box>
+      <Box>
+        {tickets.map((ticket, i) => (
+          <TicketItem key={i} ticket={ticket} />
+        ))}
       </Box>
     </Box>
   );
