@@ -1,13 +1,13 @@
 import responseHandler from "../handlers/response.handler.js";
-import balanceModel from "../models/balance.model.js";
+import userModel from "../models/user.model.js";
 
 const getBalance = async (req, res) => {
   try {
     const { id } = req.user;
 
-    const balance = await balanceModel.findOne({ user: id });
+    const user = await userModel.findById(id).select("balance");
 
-    if (!balance) {
+    if (!user) {
       return responseHandler.notFound(res, "Balance not found");
     }
 
@@ -22,13 +22,13 @@ const updateBalance = async (req, res) => {
     const { id } = req.user;
     const { amount } = req.body;
 
-    const balance = await balanceModel.findOne({ user: id });
+    const user = await userModel.findById(id).select("balance");
 
-    if (!balance) {
+    if (!user) {
       return responseHandler.notFound(res, "Balance not found");
     }
 
-    balance.balanceAmount += amount;
+    user.balance += amount;
 
     await balance.save();
 
@@ -43,22 +43,21 @@ const withdrawBalance = async (req, res) => {
     const { id } = req.user;
     const { amount, password } = req.body;
 
-    const balance = await balanceModel.findOne({ user: id });
+    const user = await userModel.findById(id).select("balance");
 
-    if (!balance) {
+    if (!user) {
       return responseHandler.notFound(res, "Balance not found");
     }
 
-    if (balance.balanceAmount < amount) {
+    if (user.balance < amount) {
       return responseHandler.badRequest(res, "Balance is not enough");
     }
 
-    const user = balance.user;
     if (!user.validatePassword(password)) {
       return responseHandler.badRequest(res, "Wrong password!");
     }
 
-    balance.balanceAmount -= amount;
+    user.balance -= amount;
 
     await balance.save();
 

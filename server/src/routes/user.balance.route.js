@@ -2,7 +2,7 @@ import express from "express";
 import { body } from "express-validator";
 import requestHandler from "../handlers/request.handler.js";
 import tokenMiddleware from "../middlewares/token.middleware.js";
-import balanceController from "../controllers/balance.controller.js";
+import balanceController from "../controllers/user.balance.controller.js";
 
 const router = express.Router();
 

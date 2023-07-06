@@ -1,7 +1,6 @@
 import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
 import userModel from "../models/user.model.js";
-import balanceModel from "../models/balance.model.js";
 
 const signUp = async (req, res) => {
   try {
@@ -19,13 +18,9 @@ const signUp = async (req, res) => {
     user.displayName = displayName;
     user.age = age;
     user.setPassword(password);
+    user.balance = 0;
 
     await user.save();
-
-    await balanceModel.create({
-      user: user.id,
-      balanceAmount: 0,
-    });
 
     const token = jsonwebtoken.sign(
       { data: user.id },
@@ -78,7 +73,7 @@ const signIn = async (req, res) => {
 
 const getInfo = async (req, res) => {
   try {
-    const user = await userModel.findById(req.user.id).populate("balance");
+    const user = await userModel.findById(req.user.id);
 
     if (!user) return responseHandler.notFound(res);
 

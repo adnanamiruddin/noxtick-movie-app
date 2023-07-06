@@ -27,8 +27,8 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     balance: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Balance",
+      type: Number,
+      required: true,
     },
   },
   modelOptions

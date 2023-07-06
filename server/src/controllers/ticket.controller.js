@@ -1,12 +1,12 @@
 import responseHandler from "../handlers/response.handler.js";
 import ticketModel from "../models/ticket.model.js";
-import balanceModel from "../models/balance.model.js";
+import userModel from "../models/user.model.js";
 import transactionModel from "../models/transaction.model.js";
 import bookedSeatsModel from "../models/booked.seats.model.js";
 
 const bookTickets = async (req, res) => {
   try {
-    const { user } = req;
+    const { id } = req.user;
     const {
       showtimeDate,
       showtimeTime,
@@ -15,6 +15,8 @@ const bookTickets = async (req, res) => {
       movieTicketPrice,
       movieTitle,
     } = req.body;
+
+    const user = await userModel.findById(id);
 
     if (user.age < movieAgeRating) {
       return responseHandler.badRequest(
@@ -62,9 +64,7 @@ const bookTickets = async (req, res) => {
 
     const totalPrice = movieTicketPrice * seatNumbers.length;
 
-    const balance = await balanceModel.findOne({ user: user.id });
-
-    if (!balance || balance.balanceAmount < totalPrice) {
+    if (user.balance < totalPrice) {
       return responseHandler.badRequest(
         res,
         "Balance is not enough. Please top up your balance."
@@ -76,8 +76,8 @@ const bookTickets = async (req, res) => {
       ...req.body,
     });
 
-    balance.balanceAmount -= totalPrice;
-    await balance.save();
+    user.balance -= totalPrice;
+    await user.save();
 
     await ticket.save();
 
@@ -114,31 +114,27 @@ const getTicketsTransaction = async (req, res) => {
 
 const cancelTicket = async (req, res) => {
   try {
-    const { user } = req;
+    const { id } = req.user;
     const { ticketId } = req.params;
 
+    const user = await userModel.findById(id);
     const ticket = await ticketModel.findOne({ _id: ticketId, user: user.id });
 
     if (!ticket) {
       return responseHandler.notFound(res, "Ticket not found");
     }
 
-    const balance = await balanceModel.findOne({ user: user.id });
-
-    balance.balanceAmount +=
-      ticket.movieTicketPrice * ticket.seatNumbers.length;
-    await balance.save();
+    user.balance += ticket.movieTicketPrice * ticket.seatNumbers.length;
+    await user.save();
 
     await ticketModel.deleteOne({ _id: ticketId, user: user.id });
 
-    const transaction = new transactionModel({
-      user: user.id,
-      ticket: ticket._id,
-      quantity: seatNumbers.length,
-      totalPrice,
-      transactionDate: new Date(),
-      transactionStatus: "Cancelled",
-    });
+    const transaction = await transactionModel.updateOne(
+      { user: user.id, ticket: ticketId },
+      {
+        transactionStatus: "Canceled",
+      }
+    );
 
     await transaction.save();
 
