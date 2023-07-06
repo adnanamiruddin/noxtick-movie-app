@@ -8,15 +8,15 @@ import { useDispatch } from "react-redux";
 import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
 
 const MovieSlide = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
-      dispatch(setGlobalLoading(true))
+      dispatch(setGlobalLoading(true));
       const { response, error } = await movieApi.getAllMovies();
-      dispatch(setGlobalLoading(false))
+      dispatch(setGlobalLoading(false));
       if (response) setMovies(response);
       if (error) toast.error(error.message);
     };
