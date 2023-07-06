@@ -17,13 +17,13 @@ router.post(
   body("showtimeDate")
     .exists()
     .withMessage("Showtime date is required!")
-    .isDate()
+    .isString()
     .withMessage("Showtime date must be a valid date!"),
   body("showtimeTime")
     .exists()
     .withMessage("Showtime time is required!")
     .isString()
-    .withMessage("Showtime time must be a valid string!"),
+    .withMessage("Showtime time must be a valid hour!"),
   body("seatNumbers")
     .exists()
     .withMessage("Seat numbers is required!")

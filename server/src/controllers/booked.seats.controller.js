@@ -29,13 +29,24 @@ const addBookedSeats = async (req, res) => {
     const { showtimeDate, showtimeTime, seatNumbers, movieId, movieTitle } =
       req.body;
 
-    const bookedSeats = new bookedSeatsModel();
+    let bookedSeats = await bookedSeatsModel.findOne({
+      showtimeDate,
+      showtimeTime,
+      movieId,
+      movieTitle,
+    });
 
-    bookedSeats.showtimeDate = showtimeDate;
-    bookedSeats.showtimeTime = showtimeTime;
-    bookedSeats.seatNumbers = seatNumbers;
-    bookedSeats.movieId = movieId;
-    bookedSeats.movieTitle = movieTitle;
+    if (bookedSeats) {
+      bookedSeats.seatNumbers.push(...seatNumbers);
+    } else {
+      bookedSeats = new bookedSeatsModel({
+        showtimeDate,
+        showtimeTime,
+        seatNumbers,
+        movieId,
+        movieTitle,
+      });
+    }
 
     await bookedSeats.save();
 

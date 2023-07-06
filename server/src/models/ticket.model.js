@@ -30,24 +30,8 @@ const ticketSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    movieId: {
-      type: Number,
-      required: true,
-    },
     movieTitle: {
       type: String,
-      required: true,
-    },
-    moviePoster: {
-      type: String,
-      required: true,
-    },
-    movieAgeRating: {
-      type: Number,
-      required: true,
-    },
-    movieTicketPrice: {
-      type: Number,
       required: true,
     },
   },
