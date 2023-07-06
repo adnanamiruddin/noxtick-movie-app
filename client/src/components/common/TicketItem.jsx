@@ -1,9 +1,23 @@
 import { Box, Typography, Divider, Button } from "@mui/material";
 import CancelTicketModal from "./CancelTicketModal";
 import { useState } from "react";
-import userTicketApi from "../../api/modules/user.ticket.api";
 import uiConfigs from "../../configs/ui.configs";
-import { toast } from "react-toastify";
+// import QRCode from "react-qr-code";
+
+const monthNames = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 
 const TicketItem = ({ ticket }) => {
   const {
@@ -20,6 +34,21 @@ const TicketItem = ({ ticket }) => {
 
   const handleClose = () => setIsModalOpen(false);
 
+  const currentTime = new Date();
+  const [showtimeDay, showtimeMonth] = showtimeDate.split(" ");
+  const [showtimeHours, showtimeMinutes] = showtimeTime.split(".");
+
+  const showtime = new Date();
+  showtime.setDate(showtimeDay);
+  showtime.setMonth(monthNames.indexOf(showtimeMonth));
+  showtime.setHours(showtimeHours);
+  showtime.setMinutes(showtimeMinutes);
+
+  const timeDifference =
+    (showtime.getTime() - currentTime.getTime()) / (1000 * 60);
+
+  const isExpired = timeDifference < 0;
+
   return (
     <Box
       sx={{
@@ -29,7 +58,7 @@ const TicketItem = ({ ticket }) => {
         alignItems: "center",
         padding: 2,
         margin: 2,
-        backgroundColor: "secondary.main",
+        backgroundColor: isExpired ? "gray" : "secondary.main",
         borderRadius: "8px",
         color: "primary.contrastText",
         width: 450,
@@ -77,6 +106,7 @@ const TicketItem = ({ ticket }) => {
         <Button
           variant="contained"
           color="error"
+          disabled={isExpired}
           onClick={() => setIsModalOpen(true)}
         >
           <Typography variant="body1" fontWeight="600">

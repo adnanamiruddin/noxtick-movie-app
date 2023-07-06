@@ -3,12 +3,11 @@ import Logo from "./Logo";
 import userTicketApi from "../../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const CancelTicketModal = ({
-  open,
-  onClose,
-  ticketId,
-}) => {
+const CancelTicketModal = ({ open, onClose, ticketId }) => {
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState("");
 
   const handlePasswordChange = (e) => {
@@ -21,7 +20,13 @@ const CancelTicketModal = ({
       password,
     });
 
-    if (response) toast.success("Ticket canceled successfully");
+    if (response) {
+      toast.success("Ticket canceled successfully");
+      setTimeout(() => {
+        navigate("/");
+        window.location.reload();
+      }, 1500);
+    }
     if (error) toast.error(error.message);
   };
 
@@ -49,10 +54,6 @@ const CancelTicketModal = ({
 
         <Typography variant="body1" sx={{ marginBottom: 4 }}>
           Apakah Anda yakin ingin membatalkan tiket ini?
-        </Typography>
-
-        <Typography variant="body1" mb={2}>
-          Jumlah Penarikan: Rp {ticketId}
         </Typography>
 
         <TextField

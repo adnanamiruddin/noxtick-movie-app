@@ -57,10 +57,10 @@ const MovieSchedule = ({
     return times.map((time) => {
       const [selectedHour, selectedMinute] = time.split(".");
       const showtime = new Date();
-      showtime.setHours(selectedHour);
-      showtime.setMinutes(selectedMinute);
       showtime.setDate(selectedDay);
       showtime.setMonth(monthNames.indexOf(selectedMonth));
+      showtime.setHours(selectedHour);
+      showtime.setMinutes(selectedMinute);
 
       const timeDifference =
         (showtime.getTime() - currentTime.getTime()) / (1000 * 60);

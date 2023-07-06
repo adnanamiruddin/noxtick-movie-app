@@ -49,6 +49,7 @@ const BuyTicketModal = ({
         toast.success("Berhasil membeli tiket");
         setTimeout(() => {
           navigate("/");
+          window.location.reload();
         }, 1500);
       }
       if (error) toast.error(error.message);
