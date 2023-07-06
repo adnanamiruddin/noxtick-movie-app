@@ -31,5 +31,4 @@ const getMovieByTitle = async (req, res) => {
   }
 };
 
-
 export default { getAllMovies, getMovieByTitle };

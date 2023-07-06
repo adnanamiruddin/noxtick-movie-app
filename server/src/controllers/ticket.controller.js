@@ -14,6 +14,7 @@ const bookTickets = async (req, res) => {
       movieAgeRating,
       movieTicketPrice,
       movieTitle,
+      moviePoster,
     } = req.body;
 
     const user = await userModel.findById(id);
