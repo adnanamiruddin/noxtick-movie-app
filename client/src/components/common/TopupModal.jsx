@@ -1,33 +1,37 @@
 import { Box, Modal, Typography, Button } from "@mui/material";
 import Logo from "./Logo";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import userBalanceApi from "../../api/modules/user.balance.api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { increaseBalance } from "../../redux/features/userBalanceSlice";
+import { useState } from "react";
 
 const TopupModal = ({ open, onClose, selectedAmount }) => {
   const { user } = useSelector((state) => state.user);
-  const { balance } = useSelector((state) => state.balance);
 
-  const dispatch = useDispatch();
+  const [onRequest, setOnRequest] = useState(false);
+
   const navigate = useNavigate();
 
   const handleTopup = async () => {
+    if (onRequest) return;
+
+    setOnRequest(true);
     if (selectedAmount) {
       const { response, error } = await userBalanceApi.topup({
         amount: selectedAmount,
       });
 
       if (response) {
-        dispatch(increaseBalance(response.balanceAmount));
         toast.success("Berhasil top up saldo");
         setTimeout(() => {
           navigate("/");
+          window.location.reload();
         }, 1500);
       }
       if (error) toast.error(error.message);
     }
+    setOnRequest(false);
   };
 
   return (
@@ -57,7 +61,7 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
         </Typography>
 
         <Typography variant="body1" mb={2}>
-          Saldo Awal: {balance}
+          Saldo Awal: {user.balance}
         </Typography>
 
         <Typography variant="body1" mb={2}>

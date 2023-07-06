@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import Logo from "./Logo";
@@ -6,7 +5,7 @@ import userTicketApi from "../../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import bookedSeatsApi from "../../api/modules/booked.seats.api";
-import { decreaseBalance } from "../../redux/features/userBalanceSlice";
+import { bookTickets } from "../../redux/features/userSlice";
 
 const ConfirmationModal = ({
   open,
@@ -17,9 +16,8 @@ const ConfirmationModal = ({
   selectedSeats,
 }) => {
   const { user, listTickets } = useSelector((state) => state.user);
-  const { balance } = useSelector((state) => state.balance);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const total = selectedSeats.length * movie.ticket_price;
@@ -46,7 +44,7 @@ const ConfirmationModal = ({
       const { response, error } = await bookedSeatsApi.addBookedSeats(body);
 
       if (response) {
-        dispatch(decreaseBalance(total))
+        dispatch(bookTickets(selectedSeats));
         toast.success("Berhasil membeli tiket");
         setTimeout(() => {
           navigate("/");

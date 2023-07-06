@@ -4,7 +4,6 @@ import userSlice from "./features/userSlice";
 import globalLoadingSlice from "./features/globalLoadingSlice";
 import authModalSlice from "./features/authModalSlice";
 import themeModeSlice from "./features/themeModeSlice";
-import userBalanceSlice from "./features/userBalanceSlice";
 
 const store = configureStore({
   reducer: {
@@ -13,7 +12,6 @@ const store = configureStore({
     globalLoading: globalLoadingSlice,
     authModal: authModalSlice,
     themeMode: themeModeSlice,
-    balance: userBalanceSlice,
   },
 });
 
