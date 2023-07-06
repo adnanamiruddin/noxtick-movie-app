@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import userTicketApi from "../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
+import uiConfigs from "../configs/ui.configs";
+import Container from "../components/common/Container";
 
 const UserInfo = () => {
   const { user } = useSelector((state) => state.user);
@@ -24,52 +26,53 @@ const UserInfo = () => {
     };
 
     getTickets();
-  }, [user]);
+  }, [user, dispatch]);
 
   return (
-    <Box sx={{ textAlign: "center" }}>
-      <Toolbar />
-      <Typography variant="h4" gutterBottom>
-        My Info
-      </Typography>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          alignItems: "center",
-          margin: "0 10%",
-          padding: 2,
-          backgroundColor: "background.paper",
-          borderRadius: "8px",
-        }}
-      >
-        <Box sx={{ marginRight: 4 }}>
-          <Typography variant="h6" gutterBottom>
-            {user.displayName}
-          </Typography>
+    <Box sx={{ textAlign: "center", ...uiConfigs.style.mainContent }}>
+      <Container>
+        <Typography variant="h4" gutterBottom>
+          My Info
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+            alignItems: "center",
+            margin: "0 10%",
+            padding: 2,
+            backgroundColor: "background.paper",
+            borderRadius: "8px",
+          }}
+        >
+          <Box sx={{ marginRight: 4 }}>
+            <Typography variant="h6" gutterBottom>
+              {user.displayName}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="body1" gutterBottom>
+              Age: {user.age}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Balance: Rp.{user.balance}
+            </Typography>
+          </Box>
         </Box>
-        <Box>
-          <Typography variant="body1" gutterBottom>
-            Age: {user.age}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Balance: Rp.{user.balance}
-          </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          {tickets.map((ticket, i) => (
+            <TicketItem key={i} ticket={ticket} />
+          ))}
         </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        {tickets.map((ticket, i) => (
-          <TicketItem key={i} ticket={ticket} />
-        ))}
-      </Box>
+      </Container>
     </Box>
   );
 };

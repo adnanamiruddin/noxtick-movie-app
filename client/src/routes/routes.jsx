@@ -1,6 +1,6 @@
 import ProtectedPage from "../components/common/ProtectedPage";
-import AboutPage from "../pages/AboutPage";
 import HomePage from "../pages/HomePage";
+import MoviesPage from "../pages/MoviesPage";
 import MovieDetail from "../pages/MovieDetail";
 import TopupBalance from "../pages/TopupBalance";
 import Transactions from "../pages/Transactions";
@@ -24,9 +24,9 @@ const routes = [
     state: "home",
   },
   {
-    path: "/about",
-    element: <AboutPage />,
-    state: "about",
+    path: "/movies",
+    element: <MoviesPage />,
+    state: "movies",
   },
   {
     path: "/movie/:movieTitle",

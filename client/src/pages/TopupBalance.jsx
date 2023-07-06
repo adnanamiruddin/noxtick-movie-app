@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Box, Button, Toolbar, Typography } from "@mui/material";
 import TopupModal from "../components/common/TopupModal";
+import uiConfigs from "../configs/ui.configs";
+import Container from "../components/common/Container";
 
 const amounts = [
   { value: 50000, label: "Rp 50.000" },
@@ -25,43 +27,61 @@ const TopupBalance = () => {
   const handleClose = () => setIsTopupModalOpen(false);
 
   return (
-    <Box sx={{ maxWidth: 400, margin: "0 auto" }}>
-      <Toolbar />
-      <Typography variant="h6" marginBottom={2}>
-        Pilih Jumlah Top Up
-      </Typography>
-
-      <Box display="flex" flexWrap="wrap">
-        {amounts.map((amount) => (
-          <Button
-            key={amount.value}
-            variant="contained"
-            onClick={() => handleAmountSelection(amount.value)}
-            sx={{ marginRight: 2, marginBottom: 2 }}
-          >
-            {amount.label}
-          </Button>
-        ))}
-      </Box>
-
-      {selectedAmount ? (
-        <Box mt={2}>
-          <Typography variant="body1">
-            Jumlah yang dipilih: Rp {selectedAmount.toLocaleString()}
+    <Box sx={{ ...uiConfigs.style.mainContent }}>
+      <Container>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h4" fontWeight="700" marginBottom={2}>
+            Pilih Jumlah Top Up
           </Typography>
-          <Button variant="contained" onClick={() => setIsTopupModalOpen(true)}>
-            Top Up
-          </Button>
-        </Box>
-      ) : (
-        ""
-      )}
 
-      <TopupModal
-        open={isTopupModalOpen}
-        onClose={handleClose}
-        selectedAmount={selectedAmount}
-      />
+          <Box
+            display="flex"
+            flexWrap="wrap"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {amounts.map((amount) => (
+              <Button
+                key={amount.value}
+                variant="contained"
+                onClick={() => handleAmountSelection(amount.value)}
+                sx={{ marginRight: 2, marginBottom: 2, flexBasis: "30%" }}
+              >
+                {amount.label}
+              </Button>
+            ))}
+          </Box>
+
+          {selectedAmount ? (
+            <Box mt={2}>
+              <Typography variant="body1">
+                Jumlah yang dipilih: Rp {selectedAmount.toLocaleString()}
+              </Typography>
+              <Button
+                variant="contained"
+                onClick={() => setIsTopupModalOpen(true)}
+              >
+                Top Up
+              </Button>
+            </Box>
+          ) : (
+            ""
+          )}
+
+          <TopupModal
+            open={isTopupModalOpen}
+            onClose={handleClose}
+            selectedAmount={selectedAmount}
+          />
+        </Box>
+      </Container>
     </Box>
   );
 };

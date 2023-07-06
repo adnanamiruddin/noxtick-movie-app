@@ -1,5 +1,5 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
+import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
@@ -13,10 +13,10 @@ const main = [
     state: "home",
   },
   {
-    title: "About",
-    path: "/about",
-    icon: <HelpCenterOutlinedIcon />,
-    state: "about",
+    title: "Movies",
+    path: "/movies",
+    icon: <LiveTvOutlinedIcon />,
+    state: "movies",
   },
 ];
 
