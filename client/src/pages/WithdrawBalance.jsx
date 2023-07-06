@@ -28,11 +28,11 @@ const WithdrawBalance = () => {
   return (
     <Box sx={{ maxWidth: 400, mx: "auto", mt: 4, p: 2 }}>
       <Toolbar />
-      <Typography variant="h5" mb={2}>
+      <Typography variant="h5" marginBottom={2}>
         Withdraw Balance
       </Typography>
 
-      <Typography variant="body1" mb={2}>
+      <Typography variant="body1" marginBottom={2}>
         {`Your current balance is Rp ${balance}`}
       </Typography>
 

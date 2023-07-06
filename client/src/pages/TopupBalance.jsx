@@ -27,7 +27,7 @@ const TopupBalance = () => {
   return (
     <Box sx={{ maxWidth: 400, margin: "0 auto" }}>
       <Toolbar />
-      <Typography variant="h6" mb={2}>
+      <Typography variant="h6" marginBottom={2}>
         Pilih Jumlah Top Up
       </Typography>
 

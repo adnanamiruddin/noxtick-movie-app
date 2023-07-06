@@ -9,12 +9,16 @@ const CancelTicketModal = ({ open, onClose, ticketId }) => {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
+  const [onRequest, setOnRequest] = useState(false);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
   const handleConfirmCancel = async () => {
+    if (onRequest) return;
+
+    setOnRequest(true);
     const { response, error } = await userTicketApi.cancelTicket({
       ticketId,
       password,
@@ -28,6 +32,7 @@ const CancelTicketModal = ({ open, onClose, ticketId }) => {
       }, 1500);
     }
     if (error) toast.error(error.message);
+    setOnRequest(false);
   };
 
   return (

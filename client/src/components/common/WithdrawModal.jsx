@@ -12,12 +12,15 @@ const WithdrawModal = ({ open, onClose, amount }) => {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
+  const [onRequest, setOnRequest] = useState(false);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
   const handleConfirmWithdrawal = async () => {
+    if (onRequest) return;
+
     if (amount <= 0) {
       toast.error("Withdraw amount must be greater than 0");
       return;
@@ -26,6 +29,7 @@ const WithdrawModal = ({ open, onClose, amount }) => {
       toast.error("Maximum withdraw amount is Rp.500.000");
       return;
     }
+    setOnRequest(true);
     const { response, error } = await userBalanceApi.withdraw({
       amount,
       password,
@@ -38,6 +42,7 @@ const WithdrawModal = ({ open, onClose, amount }) => {
       }, 1500);
     }
     if (error) toast.error(error.message);
+    setOnRequest(false);
   };
 
   return (
