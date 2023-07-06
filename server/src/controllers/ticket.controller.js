@@ -103,11 +103,11 @@ const getTicketsTransaction = async (req, res) => {
   try {
     const { user } = req;
 
-    const transactions = await ticketModel
+    const tickets = await ticketModel
       .find({ user: user.id })
       .sort("-createdAt");
 
-    responseHandler.ok(res, transactions);
+    responseHandler.ok(res, tickets);
   } catch (error) {
     responseHandler.error(res);
   }
@@ -152,6 +152,7 @@ const cancelTicket = async (req, res) => {
 
     responseHandler.ok(res, "Successfully canceled ticket");
   } catch (error) {
+    console.log({error});
     responseHandler.error(res);
   }
 };

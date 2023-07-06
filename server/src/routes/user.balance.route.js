@@ -6,10 +6,10 @@ import balanceController from "../controllers/user.balance.controller.js";
 
 const router = express.Router();
 
-router.get("/balance", tokenMiddleware.auth, balanceController.getBalance);
+router.get("/", tokenMiddleware.auth, balanceController.getBalance);
 
 router.post(
-  "/topup",
+  "/",
   tokenMiddleware.auth,
   body("amount")
     .exists()
@@ -20,8 +20,8 @@ router.post(
   balanceController.updateBalance
 );
 
-router.post(
-  "/withdraw",
+router.put(
+  "/",
   tokenMiddleware.auth,
   body("amount")
     .exists()

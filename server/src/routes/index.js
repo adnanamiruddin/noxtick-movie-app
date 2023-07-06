@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.use("/user", userRoute);
 router.use("/user/balance", balanceRoute);
-router.use("/user", ticketRoute);
+router.use("/user/tickets", ticketRoute);
 router.use("/movie", movieRoute);
 router.use("/booked-seats", bookedSeatsRoute);
 

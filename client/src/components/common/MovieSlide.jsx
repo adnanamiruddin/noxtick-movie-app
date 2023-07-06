@@ -22,7 +22,7 @@ const MovieSlide = () => {
     };
 
     getMovies();
-  }, []);
+  }, [dispatch]);
 
   return (
     <AutoSwiper>

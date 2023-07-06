@@ -1,9 +1,7 @@
 import privateClient from "../client/private.client";
 
 const userBalanceEndPoints = {
-  balance: "user/balance/balance",
-  topup: "user/balance/topup",
-  withdraw: "user/balance/withdraw",
+  balance: "user/balance",
 };
 
 const userBalanceApi = {
@@ -18,7 +16,7 @@ const userBalanceApi = {
 
   topup: async ({ amount, password }) => {
     try {
-      const response = await privateClient.post(userBalanceEndPoints.topup, {
+      const response = await privateClient.post(userBalanceEndPoints.balance, {
         amount,
         password
       });
@@ -30,7 +28,7 @@ const userBalanceApi = {
 
   withdraw: async ({ amount, password }) => {
     try {
-      const response = await privateClient.post(userBalanceEndPoints.withdraw, {
+      const response = await privateClient.put(userBalanceEndPoints.balance, {
         amount,
         password,
       });

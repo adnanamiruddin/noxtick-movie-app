@@ -7,13 +7,13 @@ import ticketController from "../controllers/ticket.controller.js";
 const router = express.Router();
 
 router.get(
-  "/tickets",
+  "/",
   tokenMiddleware.auth,
   ticketController.getTicketsTransaction
 );
 
 router.post(
-  "/tickets",
+  "/",
   tokenMiddleware.auth,
   body("showtimeDate")
     .exists()
@@ -59,8 +59,8 @@ router.post(
   ticketController.bookTickets
 );
 
-router.post(
-  "/tickets",
+router.delete(
+  "/",
   tokenMiddleware.auth,
   body("ticketId")
     .exists()

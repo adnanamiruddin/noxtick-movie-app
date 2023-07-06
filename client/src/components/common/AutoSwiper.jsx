@@ -32,8 +32,8 @@ const AutoSwiper = ({ children }) => {
         }}
         modules={[EffectCoverflow]}
         breakpoints={{
-          960: {
-            slidesPerView: "auto",
+          900: {
+            slidesPerView: 5,
           },
         }}
       >
