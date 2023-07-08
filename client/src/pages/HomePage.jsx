@@ -2,8 +2,19 @@ import { Box, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
 import MovieSlide from "../components/common/MovieSlide";
+import { useSpring, animated } from "react-spring";
+import { useState } from "react";
 
 const HomePage = () => {
+  const [isShowing, setIsShowing] = useState(true);
+
+  const springProps = useSpring({
+    opacity: isShowing ? 1 : 0,
+    from: { opacity: 0 },
+    config: { duration: 1000 },
+    onRest: () => setIsShowing(!isShowing),
+  });
+
   return (
     <div>
       <Box sx={{ ...uiConfigs.style.mainContent }}>
@@ -26,21 +37,23 @@ const HomePage = () => {
             </Typography>
           </Stack>
           <Box>
-            <Typography
-              variant="h6"
-              fontWeight="600"
-              sx={{
-                backgroundColor: "secondary.main",
-                textAlign: "center",
-                width: "50%",
-                marginX: "auto",
-                marginBottom: "2rem",
-                paddingY: "10px",
-                borderRadius: "8px",
-              }}
-            >
-              Now Showing
-            </Typography>
+            <animated.div style={springProps}>
+              <Typography
+                variant="h6"
+                fontWeight="600"
+                sx={{
+                  backgroundColor: "error.main",
+                  textAlign: "center",
+                  width: { xs: "75%", md: "50%" },
+                  marginX: "auto",
+                  marginBottom: "2rem",
+                  paddingY: "10px",
+                  borderRadius: "8px",
+                }}
+              >
+                Now Showing
+              </Typography>
+            </animated.div>
           </Box>
         </Container>
       </Box>
