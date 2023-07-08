@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  Box,
   ListItemButton,
   ListItemIcon,
   ListItemText,
@@ -23,18 +24,17 @@ const UserMenu = () => {
   const toggleMenu = (e) => setAnchorElement(e.currentTarget);
 
   return (
-    <>
+    <div>
       {user ? (
-        <>
+        <Box>
           <Typography
             variant="h6"
             sx={{
               cursor: "pointer",
               userSelect: "none",
               marginTop: { xs: 0.5, md: 0 },
-              fontSize: { xs: "1rem", md: "1.5rem" },
-              width: "100%",
-              ...uiConfigs.style.typoLines(1, "end"),
+              fontSize: { xs: "1.1rem", sm: "1.5rem" },
+              ...uiConfigs.style.typoLines(1, "center"),
             }}
             onClick={toggleMenu}
           >
@@ -77,9 +77,11 @@ const UserMenu = () => {
               />
             </ListItemButton>
           </Menu>
-        </>
-      ) : ""}
-    </>
+        </Box>
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 

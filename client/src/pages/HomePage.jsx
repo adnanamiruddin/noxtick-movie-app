@@ -41,10 +41,10 @@ const HomePage = () => {
             >
               Now Showing
             </Typography>
-            <MovieSlide />
           </Box>
         </Container>
       </Box>
+      <MovieSlide />
       {/* <MoviePostersSlide /> */}
     </div>
   );

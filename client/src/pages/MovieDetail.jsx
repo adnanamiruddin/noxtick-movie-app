@@ -46,12 +46,10 @@ const MovieDetail = () => {
   }, [movieTitle, dispatch]);
 
   useEffect(() => {
-    // Mendapatkan parameter dari URL menggunakan useSearchParams
     const searchParams = new URLSearchParams(location.search);
     const dateParam = searchParams.get("date");
     const timeParam = searchParams.get("time");
 
-    // Memperbarui state berdasarkan parameter URL
     setSelectedDate(dateParam || dayjs().format("DD MMM"));
     setSelectedTime(timeParam || "11.40");
 

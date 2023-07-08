@@ -131,7 +131,15 @@ const HeaderNavbar = () => {
 
             {/* User Menu Section START */}
             {/* If User Already Sign In START */}
-            {user ? <UserMenu /> : ""}
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "end",
+              }}
+            >
+              {user ? <UserMenu /> : ""}
+            </Box>
             {/* If User Already Sign In END */}
 
             {/* If User Haven't Sign In START */}
