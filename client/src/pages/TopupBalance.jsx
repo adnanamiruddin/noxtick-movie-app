@@ -3,6 +3,7 @@ import { Box, Button, Typography } from "@mui/material";
 import TopupModal from "../components/common/TopupModal";
 import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 
 const amounts = [
   { value: 50000, label: "Rp 50.000" },
@@ -37,8 +38,8 @@ const TopupBalance = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4" fontWeight="700" marginBottom={2}>
-            Pilih Jumlah Top Up
+          <Typography variant="h4" fontWeight="700" marginBottom={4} textAlign="center">
+            SELECT THE NOMINAL
           </Typography>
 
           <Box
@@ -46,23 +47,44 @@ const TopupBalance = () => {
             flexWrap="wrap"
             justifyContent="center"
             alignItems="center"
+            sx={{ gap: { xs: 2, md: 3 } }}
           >
             {amounts.map((amount) => (
               <Button
                 key={amount.value}
                 variant="contained"
                 onClick={() => handleAmountSelection(amount.value)}
-                sx={{ marginRight: 2, marginBottom: 2, flexBasis: "30%", backgroundColor: "secondary.main" }}
+                sx={{
+                  flexBasis: { xs: "75%", sm: "45%", md: "30%" },
+                  backgroundColor: "secondary.main",
+                  padding: 2,
+                  fontSize: "1rem",
+                  ...uiConfigs.style.typoLines(1, "center"),
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "end",
+                }}
               >
+                <AttachMoneyOutlinedIcon sx={{ fontSize: "2rem" }} />
                 {amount.label}
               </Button>
             ))}
           </Box>
 
           {selectedAmount ? (
-            <Box mt={2}>
-              <Typography variant="body1">
-                Jumlah yang dipilih: Rp {selectedAmount.toLocaleString()}
+            <Box
+              marginTop={4}
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", sm: "row" },
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                gap: 3,
+              }}
+            >
+              <Typography variant="h6" fontWeight="500">
+                Selected Nominal: RP {selectedAmount.toLocaleString()}
               </Typography>
               <Button
                 variant="contained"
