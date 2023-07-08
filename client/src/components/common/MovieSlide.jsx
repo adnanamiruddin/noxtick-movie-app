@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import MovieItem from "./MovieItem";
 import { useDispatch } from "react-redux";
 import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
+import { Box } from "@mui/material";
 
 const MovieSlide = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,14 @@ const MovieSlide = () => {
     <AutoSwiper>
       {movies.map((movie, i) => (
         <SwiperSlide key={i}>
-          <MovieItem movie={movie} />
+          <Box
+            sx={{
+              border: "4px solid",
+              borderImage: "linear-gradient(to right, gold, silver) 1",
+            }}
+          >
+            <MovieItem movie={movie} />
+          </Box>
         </SwiperSlide>
       ))}
     </AutoSwiper>

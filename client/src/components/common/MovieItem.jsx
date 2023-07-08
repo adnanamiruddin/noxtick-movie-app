@@ -26,7 +26,6 @@ const MovieItem = ({ movie }) => {
     <Link to={routesGen.movieDetail(movie.title)}>
       <Box
         sx={{
-          marginRight: 0.5,
           paddingTop: "160%",
           color: themeMode === "dark" ? "primary.contrastText" : "#fff",
           ...uiConfigs.style.backgroundImage(posterUrl),
