@@ -130,18 +130,6 @@ const HeaderNavbar = () => {
             {/* Main Menu Section END */}
 
             {/* User Menu Section START */}
-            {/* If User Already Sign In START */}
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "end",
-              }}
-            >
-              {user ? <UserMenu /> : ""}
-            </Box>
-            {/* If User Already Sign In END */}
-
             {/* If User Haven't Sign In START */}
             <Stack spacing={3} direction="row" alignItems="center">
               {!user ? (
@@ -152,7 +140,9 @@ const HeaderNavbar = () => {
                   Sign In
                 </Button>
               ) : (
-                ""
+                // If User Already Sign In START
+                <UserMenu />
+                // If User Already Sign In END
               )}
             </Stack>
             {/* If User Haven't Sign In END */}

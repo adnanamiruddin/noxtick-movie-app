@@ -1,6 +1,6 @@
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import LiveTvOutlinedIcon from "@mui/icons-material/LiveTvOutlined";
+import ConfirmationNumberOutlinedIcon from "@mui/icons-material/ConfirmationNumberOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import PaidOutlinedIcon from "@mui/icons-material/PaidOutlined";
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
@@ -22,16 +22,10 @@ const main = [
 
 const user = [
   {
-    title: "My Info",
-    path: "/my-info",
-    icon: <InfoOutlinedIcon />,
-    state: "info",
-  },
-  {
-    title: "Transactions",
-    path: "/transactions",
-    icon: <PointOfSaleOutlinedIcon />,
-    state: "transactions",
+    title: "My Tickets",
+    path: "/my-tickets",
+    icon: <ConfirmationNumberOutlinedIcon />,
+    state: "tickets",
   },
   {
     title: "Top Up",
@@ -44,6 +38,12 @@ const user = [
     path: "/withdraw",
     icon: <AccountBalanceWalletOutlinedIcon />,
     state: "withdraw",
+  },
+  {
+    title: "Transactions",
+    path: "/transactions",
+    icon: <PointOfSaleOutlinedIcon />,
+    state: "transactions",
   },
 ];
 

@@ -118,6 +118,10 @@ const TicketItem = ({ ticket }) => {
         open={isModalOpen}
         onClose={handleClose}
         ticketId={id}
+        seatNumbers={seatNumbers}
+        showtimeDate={showtimeDate}
+        showtimeTime={showtimeTime}
+        movieTitle={movieTitle}
       />
     </Box>
   );

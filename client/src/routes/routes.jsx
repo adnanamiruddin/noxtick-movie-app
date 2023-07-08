@@ -4,7 +4,7 @@ import MoviesPage from "../pages/MoviesPage";
 import MovieDetail from "../pages/MovieDetail";
 import TopupBalance from "../pages/TopupBalance";
 import Transactions from "../pages/Transactions";
-import UserInfo from "../pages/UserInfo";
+import MyTickets from "../pages/MyTickets";
 import WithdrawBalance from "../pages/WithdrawBalance";
 
 export const routesGen = {
@@ -33,22 +33,13 @@ const routes = [
     element: <MovieDetail />,
   },
   {
-    path: "/my-info",
+    path: "/my-tickets",
     element: (
       <ProtectedPage>
-        <UserInfo />
+        <MyTickets />
       </ProtectedPage>
     ),
-    state: "info",
-  },
-  {
-    path: "/transactions",
-    element: (
-      <ProtectedPage>
-        <Transactions />
-      </ProtectedPage>
-    ),
-    state: "transactions",
+    state: "tickets",
   },
   {
     path: "/topup",
@@ -67,6 +58,15 @@ const routes = [
       </ProtectedPage>
     ),
     state: "withdraw",
+  },
+  {
+    path: "/transactions",
+    element: (
+      <ProtectedPage>
+        <Transactions />
+      </ProtectedPage>
+    ),
+    state: "transactions",
   },
 ];
 

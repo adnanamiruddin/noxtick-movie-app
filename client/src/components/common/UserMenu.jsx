@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -17,11 +17,19 @@ import uiConfigs from "../../configs/ui.configs";
 const UserMenu = () => {
   const { user } = useSelector((state) => state.user);
 
+  const navigate = useNavigate()
+
   const dispatch = useDispatch();
 
   const [anchorElement, setAnchorElement] = useState(null);
 
   const toggleMenu = (e) => setAnchorElement(e.currentTarget);
+
+  const handleLogout = () => {
+    dispatch(setUser(null));
+    setAnchorElement(null);
+    navigate("/")
+  }
 
   return (
     <div>
@@ -66,7 +74,7 @@ const UserMenu = () => {
             ))}
             <ListItemButton
               sx={{ borderRadius: "10px" }}
-              onClick={() => dispatch(setUser(null))}
+              onClick={handleLogout}
             >
               <ListItemIcon>
                 <LogoutOutlinedIcon />

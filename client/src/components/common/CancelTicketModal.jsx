@@ -4,8 +4,17 @@ import userTicketApi from "../../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import bookedSeatsApi from "../../api/modules/booked.seats.api";
 
-const CancelTicketModal = ({ open, onClose, ticketId }) => {
+const CancelTicketModal = ({
+  open,
+  onClose,
+  ticketId,
+  seatNumbers,
+  showtimeDate,
+  showtimeTime,
+  movieTitle,
+}) => {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
@@ -25,12 +34,23 @@ const CancelTicketModal = ({ open, onClose, ticketId }) => {
     });
 
     if (response) {
-      toast.success("Ticket canceled successfully");
-      setTimeout(() => {
-        navigate("/");
-        window.location.reload();
-      }, 1500);
+      const { response, error } = await bookedSeatsApi.deleteBookedSeats({
+        seatNumbers,
+        showtimeDate,
+        showtimeTime,
+        movieTitle,
+      });
+
+      if (response) {
+        toast.success(response);
+        setTimeout(() => {
+          navigate("/");
+          window.location.reload();
+        }, 1500);
+      }
+      if (error) toast.error(error.message);
     }
+
     if (error) toast.error(error.message);
     setOnRequest(false);
   };

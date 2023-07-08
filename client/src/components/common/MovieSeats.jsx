@@ -84,14 +84,14 @@ const MovieSeats = ({
             Left Side Studio
           </Typography>
           {leftSideSeats.map((row, rowIndex) => (
-            <Grid container key={rowIndex} spacing={1} marginBottom={1}>
+            <Grid container key={rowIndex} spacing={1}>
               {row.map((seatNumber) => {
                 const isSelected = selectedSeats.includes(seatNumber);
                 const isMaxSelection = selectedSeats.length >= 6;
                 const isBooked = bookedSeats.includes(seatNumber);
 
                 return (
-                  <Grid item key={seatNumber} xs={3}>
+                  <Grid item key={seatNumber} xs={3} marginBottom={1}>
                     <Button
                       variant="contained"
                       color={isSelected ? "success" : "info"}

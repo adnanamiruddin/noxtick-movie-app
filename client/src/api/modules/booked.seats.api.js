@@ -1,11 +1,10 @@
 import publicClient from "../client/public.client";
-import privateClient from "../client/private.client"
+import privateClient from "../client/private.client";
 
 const bookedSeatsEndPoints = {
   bookedSeatsByTitle: ({ title, showtimeDate, showtimeTime }) =>
     `booked-seats/${title}?showtimeDate=${showtimeDate}&showtimeTime=${showtimeTime}`,
-  addBookedSeats: "booked-seats",
-  deleteBookedSeats: ({ id }) => `booked-seats/${id}`,
+  bookedSeats: "booked-seats",
 };
 
 const bookedSeatsApi = {
@@ -33,7 +32,7 @@ const bookedSeatsApi = {
   }) => {
     try {
       const response = await privateClient.post(
-        bookedSeatsEndPoints.addBookedSeats,
+        bookedSeatsEndPoints.bookedSeats,
         {
           showtimeDate,
           showtimeTime,
@@ -48,10 +47,23 @@ const bookedSeatsApi = {
     }
   },
 
-  deleteBookedSeats: async ({ id }) => {
+  deleteBookedSeats: async ({
+    seatNumbers,
+    showtimeDate,
+    showtimeTime,
+    movieTitle,
+  }) => {
     try {
       const response = await privateClient.delete(
-        bookedSeatsEndPoints.deleteBookedSeats({ id })
+        bookedSeatsEndPoints.bookedSeats,
+        {
+          data: {
+            seatNumbers,
+            showtimeDate,
+            showtimeTime,
+            movieTitle,
+          },
+        }
       );
       return { response };
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Box, Toolbar, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import TicketItem from "../components/common/TicketItem";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
 
-const UserInfo = () => {
+const MyTickets = () => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -29,35 +29,23 @@ const UserInfo = () => {
   }, [user, dispatch]);
 
   return (
-    <Box sx={{ textAlign: "center", ...uiConfigs.style.mainContent }}>
+    <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container>
-        <Typography variant="h4" gutterBottom>
-          My Info
+        <Typography variant="h4" fontWeight="700" textAlign="center">
+          {user.displayName}
         </Typography>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-around",
             alignItems: "center",
-            margin: "0 10%",
-            padding: 2,
+            padding: 3,
             backgroundColor: "background.paper",
             borderRadius: "8px",
           }}
         >
-          <Box sx={{ marginRight: 4 }}>
-            <Typography variant="h6" gutterBottom>
-              {user.displayName}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography variant="body1" gutterBottom>
-              Age: {user.age}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Balance: Rp.{user.balance}
-            </Typography>
-          </Box>
+          <Typography variant="h5">Age: {user.age}</Typography>
+          <Typography variant="h5">Balance: Rp.{user.balance}</Typography>
         </Box>
         <Box
           sx={{
@@ -77,4 +65,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default MyTickets;
