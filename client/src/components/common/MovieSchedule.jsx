@@ -22,6 +22,7 @@ const MovieSchedule = ({
   setSelectedDate,
   selectedTime,
   setSelectedTime,
+  setShowSeats,
 }) => {
   const navigate = useNavigate();
 
@@ -89,6 +90,7 @@ const MovieSchedule = ({
   };
 
   const handleTimeClick = (time) => {
+    setShowSeats(true);
     setSelectedTime(time);
     const searchParams = new URLSearchParams(location.search);
     searchParams.set("time", time);

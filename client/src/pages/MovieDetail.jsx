@@ -5,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { toast } from "react-toastify";
 import HeaderImage from "../components/common/HeaderImage";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+} from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import BuyTicketModal from "../components/common/BuyTicketModal";
 import MovieSeats from "../components/common/MovieSeats";
@@ -27,6 +33,7 @@ const MovieDetail = () => {
   const [selectedTime, setSelectedTime] = useState("11.40");
   const [bookedSeats, setBookedSeats] = useState([]);
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
+  const [showSeats, setShowSeats] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -71,18 +78,6 @@ const MovieDetail = () => {
 
     getBookedSeats();
   }, [location.search, movieTitle, bookedSeats]);
-
-  const handleSeatClick = (seatNumber) => {
-    if (selectedSeats.includes(seatNumber)) {
-      // Menghapus kursi yang sudah dipilih dari selectedSeats
-      setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
-    } else {
-      //  Menambahkan kursi yang belum dipilih ke selectedSeats
-      if (selectedSeats.length < 6) {
-        setSelectedSeats([...selectedSeats, seatNumber]);
-      }
-    }
-  };
 
   const handleClose = () => setIsModalConfirmOpen(false);
 
@@ -211,13 +206,26 @@ const MovieDetail = () => {
               setSelectedDate={setSelectedDate}
               selectedTime={selectedTime}
               setSelectedTime={setSelectedTime}
+              setShowSeats={setShowSeats}
             />
           </Container>
           <Container header="Movie Seats">
+            {!showSeats ? (
+              <Typography
+                variant="h6"
+                fontWeight="600"
+                sx={{ textAlign: "center" }}
+              >
+                Please select a date and time to see available seats
+              </Typography>
+            ) : (
+              ""
+            )}
             <MovieSeats
               selectedSeats={selectedSeats}
-              handleSeatClick={handleSeatClick}
+              setSelectedSeats={setSelectedSeats}
               bookedSeats={bookedSeats}
+              showSeats={showSeats}
             />
           </Container>
           <Box

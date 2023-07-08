@@ -23,8 +23,25 @@ const rightSideSeats = [
   [61, 62, 63, 64],
 ];
 
-const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
+const MovieSeats = ({
+  selectedSeats,
+  setSelectedSeats,
+  bookedSeats,
+  showSeats,
+}) => {
   const { themeMode } = useSelector((state) => state.themeMode);
+
+  const handleSeatClick = (seatNumber) => {
+    if (selectedSeats.includes(seatNumber)) {
+      // Menghapus kursi yang sudah dipilih dari selectedSeats
+      setSelectedSeats(selectedSeats.filter((seat) => seat !== seatNumber));
+    } else {
+      //  Menambahkan kursi yang belum dipilih ke selectedSeats
+      if (selectedSeats.length < 6) {
+        setSelectedSeats([...selectedSeats, seatNumber]);
+      }
+    }
+  };
 
   return (
     <div>
@@ -33,7 +50,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
           display: "flex",
           justifyContent: { xs: "end", md: "center" },
           marginBottom: { xs: "1rem", md: "3rem" },
-          paddingTop: "1rem"
+          paddingTop: "1rem",
         }}
       >
         <Box
@@ -47,7 +64,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
             alignItems: "center",
             fontSize: "24px",
             fontWeight: 500,
-            borderRadius: {xs: 0, md: "5px"},
+            borderRadius: { xs: 0, md: "5px" },
           }}
         >
           Studio Screen
@@ -78,7 +95,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
                     <Button
                       variant="contained"
                       color={isSelected ? "success" : "info"}
-                      disabled={isBooked}
+                      disabled={!showSeats || isBooked}
                       onClick={() => handleSeatClick(seatNumber)}
                       sx={{
                         width: "100%",
@@ -90,7 +107,11 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
                       <Typography
                         variant="body1"
                         sx={{
-                          color: isBooked ? "red" : isSelected ? "#fff" : "#000",
+                          color: isBooked
+                            ? "red"
+                            : isSelected
+                            ? "#fff"
+                            : "#000",
                           fontWeight: "bold",
                         }}
                       >
@@ -151,7 +172,7 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
                     <Button
                       variant="contained"
                       color={isSelected ? "success" : "info"}
-                      disabled={isBooked}
+                      disabled={!showSeats || isBooked}
                       onClick={() => handleSeatClick(seatNumber)}
                       sx={{
                         width: "100%",
@@ -163,7 +184,11 @@ const MovieSeats = ({ selectedSeats, handleSeatClick, bookedSeats }) => {
                       <Typography
                         variant="body1"
                         sx={{
-                          color: isBooked ? "red" : isSelected ? "#fff" : "#000",
+                          color: isBooked
+                            ? "red"
+                            : isSelected
+                            ? "#fff"
+                            : "#000",
                           fontWeight: "bold",
                         }}
                       >

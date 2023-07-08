@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button, Toolbar, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import TopupModal from "../components/common/TopupModal";
 import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
@@ -52,7 +52,7 @@ const TopupBalance = () => {
                 key={amount.value}
                 variant="contained"
                 onClick={() => handleAmountSelection(amount.value)}
-                sx={{ marginRight: 2, marginBottom: 2, flexBasis: "30%" }}
+                sx={{ marginRight: 2, marginBottom: 2, flexBasis: "30%", backgroundColor: "secondary.main" }}
               >
                 {amount.label}
               </Button>
