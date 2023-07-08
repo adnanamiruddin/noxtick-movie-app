@@ -141,18 +141,15 @@ const cancelTicket = async (req, res) => {
 
     await ticketModel.deleteOne({ _id: ticketId, user: user.id });
 
-    const transaction = await transactionModel.updateOne(
+    await transactionModel.updateOne(
       { user: user.id, ticket: ticketId },
       {
         transactionStatus: "Cancelled",
       }
     );
 
-    await transaction.save();
-
     responseHandler.ok(res, "Successfully canceled ticket");
   } catch (error) {
-    console.log({error});
     responseHandler.error(res);
   }
 };

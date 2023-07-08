@@ -58,9 +58,30 @@ const addBookedSeats = async (req, res) => {
 
 const removeBookedSeats = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { seatNumbers, showtimeDate, showtimeTime, movieTitle } = req.body;
 
-    await bookedSeatsModel.findByIdAndDelete(id);
+    const bookedSeats = await bookedSeatsModel.findOne({
+      showtimeDate,
+      showtimeTime,
+      movieTitle,
+    });
+
+    if (!bookedSeats) {
+      return responseHandler.notFound(res);
+    }
+
+    const updatedSeatNumbers = bookedSeats.seatNumbers.filter(
+      (seatNumber) => !seatNumbers.includes(seatNumber)
+    );
+
+    if (updatedSeatNumbers.length === 0) {
+      await bookedSeatsModel.findByIdAndDelete(bookedSeats.id);
+      return responseHandler.ok(res, "Successfully canceled seats");
+    }
+
+    await bookedSeatsModel.findByIdAndUpdate(bookedSeats.id, {
+      seatNumbers: updatedSeatNumbers,
+    });
 
     responseHandler.ok(res, "Successfully canceled seats");
   } catch (error) {
