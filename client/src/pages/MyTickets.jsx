@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import TicketItem from "../components/common/TicketItem";
 import { useEffect, useState } from "react";
@@ -7,11 +7,13 @@ import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import Container from "../components/common/Container";
 import userApi from "../api/modules/user.api";
+import { useNavigate } from "react-router-dom";
 
 const MyTickets = () => {
   const { user, listTickets } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const [tickets, setTickets] = useState([]);
   const [balance, setBalance] = useState(user.balance);
@@ -24,21 +26,21 @@ const MyTickets = () => {
 
       if (response) {
         setTickets(response);
-        setBalance(user.balance)
+        setBalance(user.balance);
       }
       if (error) toast.error(error.message);
     };
 
     const getUserInfo = async () => {
       dispatch(setGlobalLoading(true));
-      const {response, error} = await userApi.getInfo();
+      const { response, error } = await userApi.getInfo();
       dispatch(setGlobalLoading(false));
 
       if (response) {
-        setBalance(response.balance)
+        setBalance(response.balance);
       }
       if (error) toast.error(error.message);
-    }
+    };
 
     getTickets();
     getUserInfo();
@@ -80,9 +82,20 @@ const MyTickets = () => {
             flexWrap: "wrap",
           }}
         >
-          {tickets.map((ticket, i) => (
-            <TicketItem key={i} ticket={ticket} />
-          ))}
+          {tickets.length > 0 ? (
+            tickets.map((ticket) => (
+              <TicketItem key={ticket.id} ticket={ticket} />
+            ))
+          ) : (
+            <Box display="flex" flexDirection="column" alignItems="center" gap={3}>
+              <Typography variant="h5" textAlign="center">
+                You do not have any tickets. Lets book some!
+              </Typography>
+              <Button variant="contained" color="info" onClick={() => navigate("/movies")}>
+                Book Ticket
+              </Button>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>
