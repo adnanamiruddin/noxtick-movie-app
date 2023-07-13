@@ -6,6 +6,7 @@ import userTicketApi from "../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import Container from "../components/common/Container";
+import userApi from "../api/modules/user.api";
 
 const MyTickets = () => {
   const { user, listTickets } = useSelector((state) => state.user);
@@ -13,20 +14,34 @@ const MyTickets = () => {
   const dispatch = useDispatch();
 
   const [tickets, setTickets] = useState([]);
+  const [balance, setBalance] = useState(user.balance);
 
   useEffect(() => {
-    // const getTickets = async () => {
-    //   dispatch(setGlobalLoading(true));
-    //   const { response, error } = await userTicketApi.getTickets();
-    //   dispatch(setGlobalLoading(false));
+    const getTickets = async () => {
+      dispatch(setGlobalLoading(true));
+      const { response, error } = await userTicketApi.getTickets();
+      dispatch(setGlobalLoading(false));
 
-    //   if (response) setTickets([...listTickets]);
-    //   if (error) toast.error(error.message);
-    // };
+      if (response) {
+        setTickets(response);
+        setBalance(user.balance)
+      }
+      if (error) toast.error(error.message);
+    };
 
-    // getTickets();
+    const getUserInfo = async () => {
+      dispatch(setGlobalLoading(true));
+      const {response, error} = await userApi.getInfo();
+      dispatch(setGlobalLoading(false));
 
-    setTickets([...listTickets]);
+      if (response) {
+        setBalance(response.balance)
+      }
+      if (error) toast.error(error.message);
+    }
+
+    getTickets();
+    getUserInfo();
   }, [user, listTickets, dispatch]);
 
   return (
@@ -49,13 +64,12 @@ const MyTickets = () => {
             padding: 3,
             backgroundColor: "background.paper",
             borderRadius: "8px",
-            flexGrow: 1,
           }}
         >
           <Typography variant="h6" sx={{ marginBottom: { xs: 2, sm: 0 } }}>
             Age: {user.age}
           </Typography>
-          <Typography variant="h6">Balance: Rp.{user.balance}</Typography>
+          <Typography variant="h6">Balance: Rp.{balance}</Typography>
         </Box>
         <Box
           sx={{

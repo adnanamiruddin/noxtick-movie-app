@@ -7,14 +7,10 @@ import bookedSeatsApi from "../../api/modules/booked.seats.api";
 import { useDispatch } from "react-redux";
 import { cancelTicket } from "../../redux/features/userSlice";
 
-const CancelTicketModal = ({
-  open,
-  onClose,
-  ticket
-}) => {
-  const { id, seatNumbers, showtimeDate, showtimeTime, movieTitle } = ticket
+const CancelTicketModal = ({ open, onClose, ticket }) => {
+  const { id, seatNumbers, showtimeDate, showtimeTime, movieTitle } = ticket;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [password, setPassword] = useState("");
   const [onRequest, setOnRequest] = useState(false);
@@ -41,9 +37,9 @@ const CancelTicketModal = ({
       });
 
       if (response) {
-        dispatch(cancelTicket(ticket))
+        dispatch(cancelTicket(ticket));
         toast.success(response);
-        onClose()
+        onClose();
       }
       if (error) toast.error(error.message);
     }

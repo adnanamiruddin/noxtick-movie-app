@@ -30,7 +30,7 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [selectedDate, setSelectedDate] = useState(dayjs().format("DD MMM"));
-  const [selectedTime, setSelectedTime] = useState("11.40");
+  const [selectedTime, setSelectedTime] = useState("");
   const [bookedSeats, setBookedSeats] = useState([]);
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
   const [showSeats, setShowSeats] = useState(false);
@@ -58,7 +58,7 @@ const MovieDetail = () => {
     const timeParam = searchParams.get("time");
 
     setSelectedDate(dateParam || dayjs().format("DD MMM"));
-    setSelectedTime(timeParam || "11.40");
+    setSelectedTime(timeParam);
 
     const getBookedSeats = async () => {
       const { response, error } = await bookedSeatsApi.getBookedSeatsByTitle({
