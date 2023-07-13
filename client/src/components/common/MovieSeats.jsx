@@ -94,7 +94,7 @@ const MovieSeats = ({
                   <Grid item key={seatNumber} xs={3} marginBottom={1}>
                     <Button
                       variant="contained"
-                      color={isSelected ? "success" : "info"}
+                      color={isSelected ? "success" : isMaxSelection ? "warning" : "info"}
                       disabled={!showSeats || isBooked}
                       onClick={() => handleSeatClick(seatNumber)}
                       sx={{
@@ -171,7 +171,7 @@ const MovieSeats = ({
                   <Grid item key={seatNumber} xs={3} marginBottom={1}>
                     <Button
                       variant="contained"
-                      color={isSelected ? "success" : "info"}
+                      color={isSelected ? "success" : isMaxSelection ? "warning" : "info"}
                       disabled={!showSeats || isBooked}
                       onClick={() => handleSeatClick(seatNumber)}
                       sx={{

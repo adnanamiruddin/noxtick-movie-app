@@ -28,7 +28,7 @@ const BuyTicketModal = ({
       showtimeTime: selectedTime,
       seatNumbers: selectedSeats,
       movieAgeRating: movie.age_rating,
-      movieTicketPrice: total,
+      movieTicketPrice: movie.ticket_price,
       movieTitle: movie.title,
       moviePoster: movie.poster_url,
     };
@@ -85,7 +85,8 @@ const BuyTicketModal = ({
             </Typography>
 
             <Typography variant="body1" mb={2}>
-              Saldo: Rp.{user.balance}
+              Saldo: Rp.
+              {user.balance}
             </Typography>
 
             <Typography variant="body1" mb={2}>

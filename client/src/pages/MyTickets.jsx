@@ -29,7 +29,7 @@ const MyTickets = () => {
   }, [user, dispatch]);
 
   return (
-    <Box sx={{ ...uiConfigs.style.mainContent }}>
+    <Box sx={{margin: "auto", padding: 2}}>
       <Container>
         <Typography
           variant="h5"
