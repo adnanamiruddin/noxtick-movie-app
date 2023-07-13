@@ -21,7 +21,6 @@ const monthNames = [
 
 const TicketItem = ({ ticket }) => {
   const {
-    id,
     bookingTime,
     seatNumbers,
     movieTitle,
@@ -117,11 +116,7 @@ const TicketItem = ({ ticket }) => {
       <CancelTicketModal
         open={isModalOpen}
         onClose={handleClose}
-        ticketId={id}
-        seatNumbers={seatNumbers}
-        showtimeDate={showtimeDate}
-        showtimeTime={showtimeTime}
-        movieTitle={movieTitle}
+        ticket={ticket}
       />
     </Box>
   );

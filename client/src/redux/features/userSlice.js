@@ -23,9 +23,9 @@ export const userSlice = createSlice({
       state.listTickets = [action.payload, ...state.listTickets];
     },
     cancelTicket: (state, action) => {
-      const { movieId } = action.payload;
+      const { id } = action.payload;
       state.listTickets = [...state.listTickets].filter(
-        (ticket) => ticket.movieId.toString() !== movieId.toString()
+        (ticket) => ticket.id.toString() !== id.toString()
       );
     },
   },

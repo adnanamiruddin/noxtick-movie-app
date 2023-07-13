@@ -3,19 +3,18 @@ import Logo from "./Logo";
 import userTicketApi from "../../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import bookedSeatsApi from "../../api/modules/booked.seats.api";
+import { useDispatch } from "react-redux";
+import { cancelTicket } from "../../redux/features/userSlice";
 
 const CancelTicketModal = ({
   open,
   onClose,
-  ticketId,
-  seatNumbers,
-  showtimeDate,
-  showtimeTime,
-  movieTitle,
+  ticket
 }) => {
-  const navigate = useNavigate();
+  const { id, seatNumbers, showtimeDate, showtimeTime, movieTitle } = ticket
+
+  const dispatch = useDispatch()
 
   const [password, setPassword] = useState("");
   const [onRequest, setOnRequest] = useState(false);
@@ -29,7 +28,7 @@ const CancelTicketModal = ({
 
     setOnRequest(true);
     const { response, error } = await userTicketApi.cancelTicket({
-      ticketId,
+      ticketId: id,
       password,
     });
 
@@ -42,11 +41,9 @@ const CancelTicketModal = ({
       });
 
       if (response) {
+        dispatch(cancelTicket(ticket))
         toast.success(response);
-        setTimeout(() => {
-          navigate("/");
-          window.location.reload();
-        }, 1500);
+        onClose()
       }
       if (error) toast.error(error.message);
     }

@@ -5,31 +5,32 @@ import { useEffect, useState } from "react";
 import userTicketApi from "../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
-import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
 
 const MyTickets = () => {
-  const { user } = useSelector((state) => state.user);
+  const { user, listTickets } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    const getTickets = async () => {
-      dispatch(setGlobalLoading(true));
-      const { response, error } = await userTicketApi.getTickets();
-      dispatch(setGlobalLoading(false));
+    // const getTickets = async () => {
+    //   dispatch(setGlobalLoading(true));
+    //   const { response, error } = await userTicketApi.getTickets();
+    //   dispatch(setGlobalLoading(false));
 
-      if (response) setTickets(response);
-      if (error) toast.error(error.message);
-    };
+    //   if (response) setTickets([...listTickets]);
+    //   if (error) toast.error(error.message);
+    // };
 
-    getTickets();
-  }, [user, dispatch]);
+    // getTickets();
+
+    setTickets([...listTickets]);
+  }, [user, listTickets, dispatch]);
 
   return (
-    <Box sx={{margin: "auto", padding: 2}}>
+    <Box sx={{ margin: "auto", padding: 2 }}>
       <Container>
         <Typography
           variant="h5"
@@ -48,6 +49,7 @@ const MyTickets = () => {
             padding: 3,
             backgroundColor: "background.paper",
             borderRadius: "8px",
+            flexGrow: 1,
           }}
         >
           <Typography variant="h6" sx={{ marginBottom: { xs: 2, sm: 0 } }}>

@@ -45,11 +45,10 @@ const BuyTicketModal = ({
       const { response, error } = await bookedSeatsApi.addBookedSeats(body);
 
       if (response) {
-        dispatch(bookTickets(selectedSeats));
+        dispatch(bookTickets(response));
         toast.success("Berhasil membeli tiket");
         setTimeout(() => {
           navigate("/");
-          window.location.reload();
         }, 1500);
       }
       if (error) toast.error(error.message);

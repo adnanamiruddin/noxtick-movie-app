@@ -41,7 +41,7 @@ const uiConfigs = {
     }),
   },
   size: {
-    sideBarWidth: "300px",
+    sideNavBarWidth: "300px",
     contentMaxWidth: "1366px",
   },
 };

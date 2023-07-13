@@ -41,7 +41,7 @@ const SideNavbar = ({ open, toggleSideNavbar }) => {
         </Stack>
       </Toolbar>
       <List sx={{ paddingX: "30px" }}>
-        <Typography variant="h6" marginBottom="20px">
+        <Typography variant="h6" marginBottom="10px">
           MENU
         </Typography>
         {menuConfigs.main.map((menu, i) => (
@@ -72,7 +72,7 @@ const SideNavbar = ({ open, toggleSideNavbar }) => {
 
         {user ? (
           <div>
-            <Typography variant="h6" marginBottom="10px">
+            <Typography variant="h6" marginBottom="10px" marginTop="20px">
               PERSONAL
             </Typography>
             {menuConfigs.user.map((menu, i) => (
@@ -103,7 +103,7 @@ const SideNavbar = ({ open, toggleSideNavbar }) => {
           </div>
         ) : ""}
 
-        <Typography variant="h6" marginTop="20px" marginBottom="10px">
+        <Typography variant="h6" marginBottom="10px" marginTop="20px">
           THEME
         </Typography>
         <ListItemButton onClick={onSwitchTheme}>
