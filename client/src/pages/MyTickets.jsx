@@ -8,12 +8,13 @@ import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import Container from "../components/common/Container";
 import userApi from "../api/modules/user.api";
 import { useNavigate } from "react-router-dom";
+import uiConfigs from "../configs/ui.configs";
 
 const MyTickets = () => {
   const { user, listTickets } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [tickets, setTickets] = useState([]);
   const [balance, setBalance] = useState(user.balance);
@@ -47,7 +48,7 @@ const MyTickets = () => {
   }, [user, listTickets, dispatch]);
 
   return (
-    <Box sx={{ margin: "auto", padding: 2 }}>
+    <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container>
         <Typography
           variant="h5"
@@ -87,11 +88,20 @@ const MyTickets = () => {
               <TicketItem key={ticket.id} ticket={ticket} />
             ))
           ) : (
-            <Box display="flex" flexDirection="column" alignItems="center" gap={3}>
+            <Box
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              gap={3}
+            >
               <Typography variant="h5" textAlign="center">
                 You do not have any tickets. Lets book some!
               </Typography>
-              <Button variant="contained" color="info" onClick={() => navigate("/movies")}>
+              <Button
+                variant="contained"
+                color="info"
+                onClick={() => navigate("/movies")}
+              >
                 Book Ticket
               </Button>
             </Box>

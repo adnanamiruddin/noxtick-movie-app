@@ -2,7 +2,9 @@ import { Box, Typography, Divider, Button } from "@mui/material";
 import CancelTicketModal from "./CancelTicketModal";
 import { useState } from "react";
 import uiConfigs from "../../configs/ui.configs";
-// import QRCode from "react-qr-code";
+import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
+import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
+import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
 
 const monthNames = [
   "Jan",
@@ -53,39 +55,80 @@ const TicketItem = ({ ticket }) => {
       sx={{
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-around",
-        alignItems: "center",
+        justifyContent: { xs: "space-between", sm: "space-around" },
+        alignItems: "start",
+        gap: { xs: 1.5, sm: 0 },
         padding: 2,
         margin: 2,
         backgroundColor: isExpired ? "gray" : "secondary.main",
         borderRadius: "8px",
         color: "primary.contrastText",
-        width: 450,
+        maxWidth: 450,
+        flexGrow: 1,
+        height: 250,
       }}
     >
       <Box sx={{ ...uiConfigs.style.typoLines(8, "start") }}>
         <Typography
           variant="h5"
-          fontWeight="600"
-          textAlign="center"
+          fontWeight="800"
           sx={{
             maxWidth: 200,
-            ...uiConfigs.style.typoLines(3, "center"),
+            ...uiConfigs.style.typoLines(2, "center"),
           }}
         >
           {movieTitle}
         </Typography>
         <Divider sx={{ margin: "10px 0" }} />
 
-        <Typography variant="body1">Booking Time: {bookingTime}</Typography>
+        <Box
+          textAlign="start"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "start",
+            alignItems: "start",
+            gap: 1.5,
+          }}
+        >
+          <Typography
+            variant="body1"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <DateRangeOutlinedIcon />{" "}
+            {showtimeDate + " " + currentTime.getFullYear()}
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <WatchLaterOutlinedIcon /> {showtimeTime}
+          </Typography>
 
-        <Typography variant="body1">
-          Showtime: {showtimeDate} 2023 ({showtimeTime})
-        </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <WeekendOutlinedIcon /> [ {seatNumbers.join(", ")} ]
+          </Typography>
 
-        <Typography variant="body1">
-          Seat Numbers: {seatNumbers.join(", ")}
-        </Typography>
+          <Typography variant="caption">Booking Time: {bookingTime}</Typography>
+        </Box>
       </Box>
       <Box
         sx={{

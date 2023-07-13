@@ -26,7 +26,6 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
         toast.success("Berhasil top up saldo");
         setTimeout(() => {
           navigate("/");
-          window.location.reload();
         }, 1500);
       }
       if (error) toast.error(error.message);
