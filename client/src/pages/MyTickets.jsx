@@ -9,6 +9,9 @@ import Container from "../components/common/Container";
 import userApi from "../api/modules/user.api";
 import { useNavigate } from "react-router-dom";
 import uiConfigs from "../configs/ui.configs";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+import SettingsAccessibilityOutlinedIcon from "@mui/icons-material/SettingsAccessibilityOutlined";
+import UserInfo from "../components/common/UserInfo";
 
 const MyTickets = () => {
   const { user, listTickets } = useSelector((state) => state.user);
@@ -50,30 +53,7 @@ const MyTickets = () => {
   return (
     <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container>
-        <Typography
-          variant="h5"
-          fontWeight="700"
-          textAlign="center"
-          textTransform="uppercase"
-        >
-          {user.displayName}
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            justifyContent: "space-around",
-            alignItems: "center",
-            padding: 3,
-            backgroundColor: "background.paper",
-            borderRadius: "8px",
-          }}
-        >
-          <Typography variant="h6" sx={{ marginBottom: { xs: 2, sm: 0 } }}>
-            Age: {user.age}
-          </Typography>
-          <Typography variant="h6">Balance: Rp.{balance}</Typography>
-        </Box>
+        <UserInfo user={user} balance={balance} />
         <Box
           sx={{
             display: "flex",

@@ -65,7 +65,7 @@ const TicketItem = ({ ticket }) => {
         color: "primary.contrastText",
         maxWidth: 450,
         flexGrow: 1,
-        height: 250,
+        height: {xs: "auto", sm: 250},
       }}
     >
       <Box sx={{ ...uiConfigs.style.typoLines(8, "start") }}>
@@ -100,7 +100,7 @@ const TicketItem = ({ ticket }) => {
               gap: 1,
             }}
           >
-            <DateRangeOutlinedIcon />{" "}
+            <DateRangeOutlinedIcon />
             {showtimeDate + " " + currentTime.getFullYear()}
           </Typography>
           <Typography
@@ -122,12 +122,13 @@ const TicketItem = ({ ticket }) => {
               justifyContent: "center",
               alignItems: "center",
               gap: 1,
+              marginBottom: 0.5,
             }}
           >
             <WeekendOutlinedIcon /> [ {seatNumbers.join(", ")} ]
           </Typography>
 
-          <Typography variant="caption">Booking Time: {bookingTime}</Typography>
+          <Typography variant="caption">Booked at {bookingTime}</Typography>
         </Box>
       </Box>
       <Box
@@ -135,7 +136,9 @@ const TicketItem = ({ ticket }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "end",
+          alignItems: "center",
+          gap: 1.5,
+          marginTop: 1,
         }}
       >
         <Box>

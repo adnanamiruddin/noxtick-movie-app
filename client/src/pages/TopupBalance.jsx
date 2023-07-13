@@ -5,7 +5,7 @@ import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 
-const amounts = [
+const nominals = [
   { value: 50000, label: "Rp 50.000" },
   { value: 75000, label: "Rp 75.000" },
   { value: 100000, label: "Rp 100.000" },
@@ -49,11 +49,11 @@ const TopupBalance = () => {
             alignItems="center"
             sx={{ gap: { xs: 2, md: 3 } }}
           >
-            {amounts.map((amount) => (
+            {nominals.map((nominal) => (
               <Button
-                key={amount.value}
+                key={nominal.value}
                 variant="contained"
-                onClick={() => handleAmountSelection(amount.value)}
+                onClick={() => handleAmountSelection(nominal.value)}
                 sx={{
                   flexBasis: { xs: "75%", sm: "45%", md: "30%" },
                   backgroundColor: "secondary.main",
@@ -66,7 +66,7 @@ const TopupBalance = () => {
                 }}
               >
                 <AttachMoneyOutlinedIcon sx={{ fontSize: "2rem" }} />
-                {amount.label}
+                {nominal.label}
               </Button>
             ))}
           </Box>
