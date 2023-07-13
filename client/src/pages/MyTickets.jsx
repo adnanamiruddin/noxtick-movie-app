@@ -9,9 +9,7 @@ import Container from "../components/common/Container";
 import userApi from "../api/modules/user.api";
 import { useNavigate } from "react-router-dom";
 import uiConfigs from "../configs/ui.configs";
-import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
-import SettingsAccessibilityOutlinedIcon from "@mui/icons-material/SettingsAccessibilityOutlined";
-import UserInfo from "../components/common/UserInfo";
+import UserDetail from "../components/common/UserDetail";
 
 const MyTickets = () => {
   const { user, listTickets } = useSelector((state) => state.user);
@@ -20,7 +18,6 @@ const MyTickets = () => {
   const navigate = useNavigate();
 
   const [tickets, setTickets] = useState([]);
-  const [balance, setBalance] = useState(user.balance);
 
   useEffect(() => {
     const getTickets = async () => {
@@ -28,32 +25,17 @@ const MyTickets = () => {
       const { response, error } = await userTicketApi.getTickets();
       dispatch(setGlobalLoading(false));
 
-      if (response) {
-        setTickets(response);
-        setBalance(user.balance);
-      }
-      if (error) toast.error(error.message);
-    };
-
-    const getUserInfo = async () => {
-      dispatch(setGlobalLoading(true));
-      const { response, error } = await userApi.getInfo();
-      dispatch(setGlobalLoading(false));
-
-      if (response) {
-        setBalance(response.balance);
-      }
+      if (response) setTickets(response);
       if (error) toast.error(error.message);
     };
 
     getTickets();
-    getUserInfo();
   }, [user, listTickets, dispatch]);
 
   return (
     <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container>
-        <UserInfo user={user} balance={balance} />
+        <UserDetail />
         <Box
           sx={{
             display: "flex",

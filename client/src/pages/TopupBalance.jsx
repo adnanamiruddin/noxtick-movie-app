@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import TopupModal from "../components/common/TopupModal";
 import uiConfigs from "../configs/ui.configs";
 import Container from "../components/common/Container";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+import UserDetail from "../components/common/UserDetail";
+import { useDispatch, useSelector } from "react-redux";
+import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
+import userApi from "../api/modules/user.api";
+import { toast } from "react-toastify";
 
 const nominals = [
   { value: 50000, label: "Rp 50.000" },
@@ -30,6 +35,7 @@ const TopupBalance = () => {
   return (
     <Box sx={{ ...uiConfigs.style.mainContent }}>
       <Container>
+        <UserDetail />
         <Box
           sx={{
             display: "flex",
@@ -38,7 +44,12 @@ const TopupBalance = () => {
             alignItems: "center",
           }}
         >
-          <Typography variant="h4" fontWeight="700" marginBottom={4} textAlign="center">
+          <Typography
+            variant="h6"
+            fontWeight="700"
+            marginBottom={4}
+            textAlign="center"
+          >
             SELECT THE NOMINAL
           </Typography>
 
