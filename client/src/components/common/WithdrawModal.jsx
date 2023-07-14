@@ -143,7 +143,7 @@ const WithdrawModal = ({ open, onClose, selectedAmount }) => {
             value={password}
             onChange={handlePasswordChange}
             autoSave="false"
-            sx={{ marginBottom: 2, width: "60%" }}
+            sx={{ marginBottom: 2 }}
           />
           <Button
             variant="contained"

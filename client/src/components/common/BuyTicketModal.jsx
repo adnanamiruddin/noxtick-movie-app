@@ -12,7 +12,7 @@ import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
 import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
-import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
+import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined";
 import { useState } from "react";
 
 const BuyTicketModal = ({
@@ -163,7 +163,7 @@ const BuyTicketModal = ({
                     justifyContent: "center",
                     alignItems: "center",
                     gap: 1,
-                    maxWidth: {xs: "100%", sm: "90%", md: "100%"}
+                    maxWidth: { xs: "100%", sm: "90%", md: "100%" },
                   }}
                 >
                   <WeekendOutlinedIcon /> [ {selectedSeats.join(", ")} ]
@@ -268,7 +268,9 @@ const BuyTicketModal = ({
             </Box>
           </Box>
         ) : (
-          <Typography>Sorry, you are not old enough ({user.age}) to watch this film</Typography>
+          <Typography>
+            Sorry, you are not old enough ({user.age}) to watch this film
+          </Typography>
         )}
       </Box>
     </Modal>
