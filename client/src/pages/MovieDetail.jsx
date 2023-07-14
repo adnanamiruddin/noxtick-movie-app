@@ -5,13 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import { toast } from "react-toastify";
 import HeaderImage from "../components/common/HeaderImage";
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import uiConfigs from "../configs/ui.configs";
 import BuyTicketModal from "../components/common/BuyTicketModal";
 import MovieSeats from "../components/common/MovieSeats";
