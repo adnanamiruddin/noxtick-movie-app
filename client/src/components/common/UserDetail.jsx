@@ -34,6 +34,7 @@ const UserDetail = () => {
         fontWeight="700"
         textAlign="center"
         textTransform="uppercase"
+        marginBottom={2}
       >
         {user.displayName}
       </Typography>
@@ -51,7 +52,7 @@ const UserDetail = () => {
         <Typography
           variant="h6"
           sx={{
-            marginBottom: { xs: 2, sm: 0 },
+            marginBottom: { xs: 3, sm: 0 },
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

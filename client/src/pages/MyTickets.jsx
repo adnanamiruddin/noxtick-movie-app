@@ -6,7 +6,6 @@ import userTicketApi from "../api/modules/user.ticket.api";
 import { toast } from "react-toastify";
 import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
 import Container from "../components/common/Container";
-import userApi from "../api/modules/user.api";
 import { useNavigate } from "react-router-dom";
 import uiConfigs from "../configs/ui.configs";
 import UserDetail from "../components/common/UserDetail";

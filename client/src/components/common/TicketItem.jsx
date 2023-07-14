@@ -65,7 +65,7 @@ const TicketItem = ({ ticket }) => {
         color: "primary.contrastText",
         maxWidth: 450,
         flexGrow: 1,
-        height: {xs: "auto", sm: 250},
+        height: { xs: "auto", sm: 250 },
       }}
     >
       <Box sx={{ ...uiConfigs.style.typoLines(8, "start") }}>

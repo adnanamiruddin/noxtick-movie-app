@@ -1,57 +1,118 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, TextField, Toolbar, Typography } from "@mui/material";
+import { useState } from "react";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import WithdrawModal from "../components/common/WithdrawModal";
-import { setGlobalLoading } from "../redux/features/globalLoadingSlice";
+import Container from "../components/common/Container";
+import UserDetail from "../components/common/UserDetail";
+import uiConfigs from "../configs/ui.configs";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+
+const nominals = [
+  { value: 50000, label: "Rp 50.000" },
+  { value: 75000, label: "Rp 75.000" },
+  { value: 100000, label: "Rp 100.000" },
+  { value: 150000, label: "Rp 150.000" },
+  { value: 200000, label: "Rp 200.000" },
+  { value: 500000, label: "Rp 500.000" },
+];
 
 const WithdrawBalance = () => {
-  const { user } = useSelector((state) => state.user);
-
-  const dispatch = useDispatch();
-
   const [amount, setAmount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [balance, setBalance] = useState(0);
-
-  useEffect(() => {
-    const getBalance = async () => {
-      dispatch(setGlobalLoading(true));
-      await setBalance(user.balance);
-      dispatch(setGlobalLoading(false));
-    };
-
-    getBalance();
-  }, [user, dispatch]);
 
   const handleClose = () => setIsModalOpen(false);
 
+  const handleAmountButtonClick = (value) => {
+    setAmount(value);
+  };
+
   return (
-    <Box sx={{ maxWidth: 400, mx: "auto", mt: 4, p: 2 }}>
-      <Toolbar />
-      <Typography variant="h5" marginBottom={2}>
-        Withdraw Balance
-      </Typography>
+    <Box sx={{ ...uiConfigs.style.mainContent }}>
+      <Container>
+        <UserDetail />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h6" fontWeight="700" textAlign="center">
+            SELECT THE NOMINAL
+          </Typography>
+        </Box>
 
-      <Typography variant="body1" marginBottom={2}>
-        {`Your current balance is Rp ${balance}`}
-      </Typography>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexWrap="wrap"
+          sx={{ gap: { xs: 2, md: 3 } }}
+        >
+          {nominals.map((nominal) => (
+            <Button
+              key={nominal.value}
+              variant={amount === nominal.value ? "contained" : "outlined"}
+              fullWidth
+              onClick={() => handleAmountButtonClick(nominal.value)}
+              sx={{
+                flexBasis: { xs: "75%", sm: "45%", md: "30%" },
+                padding: 2,
+                fontSize: "1rem",
+                ...uiConfigs.style.typoLines(1, "center"),
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "end",
+              }}
+            >
+              <AttachMoneyOutlinedIcon sx={{ fontSize: "2rem" }} />
+              <Typography variant="h6">{nominal.label}</Typography>
+            </Button>
+          ))}
+        </Box>
 
-      <TextField
-        type="number"
-        label="Amount"
-        variant="outlined"
-        fullWidth
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-        inputProps={{ inputProps: { min: 0, max: 500000 } }}
-        sx={{ marginBottom: 2 }}
-      />
+        <Box
+          sx={{
+            padding: 4,
+            paddingTop: 0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2.5,
+          }}
+        >
+          <Typography variant="caption" textAlign="center" fontStyle="italic">
+            You can also enter manual amount to withdraw
+          </Typography>
 
-      <Button variant="contained" onClick={() => setIsModalOpen(true)}>
-        Withdraw
-      </Button>
+          <TextField
+            type="number"
+            label="Amount"
+            variant="outlined"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            inputProps={{ inputProps: { min: 0, max: 500000 } }}
+            sx={{ width: "50%", fontWeight: 700 }}
+          />
 
-      <WithdrawModal open={isModalOpen} onClose={handleClose} amount={amount} />
+          <Button
+            variant="contained"
+            onClick={() => setIsModalOpen(true)}
+            sx={{ height: 55, width: "max-content", padding: "0 2rem" }}
+          >
+            <Typography variant="h6" sx={{ fontWeight: 700 }}>
+              Withdraw
+            </Typography>
+          </Button>
+        </Box>
+
+        <WithdrawModal
+          open={isModalOpen}
+          onClose={handleClose}
+          amount={amount}
+        />
+      </Container>
     </Box>
   );
 };

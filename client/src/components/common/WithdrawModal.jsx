@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
 import { useSelector } from "react-redux";
 import Logo from "./Logo";
@@ -83,6 +83,7 @@ const WithdrawModal = ({ open, onClose, amount }) => {
           value={password}
           onChange={handlePasswordChange}
           fullWidth
+          autoSave="false"
           sx={{ marginBottom: 2 }}
         />
 
