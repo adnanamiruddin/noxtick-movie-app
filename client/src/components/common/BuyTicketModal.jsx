@@ -27,11 +27,16 @@ const BuyTicketModal = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [onRequest, setOnRequest] = useState(false);
+
   const currentTime = new Date();
   const total = selectedSeats.length * movie.ticket_price;
   const isEnoughBalance = user.balance >= total;
 
   const handleConfirmBuy = async () => {
+    if (onRequest) return;
+
+    setOnRequest(true);
     const body = {
       showtimeDate: selectedDate,
       showtimeTime: selectedTime,
@@ -63,6 +68,7 @@ const BuyTicketModal = ({
       if (error) toast.error(error.message);
     }
     if (error) toast.error(error.message);
+    setOnRequest(false);
   };
 
   return user ? (
