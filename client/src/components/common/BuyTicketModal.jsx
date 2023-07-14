@@ -6,6 +6,13 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import bookedSeatsApi from "../../api/modules/booked.seats.api";
 import { bookTickets } from "../../redux/features/userSlice";
+import uiConfigs from "../../configs/ui.configs";
+import DateRangeIcon from "@mui/icons-material/DateRange";
+import WatchLaterOutlinedIcon from "@mui/icons-material/WatchLaterOutlined";
+import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
+import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
+import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
+import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
 
 const BuyTicketModal = ({
   open,
@@ -20,7 +27,9 @@ const BuyTicketModal = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const currentTime = new Date();
   const total = selectedSeats.length * movie.ticket_price;
+  const isEnoughBalance = user.balance >= total;
 
   const handleConfirmBuy = async () => {
     const body = {
@@ -67,57 +76,192 @@ const BuyTicketModal = ({
           backgroundColor: "background.paper",
           boxShadow: 24,
           padding: 4,
+          paddingTop: 2,
           maxWidth: 600,
           borderRadius: "1rem",
-          width: "75%",
+          width: { xs: "75%", sm: "65%", md: "50%" },
         }}
       >
-        <Logo />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Logo />
+        </Box>
+
         {user.age > movie.age_rating ? (
           <Box>
-            <Typography variant="h6" mb={2}>
-              Konfirmasi Pemesanan Tiket
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              Nama: {user.displayName}
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              Saldo: Rp.
-              {user.balance}
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              Film: {movie.title}
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              Tanggal: {selectedDate}
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              Waktu: {selectedTime}
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              Kursi: {selectedSeats.join(", ")}
-            </Typography>
-
-            <Typography variant="body1" mb={2}>
-              {`Total: Rp.${total}`}
-            </Typography>
-
-            <Button
-              variant="contained"
-              disabled={total !== 0 ? false : true}
-              onClick={handleConfirmBuy}
+            <Typography
+              variant="h5"
+              fontWeight="800"
+              sx={{
+                marginTop: 1,
+                marginBottom: 3,
+                ...uiConfigs.style.typoLines(3, "center"),
+              }}
             >
-              Konfirmasi
-            </Button>
+              {movie.title} ({movie.age_rating}+)
+            </Typography>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "start",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: { xs: 4, sm: 0 },
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "start",
+                  flexDirection: "column",
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  <DateRangeIcon />
+                  {selectedDate + " " + currentTime.getFullYear()}
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 1,
+                  }}
+                >
+                  <WatchLaterOutlinedIcon /> {selectedTime}
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 1,
+                    maxWidth: {xs: "100%", sm: "80%", lg: "100%"}
+                  }}
+                >
+                  <WeekendOutlinedIcon /> [ {selectedSeats.join(", ")} ]
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: { xs: "start", sm: "end" },
+                  flexDirection: "column",
+                  gap: 1,
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 1,
+                    flexDirection: { xs: "row", sm: "row-reverse" },
+                  }}
+                >
+                  <AttachMoneyOutlinedIcon /> Balance Rp.{user.balance}
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 1,
+                    flexDirection: { xs: "row", sm: "row-reverse" },
+                  }}
+                >
+                  <PointOfSaleOutlinedIcon /> Total Rp.{total}
+                </Typography>
+
+                <Box
+                  variant="body1"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: 1,
+                    flexDirection: { xs: "row", sm: "row-reverse" },
+                    maxWidth: "95%",
+                  }}
+                >
+                  <CurrencyExchangeOutlinedIcon />{" "}
+                  {!isEnoughBalance ? (
+                    <Typography
+                      variant="body1"
+                      fontWeight="700"
+                      sx={{
+                        color: "red",
+                        textAlign: { xs: "start", sm: "end" },
+                      }}
+                    >
+                      Not enough balance ({user.balance - total})
+                    </Typography>
+                  ) : (
+                    <Typography
+                      variant="body1"
+                      fontWeight="700"
+                      sx={{
+                        color: "green",
+                        textAlign: { xs: "start", sm: "end" },
+                      }}
+                    >
+                      Change Rp.{user.balance - total}
+                    </Typography>
+                  )}
+                </Box>
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                marginTop: 2,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                gap: 1,
+              }}
+            >
+              <Typography variant="caption">
+                Confirm your purchase, {user.displayName.split(" ")[0]}
+              </Typography>
+              <Button
+                variant="contained"
+                disabled={total !== 0 ? false : true}
+                onClick={handleConfirmBuy}
+                sx={{ width: "50%" }}
+              >
+                Buy
+              </Button>
+            </Box>
           </Box>
         ) : (
-          <Typography>UMUR LU BELUM CUKUP DEK</Typography>
+          <Typography>Sorry, you are not old enough ({user.age}) to watch this film</Typography>
         )}
       </Box>
     </Modal>
