@@ -33,7 +33,6 @@ const BuyTicketModal = ({
 
   const currentTime = new Date();
   const total = selectedSeats.length * movie.ticket_price;
-  const isEnoughBalance = user.balance >= total;
 
   const handleConfirmBuy = async () => {
     if (onRequest) return;
@@ -228,7 +227,7 @@ const BuyTicketModal = ({
                     >
                       Please select your seat!
                     </Typography>
-                  ) : !isEnoughBalance ? (
+                  ) : !user.balance >= total ? (
                     <Typography
                       variant="body1"
                       fontWeight="700"
