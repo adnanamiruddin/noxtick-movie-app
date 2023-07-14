@@ -62,7 +62,7 @@ const BuyTicketModal = ({
 
       if (response) {
         dispatch(bookTickets(response));
-        toast.success("Berhasil membeli tiket");
+        toast.success("Successful purchase of tickets");
         setTimeout(() => {
           navigate("/");
         }, 1500);

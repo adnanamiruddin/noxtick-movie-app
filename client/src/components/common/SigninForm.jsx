@@ -8,7 +8,6 @@ import { LoadingButton } from "@mui/lab";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import userApi from "../../api/modules/user.api";
 import { setUser } from "../../redux/features/userSlice";
-import userBalanceApi from "../../api/modules/user.balance.api";
 
 const SigninForm = ({ switchAuthState }) => {
   const dispatch = useDispatch();

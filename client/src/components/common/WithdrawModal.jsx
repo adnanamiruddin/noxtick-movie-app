@@ -38,7 +38,7 @@ const WithdrawModal = ({ open, onClose, selectedAmount }) => {
       password,
     });
     if (response) {
-      toast.success("Withdraw successful");
+      toast.success("Withdrawal successful");
       setTimeout(() => {
         navigate("/");
       }, 1500);
