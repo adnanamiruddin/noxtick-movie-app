@@ -292,7 +292,8 @@ const BuyTicketModal = ({
           >
             <EscalatorWarningOutlinedIcon />
             <Typography variant="body1" fontWeight="500">
-              Sorry but you are not old enough ({user.age}) to watch this movie :)
+              Sorry but you are not old enough ({user.age}) to watch this movie
+              :)
             </Typography>
 
             <Button
