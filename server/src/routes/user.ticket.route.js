@@ -6,11 +6,7 @@ import ticketController from "../controllers/ticket.controller.js";
 
 const router = express.Router();
 
-router.get(
-  "/",
-  tokenMiddleware.auth,
-  ticketController.getTicketsTransaction
-);
+router.get("/", tokenMiddleware.auth, ticketController.getTicketsTransaction);
 
 router.post(
   "/",
