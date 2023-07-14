@@ -13,6 +13,7 @@ import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
 import CurrencyExchangeOutlinedIcon from '@mui/icons-material/CurrencyExchangeOutlined';
+import { useState } from "react";
 
 const BuyTicketModal = ({
   open,
@@ -162,7 +163,7 @@ const BuyTicketModal = ({
                     justifyContent: "center",
                     alignItems: "center",
                     gap: 1,
-                    maxWidth: {xs: "100%", sm: "80%", lg: "100%"}
+                    maxWidth: {xs: "100%", sm: "90%", md: "100%"}
                   }}
                 >
                   <WeekendOutlinedIcon /> [ {selectedSeats.join(", ")} ]
@@ -212,7 +213,6 @@ const BuyTicketModal = ({
                     alignItems: "center",
                     gap: 1,
                     flexDirection: { xs: "row", sm: "row-reverse" },
-                    maxWidth: "95%",
                   }}
                 >
                   <CurrencyExchangeOutlinedIcon />{" "}
@@ -223,6 +223,7 @@ const BuyTicketModal = ({
                       sx={{
                         color: "red",
                         textAlign: { xs: "start", sm: "end" },
+                        maxWidth: "85%",
                       }}
                     >
                       Not enough balance ({user.balance - total})

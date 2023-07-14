@@ -16,13 +16,13 @@ const nominals = [
 ];
 
 const WithdrawBalance = () => {
-  const [amount, setAmount] = useState(0);
+  const [selectedAmount, setSelectedAmount] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClose = () => setIsModalOpen(false);
 
   const handleAmountButtonClick = (value) => {
-    setAmount(value);
+    setSelectedAmount(value);
   };
 
   return (
@@ -38,7 +38,7 @@ const WithdrawBalance = () => {
           }}
         >
           <Typography variant="h6" fontWeight="700" textAlign="center">
-            SELECT THE NOMINAL
+            SELECT THE NOMINAL TO WITHDRAW
           </Typography>
         </Box>
 
@@ -52,7 +52,7 @@ const WithdrawBalance = () => {
           {nominals.map((nominal) => (
             <Button
               key={nominal.value}
-              variant={amount === nominal.value ? "contained" : "outlined"}
+              variant={selectedAmount === nominal.value ? "contained" : "outlined"}
               fullWidth
               onClick={() => handleAmountButtonClick(nominal.value)}
               sx={{
@@ -83,15 +83,15 @@ const WithdrawBalance = () => {
           }}
         >
           <Typography variant="caption" textAlign="center" fontStyle="italic">
-            You can also enter manual amount to withdraw
+            Note: You can also enter a manual amount to withdraw
           </Typography>
 
           <TextField
             type="number"
             label="Amount"
             variant="outlined"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            value={selectedAmount}
+            onChange={(e) => setSelectedAmount(e.target.value)}
             inputProps={{ inputProps: { min: 0, max: 500000 } }}
             sx={{ width: "50%", fontWeight: 700 }}
           />
@@ -110,7 +110,7 @@ const WithdrawBalance = () => {
         <WithdrawModal
           open={isModalOpen}
           onClose={handleClose}
-          amount={amount}
+          selectedAmount={selectedAmount}
         />
       </Container>
     </Box>

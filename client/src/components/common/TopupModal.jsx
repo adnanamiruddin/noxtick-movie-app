@@ -90,7 +90,7 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              gap: {xs: 2, sm: 1},
+              gap: { xs: 2, sm: 1 },
               maxWidth: { xs: "100%", sm: "40%" },
             }}
           >
@@ -103,7 +103,7 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              gap: {xs: 2, sm: 1},
+              gap: { xs: 2, sm: 1.5 },
               flexDirection: { xs: "row", sm: "row-reverse" },
               maxWidth: { xs: "100%", sm: "40%" },
               textAlign: { xs: "start", sm: "end" },
@@ -134,12 +134,6 @@ const TopupModal = ({ open, onClose, selectedAmount }) => {
             Top Up
           </Button>
         </Box>
-
-        {/* 
-
-        <Button variant="contained" onClick={handleTopup}>
-          Topup
-        </Button> */}
       </Box>
     </Modal>
   );
