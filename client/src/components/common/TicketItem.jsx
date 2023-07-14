@@ -155,7 +155,7 @@ const TicketItem = ({ ticket }) => {
           onClick={() => setIsModalOpen(true)}
         >
           <Typography variant="body1" fontWeight="600">
-            Cancel
+            {isExpired ? "Expired" : "Cancel"}
           </Typography>
         </Button>
       </Box>

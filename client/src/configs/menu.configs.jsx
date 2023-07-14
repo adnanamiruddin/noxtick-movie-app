@@ -39,12 +39,6 @@ const user = [
     icon: <AccountBalanceWalletOutlinedIcon />,
     state: "withdraw",
   },
-  {
-    title: "Transactions",
-    path: "/transactions",
-    icon: <PointOfSaleOutlinedIcon />,
-    state: "transactions",
-  },
 ];
 
 const menuConfigs = { main, user };

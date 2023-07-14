@@ -59,15 +59,6 @@ const routes = [
     ),
     state: "withdraw",
   },
-  {
-    path: "/transactions",
-    element: (
-      <ProtectedPage>
-        <Transactions />
-      </ProtectedPage>
-    ),
-    state: "transactions",
-  },
 ];
 
 export default routes;
