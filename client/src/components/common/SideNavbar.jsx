@@ -19,13 +19,11 @@ import { setThemeMode } from "../../redux/features/themeModeSlice";
 import Logo from "./Logo";
 
 const SideNavbar = ({ open, toggleSideNavbar }) => {
-  const dispatch = useDispatch();
-
   const { user } = useSelector((state) => state.user);
   const { appState } = useSelector((state) => state.appState);
   const { themeMode } = useSelector((state) => state.themeMode);
 
-  const sideNavbarWidth = uiConfigs.size.sideNavBarWidth;
+  const dispatch = useDispatch();
 
   const onSwitchTheme = () => {
     const theme =
@@ -62,9 +60,7 @@ const SideNavbar = ({ open, toggleSideNavbar }) => {
             <ListItemText
               disableTypography
               primary={
-                <Typography textTransform="uppercase">
-                  {menu.title}
-                </Typography>
+                <Typography textTransform="uppercase">{menu.title}</Typography>
               }
             />
           </ListItemButton>
@@ -101,7 +97,9 @@ const SideNavbar = ({ open, toggleSideNavbar }) => {
               </ListItemButton>
             ))}
           </div>
-        ) : ""}
+        ) : (
+          ""
+        )}
 
         <Typography variant="h6" marginBottom="10px" marginTop="20px">
           THEME
@@ -130,7 +128,7 @@ const SideNavbar = ({ open, toggleSideNavbar }) => {
       onClose={() => toggleSideNavbar(false)}
       sx={{
         "& .MuiDrawer-Paper": {
-          width: sideNavbarWidth,
+          width: uiConfigs.size.sideNavBarWidth,
           borderRight: "0px",
           boxSizing: "border-box",
         },

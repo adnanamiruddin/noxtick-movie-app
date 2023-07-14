@@ -3,7 +3,6 @@ import HomePage from "../pages/HomePage";
 import MoviesPage from "../pages/MoviesPage";
 import MovieDetail from "../pages/MovieDetail";
 import TopupBalance from "../pages/TopupBalance";
-import Transactions from "../pages/Transactions";
 import MyTickets from "../pages/MyTickets";
 import WithdrawBalance from "../pages/WithdrawBalance";
 

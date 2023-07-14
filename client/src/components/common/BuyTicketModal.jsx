@@ -216,7 +216,18 @@ const BuyTicketModal = ({
                   }}
                 >
                   <CurrencyExchangeOutlinedIcon />{" "}
-                  {!isEnoughBalance ? (
+                  {selectedSeats.length === 0 ? (
+                    <Typography
+                      variant="body1"
+                      fontWeight="500"
+                      sx={{
+                        color: "orange",
+                        textAlign: { xs: "start", sm: "end" },
+                      }}
+                    >
+                      Please select your seat!
+                    </Typography>
+                  ) : !isEnoughBalance ? (
                     <Typography
                       variant="body1"
                       fontWeight="700"

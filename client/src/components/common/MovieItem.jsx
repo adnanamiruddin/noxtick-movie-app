@@ -8,7 +8,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 
 const MovieItem = ({ movie }) => {
-  const {themeMode} = useSelector(state => state.themeMode)
+  const { themeMode } = useSelector((state) => state.themeMode);
 
   const [title, setTitle] = useState("");
   const [releaseDate, setReleaseDate] = useState(null);
@@ -44,7 +44,9 @@ const MovieItem = ({ movie }) => {
               top: 0,
               left: 0,
               backgroundImage:
-                themeMode === "dark" ? "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))" : "linear-gradient(to top, rgba(60, 60, 60, 1), rgba(60, 60, 60, 0))",
+                themeMode === "dark"
+                  ? "linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0))"
+                  : "linear-gradient(to top, rgba(60, 60, 60, 1), rgba(60, 60, 60, 0))",
               opacity: { xs: 1, md: 0 },
               transition: "all 0.3s ease",
             }}

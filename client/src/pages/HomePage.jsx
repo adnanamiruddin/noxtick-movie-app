@@ -44,7 +44,7 @@ const HomePage = () => {
                 sx={{
                   backgroundColor: "error.main",
                   textAlign: "center",
-                  width: { xs: "75%", md: "50%" },
+                  width: { xs: "75%", md: "65%" },
                   marginX: "auto",
                   marginBottom: "2rem",
                   paddingY: "10px",
