@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import Logo from "./Logo";
@@ -13,7 +14,7 @@ import WeekendOutlinedIcon from "@mui/icons-material/WeekendOutlined";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined";
-import { useState } from "react";
+import EscalatorWarningOutlinedIcon from "@mui/icons-material/EscalatorWarningOutlined";
 
 const BuyTicketModal = ({
   open,
@@ -99,20 +100,20 @@ const BuyTicketModal = ({
           <Logo />
         </Box>
 
+        <Typography
+          variant="h5"
+          fontWeight="800"
+          sx={{
+            marginTop: 1,
+            marginBottom: 3,
+            ...uiConfigs.style.typoLines(3, "center"),
+          }}
+        >
+          {movie.title} ({movie.age_rating}+)
+        </Typography>
+
         {user.age > movie.age_rating ? (
           <Box>
-            <Typography
-              variant="h5"
-              fontWeight="800"
-              sx={{
-                marginTop: 1,
-                marginBottom: 3,
-                ...uiConfigs.style.typoLines(3, "center"),
-              }}
-            >
-              {movie.title} ({movie.age_rating}+)
-            </Typography>
-
             <Box
               sx={{
                 display: "flex",
@@ -279,9 +280,31 @@ const BuyTicketModal = ({
             </Box>
           </Box>
         ) : (
-          <Typography>
-            Sorry, you are not old enough ({user.age}) to watch this film
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 2,
+              marginTop: 3.5,
+            }}
+          >
+            <EscalatorWarningOutlinedIcon />
+            <Typography variant="body1" fontWeight="500">
+              Sorry but you are not old enough ({user.age}) to watch this movie :)
+            </Typography>
+
+            <Button
+              variant="contained"
+              disabled={total !== 0 ? false : true}
+              color="error"
+              onClick={() => onClose()}
+              sx={{ width: "30%" }}
+            >
+              Back
+            </Button>
+          </Box>
         )}
       </Box>
     </Modal>
