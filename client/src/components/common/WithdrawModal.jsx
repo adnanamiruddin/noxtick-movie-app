@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal, Box, Typography, TextField, Button } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Logo from "./Logo";
 import { toast } from "react-toastify";
 import userBalanceApi from "../../api/modules/user.balance.api";
@@ -8,14 +8,30 @@ import { useNavigate } from "react-router-dom";
 import uiConfigs from "../../configs/ui.configs";
 import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
+import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
+import userApi from "../../api/modules/user.api";
 
 const WithdrawModal = ({ open, onClose, selectedAmount }) => {
-  const { user } = useSelector((state) => state.user);
+  const { user, listTickets } = useSelector((state) => state.user);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const [onRequest, setOnRequest] = useState(false);
+  const [balance, setBalance] = useState(0);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      dispatch(setGlobalLoading(true));
+      const { response } = await userApi.getInfo();
+      dispatch(setGlobalLoading(false));
+
+      if (response) setBalance(response.balance);
+    };
+
+    getUserInfo();
+  }, [user, listTickets, dispatch]);
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -105,7 +121,7 @@ const WithdrawModal = ({ open, onClose, selectedAmount }) => {
               maxWidth: { xs: "100%", sm: "40%" },
             }}
           >
-            <AttachMoneyOutlinedIcon /> Current Balance Rp.{user.balance}
+            <AttachMoneyOutlinedIcon /> Current Balance Rp.{balance}
           </Typography>
 
           <Typography

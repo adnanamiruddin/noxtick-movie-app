@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal, Box, Typography, Button } from "@mui/material";
 import Logo from "./Logo";
@@ -15,6 +15,8 @@ import AttachMoneyOutlinedIcon from "@mui/icons-material/AttachMoneyOutlined";
 import PointOfSaleOutlinedIcon from "@mui/icons-material/PointOfSaleOutlined";
 import CurrencyExchangeOutlinedIcon from "@mui/icons-material/CurrencyExchangeOutlined";
 import EscalatorWarningOutlinedIcon from "@mui/icons-material/EscalatorWarningOutlined";
+import { setGlobalLoading } from "../../redux/features/globalLoadingSlice";
+import userApi from "../../api/modules/user.api";
 
 const BuyTicketModal = ({
   open,
@@ -24,15 +26,28 @@ const BuyTicketModal = ({
   selectedTime,
   selectedSeats,
 }) => {
-  const { user } = useSelector((state) => state.user);
+  const { user, listTickets } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [onRequest, setOnRequest] = useState(false);
+  const [balance, setBalance] = useState(0);
 
   const currentTime = new Date();
   const total = selectedSeats.length * movie.ticket_price;
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      dispatch(setGlobalLoading(true));
+      const { response } = await userApi.getInfo();
+      dispatch(setGlobalLoading(false));
+
+      if (response) setBalance(response.balance);
+    };
+
+    getUserInfo();
+  }, [user, listTickets, dispatch]);
 
   const handleConfirmBuy = async () => {
     if (onRequest) return;
@@ -189,7 +204,7 @@ const BuyTicketModal = ({
                     flexDirection: { xs: "row", sm: "row-reverse" },
                   }}
                 >
-                  <AttachMoneyOutlinedIcon /> Balance Rp.{user.balance}
+                  <AttachMoneyOutlinedIcon /> Balance Rp.{balance}
                 </Typography>
 
                 <Typography
@@ -227,7 +242,7 @@ const BuyTicketModal = ({
                     >
                       Please select your seat!
                     </Typography>
-                  ) : !user.balance >= total ? (
+                  ) : !balance >= total ? (
                     <Typography
                       variant="body1"
                       fontWeight="700"
@@ -237,7 +252,7 @@ const BuyTicketModal = ({
                         maxWidth: "85%",
                       }}
                     >
-                      Not enough balance ({user.balance - total})
+                      Not enough balance ({balance - total})
                     </Typography>
                   ) : (
                     <Typography
@@ -248,7 +263,7 @@ const BuyTicketModal = ({
                         textAlign: { xs: "start", sm: "end" },
                       }}
                     >
-                      Change Rp.{user.balance - total}
+                      Change Rp.{balance - total}
                     </Typography>
                   )}
                 </Box>
