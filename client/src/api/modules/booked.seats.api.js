@@ -6,7 +6,7 @@ const bookedSeatsEndPoints = {
     `booked-seats/${title}?showtimeDate=${showtimeDate}&showtimeTime=${showtimeTime}`,
   bookedSeats: "booked-seats",
 };
-
+3
 const bookedSeatsApi = {
   getBookedSeatsByTitle: async ({ title, showtimeDate, showtimeTime }) => {
     try {

@@ -71,7 +71,7 @@ const MovieDetail = () => {
     };
 
     getBookedSeats();
-  }, [location.search, movieTitle, bookedSeats]);
+  }, [location.search, movieTitle]);
 
   const handleClose = () => setIsModalConfirmOpen(false);
 
