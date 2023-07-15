@@ -242,7 +242,10 @@ const BuyTicketModal = ({
                     >
                       Please select your seat!
                     </Typography>
-                  ) : !balance >= total ? (
+                  ) : (
+                    ""
+                  )}
+                  {selectedSeats.length > 0 && balance <= total ? (
                     <Typography
                       variant="body1"
                       fontWeight="700"
@@ -254,7 +257,7 @@ const BuyTicketModal = ({
                     >
                       Not enough balance ({balance - total})
                     </Typography>
-                  ) : (
+                  ) : selectedSeats.length > 0 && balance >= total ? (
                     <Typography
                       variant="body1"
                       fontWeight="700"
@@ -265,6 +268,8 @@ const BuyTicketModal = ({
                     >
                       Change Rp.{balance - total}
                     </Typography>
+                  ) : (
+                    ""
                   )}
                 </Box>
               </Box>
