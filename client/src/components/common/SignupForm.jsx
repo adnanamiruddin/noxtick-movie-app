@@ -3,7 +3,14 @@ import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
-import { Alert, Box, Button, Stack, TextField } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { setAuthModalOpen } from "../../redux/features/authModalSlice";
 import userApi from "../../api/modules/user.api";
@@ -63,7 +70,7 @@ const SignupForm = ({ switchAuthState }) => {
 
   return (
     <Box component="form" onSubmit={signupForm.handleSubmit}>
-      <Stack spacing={3}>
+      <Stack spacing={2}>
         <TextField
           type="text"
           placeholder="username..."
@@ -94,6 +101,7 @@ const SignupForm = ({ switchAuthState }) => {
             signupForm.errors.displayName !== undefined
           }
         />
+        <Typography variant="body1">Age</Typography>
         <TextField
           type="number"
           placeholder="age..."
@@ -102,13 +110,8 @@ const SignupForm = ({ switchAuthState }) => {
           fullWidth
           color="success"
           onChange={signupForm.handleChange}
-          helperText={
-            signupForm.touched.age && signupForm.errors.age
-          }
-          error={
-            signupForm.touched.age &&
-            signupForm.errors.age !== undefined
-          }
+          helperText={signupForm.touched.age && signupForm.errors.age}
+          error={signupForm.touched.age && signupForm.errors.age !== undefined}
         />
         <TextField
           type="password"
